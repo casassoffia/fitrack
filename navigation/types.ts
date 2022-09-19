@@ -6,7 +6,8 @@ export type HomeStackNavigatorParamList = {
     Register:undefined;
     Form:undefined;
     Plan: undefined;
-  PlanDay: {Day:string}
+  PlanDay: { Day: string };
+  Welcome: undefined;
   
   };
 

@@ -76,5 +76,20 @@ export default StyleSheet.create({
       flex: 0.1,
       flexDirection: 'column',
       backgroundColor: '#61b254',
-    }
+  },
+    button:{
+      alignSelf: 'center',
+      borderRadius:10,
+      width:'50%',
+      height:'10%',
+      
+      
+    },
+    
+    buttonText: {
+      textAlign: 'center',
+      marginTop: 11,
+      fontSize:20,
+     
+    },
   })

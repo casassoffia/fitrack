@@ -11,12 +11,12 @@ interface IDropDown {
 
 
 const DropDown = ({ text, data, value, onSelect }: IDropDown) => {
-  
+
   const [showOption, setShowOption] = useState(false)
-  const onSelectedItem = (val:any) => {
+  const onSelectedItem = (val: any) => {
     setShowOption(false)
     onSelect(val)
-    
+
   }
   return (
     <View>
@@ -30,13 +30,14 @@ const DropDown = ({ text, data, value, onSelect }: IDropDown) => {
         return (
           <TouchableOpacity
             key={String(i)}
-            onPress={()=>onSelectedItem(val)}
-            style={{backgroundColor: value?.id == val.id ? '#eede89' : '#F8F1CC',paddingHorizontal:6,paddingVertical:8, borderRadius:8,width:'70%', alignItems: 'center',
-            justifyContent: 'space-between',minHeight:42,flexDirection:'row',marginTop:8, marginLeft:60
+            onPress={() => onSelectedItem(val)}
+            style={{
+              backgroundColor: value?.id == val.id ? '#eede89' : '#F8F1CC', paddingHorizontal: 6, paddingVertical: 8, borderRadius: 8, width: '70%', alignItems: 'center',
+              justifyContent: 'space-between', minHeight: 42, flexDirection: 'row', marginTop: 8, marginLeft: 60
             }}>
             <Text style={styles.texto}>{val.name}
             </Text>
-           
+
           </TouchableOpacity>
         )
       })}</View>)}
@@ -134,14 +135,14 @@ const styles = StyleSheet.create({
   texto: {
     fontSize: 18,
     position: 'absolute',
-    color:'#907761',
+    color: '#907761',
     padding: 15,
   },
   buttonText: {
     textAlign: 'center',
     marginTop: 11,
     fontSize: 20,
-    
+
 
   },
 })

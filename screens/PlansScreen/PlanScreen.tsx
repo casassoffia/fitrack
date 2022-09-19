@@ -23,10 +23,10 @@ const Plan = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const [users, setUsers] = useState([]);
   const auth = getAuth()
-  const userLogued = auth.currentUser;
   const [num, setNum] = useState(0)
 
   useEffect(() => {
+
     UserMethods.getNumDias().then(
       (num_dias) => {
         setNum(num_dias)
@@ -35,10 +35,7 @@ const Plan = () => {
 
     )
 
-
   }, [])
-
-
 
 
   const signOutUser = () => {
@@ -46,7 +43,7 @@ const Plan = () => {
       .signOut()
       .then(() => {
         console.log('User signed out!')
-        navigation.navigate("Login")
+        navigation.navigate("Home")
       }
       ).catch((error) => { console.log(error) });
   }
@@ -74,10 +71,10 @@ const Plan = () => {
           justifyContent: 'space-between', width: '100%', height: '70%'
         }}>
           {num >= 2 ? (<ButtonDays text="Lunes" action={() => navigation.navigate('PlanDay', { Day: "Lunes" })} />) : null}
-          {num >= 2 ? (<ButtonDays text="Martes" action={() => navigation.navigate('Plan')} />) : null}
-          {num >= 3 ? (<ButtonDays text="Miercoles" action={() => navigation.navigate('Plan')} />) : null}
-          {num >= 4 ? (<ButtonDays text="Jueves" action={() => navigation.navigate('Plan')} />) : null}
-          {num >= 5 ? (<ButtonDays text="Viernes" action={() => navigation.navigate('Plan')} />) : null}
+          {num >= 2 ? (<ButtonDays text="Martes" action={() => navigation.navigate('PlanDay', { Day: "Martes" })} />) : null}
+          {num >= 3 ? (<ButtonDays text="Miercoles" action={() => navigation.navigate('PlanDay', { Day: "Miercoles" })} />) : null}
+          {num >= 4 ? (<ButtonDays text="Jueves" action={() => navigation.navigate('PlanDay', { Day: "Jueves" })} />) : null}
+          {num >= 5 ? (<ButtonDays text="Viernes" action={() => navigation.navigate('PlanDay', { Day: "Viernes" })} />) : null}
 
         </View>
         <NavBar></NavBar>
