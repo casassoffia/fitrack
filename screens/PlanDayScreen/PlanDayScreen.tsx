@@ -17,12 +17,18 @@ import "firebase/firestore";
 import { getAuth } from 'firebase/auth';
 import UserMethods from '../../APIs/UserApi/UserApi'
 import { Route } from '@react-navigation/native';
+import { PlanButton } from '../../components/PlanButton';
+import DropDown from '../../components/DropDown';
 
 
-
+let options = [{ id: 1, name: 'Desayuno' }, { id: 2, name: 'Comida' }, { id: 3, name: 'Cena' }]
 const PlanDay = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const route: any = useRoute();
+  const [selectedItem, setSelectedItem] = useState('')
+  const accion = (item: any) => {
+    setSelectedItem(item)
+  }
   const dia =
     // const state = props.navigation
     useEffect(() => {
@@ -46,9 +52,12 @@ const PlanDay = () => {
 
       <View style={styles.body}>
         <View style={styles.titulo}>
-
           <Text style={styles.textoTitulo}>Rutina del {route.params.Day}</Text>
         </View>
+
+        <PlanButton text="Ejercicios" action={() => navigation.navigate('Home')} />
+        <DropDown text="Alimentos" onSelect={accion} data={options} value={selectedItem} color2='#7DB065' tam='25' color1='#D9EFCF' colorLetra='#ffff' redirigir={true}  ></DropDown>
+
 
         <NavBar></NavBar>
       </View>

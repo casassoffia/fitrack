@@ -1,19 +1,24 @@
 import { StyleSheet, Button, Text, View, Image, TouchableOpacity } from 'react-native';
 import React, { Component } from 'react';
 import { useFonts } from 'expo-font';
+// import Icon from 'react-native-vector-icons/Icon';
 
-interface IGenericButton {
+
+interface ButtonPlan {
     text: string,
     action: Function,
-    color: string
 }
-export function GenericButton({ text, action, color }: IGenericButton) {
+export function PlanButton({ text, action }: ButtonPlan) {
+
 
     return (
         <TouchableOpacity onPress={() => action()}
             style={{
                 ...styles.button,
-                backgroundColor: color,
+                backgroundColor: '#7DB065',
+                marginTop: 20,
+                marginLeft: 20,
+                borderRadius: 20,
 
             }}
         >
@@ -22,7 +27,9 @@ export function GenericButton({ text, action, color }: IGenericButton) {
 
             }}>
                 {text}
+
             </Text>
+
         </TouchableOpacity>
 
 
@@ -31,10 +38,10 @@ export function GenericButton({ text, action, color }: IGenericButton) {
 const styles = StyleSheet.create({
     button: {
         alignSelf: 'center',
-        borderRadius: 10,
-        width: '60%',
-        height: '10%',
-        marginTop: '10%',
+        width: '90%',
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -50,8 +57,16 @@ const styles = StyleSheet.create({
 
     buttonText: {
         textAlign: 'center',
-        marginTop: 11,
         fontSize: 25,
+        color: '#ffff'
 
+    },
+    icono2: {
+
+        width: '20%',
+        height: '20%',
+
+        position: 'relative',
+        color: '#ffff'
     },
 })

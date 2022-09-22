@@ -67,9 +67,11 @@ const Login = () => {
         <Text style={styles.titulo}> Bienvenid@ de nuevo </Text>
         <TextInput style={styles.textInput} onChangeText={text => setEmail(text)} value={email} placeholder="Correo Electronico"></TextInput>
         <TextInput style={styles.textInput} onChangeText={text => setPassword(text)} value={password} placeholder="Contraseña" secureTextEntry></TextInput>
-        <GenericButton text="OK" action={handleSignIn} />
+        <GenericButton text="OK" action={handleSignIn} color='#F8F1CC' />
 
-        <Text style={styles.nombre}> fiTrack </Text>
+        <View style={styles.pie}>
+          <Text style={styles.nombre}> fiTrack </Text>
+        </View>
       </View>
     </View>
 

@@ -11,14 +11,23 @@ import React, { useState } from 'react';
 import styles from './RegisterStyles'
 import { auth } from '../../utils/Firebase'
 import UserMethods from '../../APIs/UserApi/UserApi'
-// import AsyncStorage from '@react-native-community/async-storage';
+import { validateEmail } from '../../utils/helpers';
+import { Input } from 'react-native-elements'
+
 
 const Register = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [nombre, setNombre] = useState('');
-
+  const [confirm, setConfirm] = useState('');
+  const [errorEmail, setErrorEmail] = useState('')
+  const [errorPassword, setErrorPassword] = useState('')
+  const [errorConfirm, setErrorConfirm] = useState('')
+  const defaultFormValues = () => {
+    return { email: "", password: "", confirm: "" }
+  }
+  const [formData, setFormData] = useState(defaultFormValues())
   const [loaded] = useFonts({
     lob: require('../../assets/fonts/Lobster-Regular.ttf'),
   });
@@ -27,32 +36,41 @@ const Register = () => {
   if (!loaded) {
     return null;
   }
-  const clearForm = () => {
-    setEmail('')
-    setPassword('')
-  }
+
+
   const handleCreateAccount = () => {
-    console.log("registro")
-    console.log(auth)
-    console.log(email)
-    console.log(password)
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // clearForm();
+    if (validateData()) {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          console.log('Accout created!')
+          UserMethods.sendNameData(nombre, email, password)
+          navigation.navigate("Form")
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
 
-        console.log('Accout created!')
-        UserMethods.sendNameData(nombre, email, password)
-        const user = userCredential.user;
-        console.log(user)
-        navigation.navigate("Form")
-      })
-      .catch(error => {
-        console.log(email)
-        console.log(password)
 
-        console.log(error)
-      })
+
   }
+  const validateData = () => {
+    let isValid = true
+    if (confirm.valueOf() != password.valueOf()) {
+      Alert.alert("Las contraseñas no coinciden, asegurate de que son las mismas")
+      isValid = false
+    }
+    if (nombre.length == 0 || confirm.length == 0 || password.length == 0 || email.length == 0) {
+      Alert.alert("No puedes dejar ningun campo en blanco")
+      isValid = false
+    }
+    if (!validateEmail(email)) {
+      Alert.alert("El formato del email no es correcto")
+      isValid = false
+    }
+    return isValid
+  }
+
   return (
 
     <View style={styles.container}>
@@ -72,19 +90,16 @@ const Register = () => {
       <View style={styles.body}>
         <ScrollView style={{ width: '100%' }} >
           <Text style={styles.titulo}>Rellena la siguiente información </Text>
-          <TextInput onChangeText={text => setNombre(text)} style={styles.textInput} value={nombre} placeholder="Nombre Usuario"></TextInput>
-          <TextInput onChangeText={text => setEmail(text)} style={styles.textInput} value={email} placeholder="Correo Electronico"></TextInput>
+          <TextInput onChangeText={text => setNombre(text)} style={styles.textInput} value={nombre} placeholder="Nombre Usuario" ></TextInput>
+          <TextInput style={styles.textInput} defaultValue={formData.email} onChangeText={text => setEmail(text.toLowerCase())} value={email.toLowerCase()} placeholder="Correo Electronico" ></TextInput>
           <TextInput onChangeText={text => setPassword(text)} style={styles.textInput} value={password} placeholder="Contraseña" secureTextEntry></TextInput>
-          <TextInput style={styles.textInput} placeholder="Confirmacion de contraseña" secureTextEntry></TextInput>
-          {/* <GenericButton text="OK" action={handleCreateAccount}/> */}
-          <TouchableOpacity onPress={() => handleCreateAccount()} style={{
-            ...styles.button,
-            backgroundColor: '#F8F1CC',
-            marginTop: 20
-          }}>
-            <Text style={styles.buttonText}>OK</Text></TouchableOpacity>
+          <TextInput onChangeText={text => setConfirm(text)} style={styles.textInput} placeholder="Confirmacion de contraseña" value={confirm} secureTextEntry></TextInput>
+
+          <GenericButton text="OK" action={handleCreateAccount} color='#F8F1CC' />
+
+
         </ScrollView>
-        {/* <GenericButton text="OK" action={() => navigation.navigate('Form')}/> */}
+
       </View>
       <View style={styles.pie}>
         <Text style={styles.nombre}> fiTrack </Text>

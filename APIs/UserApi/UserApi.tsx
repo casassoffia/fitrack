@@ -14,8 +14,6 @@ const UserMethods = {
         let num = 0
 
         const querySnapshot = await getDocs(q);
-
-
         querySnapshot.forEach((doc) => {
             usuario = doc.data()
 

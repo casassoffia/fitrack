@@ -56,7 +56,7 @@ export default StyleSheet.create({
        
     },
     textInput:{
-      width: 350,
+      width: '90%',
       padding: 15,
       height: 55,
       backgroundColor: '#F8F1CC',
@@ -66,6 +66,7 @@ export default StyleSheet.create({
       marginLeft:25,
       fontSize: 18,
       borderRadius: 20,
+      
       
     },
     scrollView: {

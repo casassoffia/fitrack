@@ -1,27 +1,39 @@
+import { NavigationHelpersContext, useNavigation } from '@react-navigation/native';
 import { ActionCodeInfo } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { Touchable, TouchableOpacity, View, Text, StyleSheet, Image } from 'react-native';
+import { HomeScreenNavigationProp } from '../navigation/types';
 
 interface IDropDown {
   text: string,
   data: Array<any>,
   value: any,
-  onSelect: (item: any) => void
+  onSelect: (item: any) => void,
+  color1: string,
+  color2: string,
+  tam: string,
+  colorLetra: string
+  redirigir: boolean
+
 }
 
 
-const DropDown = ({ text, data, value, onSelect }: IDropDown) => {
-
+const DropDown = ({ text, data, value, onSelect, color1, color2, colorLetra, tam, redirigir }: IDropDown) => {
+  const navigation = useNavigation<HomeScreenNavigationProp>();
   const [showOption, setShowOption] = useState(false)
   const onSelectedItem = (val: any) => {
     setShowOption(false)
     onSelect(val)
+    if (redirigir) {
+      navigation.navigate('Home')
+    }
+
 
   }
   return (
     <View>
-      <TouchableOpacity style={styles.textInput} activeOpacity={0.8} onPress={() => setShowOption(!showOption)} >
-        <Text style={styles.texto}>{!!value ? value?.name : text}</Text>
+      <TouchableOpacity style={{ ...styles.textInput, backgroundColor: color2 }} activeOpacity={0.8} onPress={() => setShowOption(!showOption)} >
+        <Text style={{ ...styles.texto, fontSize: parseInt(tam), color: colorLetra }}>{!!value ? value?.name : text}</Text>
         <Image source={require('../assets/iconos/arrow_drop_down_FILL0_wght400_GRAD0_opsz48.png')} style={styles.icono2}></Image>
 
       </TouchableOpacity>
@@ -32,10 +44,10 @@ const DropDown = ({ text, data, value, onSelect }: IDropDown) => {
             key={String(i)}
             onPress={() => onSelectedItem(val)}
             style={{
-              backgroundColor: value?.id == val.id ? '#eede89' : '#F8F1CC', paddingHorizontal: 6, paddingVertical: 8, borderRadius: 8, width: '70%', alignItems: 'center',
+              backgroundColor: value?.id == val.id ? color1 : color2, paddingHorizontal: 6, paddingVertical: 8, borderRadius: 8, width: '70%', alignItems: 'center',
               justifyContent: 'space-between', minHeight: 42, flexDirection: 'row', marginTop: 8, marginLeft: 60
             }}>
-            <Text style={styles.texto}>{val.name}
+            <Text style={{ ...styles.texto, fontSize: parseInt(tam), color: colorLetra }}>{val.name}
             </Text>
 
           </TouchableOpacity>
@@ -114,13 +126,14 @@ const styles = StyleSheet.create({
 
   },
   textInput: {
-    width: 350,
-    height: 60,
+    width: 360,
+    height: 50,
     backgroundColor: '#F8F1CC',
     alignItems: 'center',
     justifyContent: 'center',
+
     marginTop: 30,
-    marginLeft: 25,
+    marginLeft: 20,
     fontSize: 25,
     padding: 15,
     borderRadius: 20,
@@ -133,9 +146,9 @@ const styles = StyleSheet.create({
 
   },
   texto: {
-    fontSize: 18,
+
     position: 'absolute',
-    color: '#907761',
+    // color: '#907761',
     padding: 15,
   },
   buttonText: {
