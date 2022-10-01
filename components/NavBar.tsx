@@ -14,9 +14,9 @@ const NavBar = () => {
     <View style={styles.NavContainer}>
       <View style={styles.NavBar}>
         <Icon name="search-outline" size={30} color="#fff" onPress={() => navigation.navigate('Home')} ></Icon>
-        <Icon name="barbell-outline" size={30} color="#fff" onPress={() => navigation.navigate('Home')} ></Icon>
+        <Icon name="barbell-outline" size={30} color="#fff" onPress={() => navigation.navigate('ListExercicies')} ></Icon>
         <Icon name="home-outline" size={30} color="#fff" onPress={() => navigation.navigate('Plan')} ></Icon>
-        <Icon2 type='material-community' name="silverware-fork-knife" color="#fff" onPress={() => navigation.navigate('Home')} ></Icon2>
+        <Icon2 type='material-community' name="silverware-fork-knife" color="#fff" onPress={() => navigation.navigate('ListMeals')} ></Icon2>
         <Icon name="person-circle-outline" size={30} color="#fff" onPress={() => navigation.navigate('Home')} ></Icon>
       </View>
     </View>

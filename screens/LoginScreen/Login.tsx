@@ -39,12 +39,9 @@ const Login = () => {
         navigation.navigate("Plan")
       })
       .catch(error => {
-        console.log('error')
-        console.log('aqui')
+
         Alert.alert(error.message)
-        console.log(email)
-        console.log(password)
-        console.log(error)
+
       })
   }
 

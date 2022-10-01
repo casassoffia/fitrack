@@ -19,8 +19,8 @@ export default StyleSheet.create({
 
   },
   header: {
-    flex: 0.18,
-    backgroundColor: '#61b254',
+    flex: 0.2,
+    backgroundColor: 'red',
     flexDirection: 'row',
   },
   icono: {
@@ -30,14 +30,13 @@ export default StyleSheet.create({
     borderRadius: 100,
     resizeMode: 'contain',
     marginLeft: 130,
-    marginTop: 20
+    marginTop: 50
   },
   body: {
     flex: 1,
     backgroundColor: '#61b254',
     flexDirection: 'column',
-    alignItems: 'center',
-    
+     marginBottom:100
   },
   nombre: {
     fontSize: 30,
@@ -49,19 +48,52 @@ export default StyleSheet.create({
 
   },
   titulo: {
-    fontSize: 35,
+    fontSize: 30,
     color: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 25,
-    marginTop: 25,
-
+  
   },
-  texto: {
+    aclaracion: {
     fontSize: 20,
-     color: '#613000'
+    color: '#fff',
+   marginTop:20,
+    marginLeft: 25,
+  
   },
+  textInput: {
+    width: 350,
+    padding: 15,
+    height: 55,
+    backgroundColor: '#F8F1CC',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 30,
+    marginLeft: 25,
+    fontSize: 18,
+    borderRadius: 20,
+ 
 
+  },
+    textPasos: {
+    width: 350,
+    padding: 15,
+    height: 200,
+    backgroundColor: '#F8F1CC',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 30,
+    marginLeft: 25,
+    fontSize: 18,
+      borderRadius: 20,
+
+
+  },
+  scrollView: {
+    backgroundColor: '#fff',
+    marginHorizontal: 40,
+  },
   pie: {
     flex: 0.1,
     flexDirection: 'column',
@@ -71,7 +103,15 @@ export default StyleSheet.create({
     alignSelf: 'center',
     borderRadius: 10,
     width: '50%',
-    height: '10%',
+    height: '5%',
+     shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
 
 
   },
@@ -82,14 +122,4 @@ export default StyleSheet.create({
     fontSize: 20,
 
   },
-  contenedor: {
-    marginTop:24,
-    width: '90%',
-    height: '60%',
-    backgroundColor: '#F8F1CC',
-    borderRadius: 50,
-    justifyContent:'flex-start',
-    alignContent: 'center',
-    padding:'4%',
-  }
 })

@@ -26,6 +26,13 @@ export default StyleSheet.create({
     borderBottomLeftRadius: 200,
 
   },
+    Spinner: {
+        display:'flex',
+        justifyContent:'center',
+        alignItems: 'center',
+        textAlign: 'center',
+        minHeight: 100
+    },
   forma: {
     borderBottomLeftRadius: 120,
 

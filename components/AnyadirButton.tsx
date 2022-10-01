@@ -1,13 +1,14 @@
 import { StyleSheet, Button, Text, View, Image, TouchableOpacity } from 'react-native';
 import React, { Component } from 'react';
 import { useFonts } from 'expo-font';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { Adamina_400Regular } from '@expo-google-fonts/adamina'
 
-interface ButtonDays {
+interface IAnyadirButton {
     text: string,
     action: Function,
 }
-export function ButtonDays({ text, action }: ButtonDays) {
+export function AnyadirButton({ text, action }: IAnyadirButton) {
     const [loaded] = useFonts({
         "Adamina_400Regular": Adamina_400Regular,
     });
@@ -19,21 +20,25 @@ export function ButtonDays({ text, action }: ButtonDays) {
         <TouchableOpacity onPress={() => action()}
             style={{
                 ...styles.button,
-                backgroundColor: '#7DB065',
-                opacity: 0.65,
+                backgroundColor: '#EFE6CF',
                 marginTop: 20,
                 borderRadius: 50,
 
-
             }}
         >
+
+            <View style={{ ...styles.circulo }}>
+                <Icon size={30} name="add-outline" color='#613000'  ></Icon>
+            </View>
+
             <Text style={{
-                ...styles.buttonText,
-                fontFamily: 'Adamina_400Regular'
+                ...styles.buttonText, fontFamily: 'Adamina_400Regular'
 
             }}>
                 {text}
             </Text>
+
+
         </TouchableOpacity>
 
 
@@ -51,7 +56,11 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
-        padding: '5%',
+        height: 70,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+
 
 
     },
@@ -59,8 +68,24 @@ const styles = StyleSheet.create({
     buttonText: {
         textAlign: 'center',
         fontSize: 30,
-
+        position: 'absolute',
         color: '#613000'
+
+    },
+    circulo: {
+        width: 50,
+        height: 50,
+        borderRadius: 60 / 2,
+        backgroundColor: 'white',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginRight: 300
+
+
+
+
+
+
 
     },
 })

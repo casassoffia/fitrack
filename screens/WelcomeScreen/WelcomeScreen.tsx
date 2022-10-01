@@ -11,26 +11,22 @@ import React, { useState } from 'react';
 import styles from './WelcomeStyles'
 import { auth } from '../../utils/Firebase'
 import UserMethods from '../../APIs/UserApi/UserApi'
-// import AsyncStorage from '@react-native-community/async-storage';
+import { Adamina_400Regular } from '@expo-google-fonts/adamina';
 
 const Register = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [nombre, setNombre] = useState('');
 
   const [loaded] = useFonts({
-    lob: require('../../assets/fonts/Lobster-Regular.ttf'),
+    "Adamina_400Regular": Adamina_400Regular,
   });
+
+
 
 
   if (!loaded) {
     return null;
   }
-  const clearForm = () => {
-    setEmail('')
-    setPassword('')
-  }
+
 
   return (
 
@@ -47,14 +43,20 @@ const Register = () => {
         </View>
       </View>
       <View style={styles.body}>
-
-        <Text style={styles.titulo}>Bienvenido a Fitrack</Text>
-
-        <Text style={styles.titulo}>Esperemos que disfrute de la experiencia</Text>
-        {/* <GenericButton text="OK" action={handleCreateAccount}/> */}
+        <Text style={{ ...styles.titulo, fontFamily: 'Adamina_400Regular' }}>Bienvenido a Fitrack</Text>
+        <View style={styles.contenedor}>
 
 
-        <GenericButton text="Empezar el Cambio" action={() => navigation.navigate('Plan')} />
+          <Text style={{ ...styles.texto, fontFamily: 'Adamina_400Regular' }}>Desde fitrack te damos las gracias por confiar tu cambio en nosotros .</Text>
+          <Text> </Text>
+          <Text style={{ ...styles.texto, fontFamily: 'Adamina_400Regular' }}>Aqui podras encontrar miles de recetas y ejercicios adaptados a tus objetivos y a tu nivel.</Text>
+          <Text> </Text>
+          <Text style={{ ...styles.texto, fontFamily: 'Adamina_400Regular' }}>Ademas de los ejercicios y comidas que te proporcionamos podrás inclir todas las recetas y ejercicios que quieras.</Text>
+          <Text> </Text>
+          <Text style={{ ...styles.texto, fontFamily: 'Adamina_400Regular' }}>Esperemos que disfrutes de esta aplicacion y recuerda que siempre puedes modificar tus datos desde la sección de usuario.</Text>
+        </View>
+
+        <GenericButton text="Empezar el Cambio" action={() => navigation.navigate('Plan')} color='#F8F1CC' />
       </View>
       <View style={styles.pie}>
         <Text style={styles.nombre}> fiTrack </Text>

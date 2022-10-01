@@ -13,7 +13,7 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../utils/Firebase';
 // import firestore from '@react-native-firebase/firestore'
 
-let options = [{ id: 1, name: 'Ganar masa muscular' }, { id: 2, name: 'Perder grasa' }]
+let options = [{ id: 1, name: 'Ganar masa muscular' }, { id: 2, name: 'Perder grasa' }, { id: 3, name: 'Mantener' }]
 let sexo = [{ id: 1, name: 'Femenino' }, { id: 2, name: 'Masculino' }, { id: 3, name: 'Otros' }]
 let dias = [{ id: 2, name: '2' }, { id: 3, name: '3' }, { id: 4, name: '4' }, { id: 5, name: '5' }]
 let nivel = [{ id: 1, name: 'Principiante' }, { id: 2, name: 'Intermedio' }, { id: 3, name: 'Avanzado' }]
@@ -110,12 +110,12 @@ const Form = () => {
         <Text style={styles.titulo}>Completa la siguiente información: </Text>
         <ScrollView style={{ width: '100%' }} >
 
-          <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text="Elige tu objetivo" onSelect={accion} data={options} value={selectedItem} color1='#eede89' color2='#F8F1CC' ></DropDown>
+          <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text="Elige tu objetivo" onSelect={accion} data={options} value={selectedItem} color1='#eede89' color2='#F8F1CC' dia={''}  ></DropDown>
           <TextInput keyboardType='numeric' onChangeText={text => setEdad(text)} style={styles.textInput} value={edad} placeholder="Edad"></TextInput>
           <TextInput keyboardType='numeric' onChangeText={text => setPeso(text)} style={styles.textInput} value={peso.toString()} placeholder="Peso"></TextInput>
-          <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text="Sexo" onSelect={accion2} data={sexo} value={selectedItem2} color1='#eede89' color2='#F8F1CC'></DropDown>
-          <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text="Dias a la semana de entreno" onSelect={accion3} data={dias} value={selectedItem3} color1='#eede89' color2='#F8F1CC'></DropDown>
-          <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text="Nivel" onSelect={accion4} data={nivel} value={selectedItem4} color1='#eede89' color2='#F8F1CC'></DropDown>
+          <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text="Sexo" onSelect={accion2} data={sexo} value={selectedItem2} color1='#eede89' color2='#F8F1CC' dia={''} ></DropDown>
+          <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text="Dias a la semana de entreno" onSelect={accion3} data={dias} value={selectedItem3} color1='#eede89' color2='#F8F1CC' dia={''} ></DropDown>
+          <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text="Nivel" onSelect={accion4} data={nivel} value={selectedItem4} color1='#eede89' color2='#F8F1CC' dia={''} ></DropDown>
           {/* <GenericButton text="OK" action={() => navigation.navigate('Plan')} /> */}
           <TouchableOpacity onPress={() => rellenarForm()} style={{
             ...styles.button,

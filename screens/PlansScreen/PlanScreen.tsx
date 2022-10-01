@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Pressable, FlatList, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Pressable, FlatList, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 // import { StatusBar } from 'expo-status-bar';
 import { useFonts } from 'expo-font';
@@ -24,16 +24,17 @@ const Plan = () => {
   const [users, setUsers] = useState([]);
   const auth = getAuth()
   const [num, setNum] = useState(0)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   useEffect(() => {
-
+    setIsLoading(true)
     UserMethods.getNumDias().then(
       (num_dias) => {
         setNum(num_dias)
 
       }
 
-    )
+    ).finally(() => setIsLoading(false))
 
   }, [])
 
@@ -48,18 +49,21 @@ const Plan = () => {
       ).catch((error) => { console.log(error) });
   }
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <View style={styles.headerLeft}>
-          <Image source={require("../../assets/imagenes/colorDelLogo.png")} style={styles.forma}></Image>
-          <Image source={require("../../assets/imagenes/titulo3.png")} style={styles.nombre}></Image>
-        </View>
-        <View style={styles.headerRight}>
-          <Image source={require("../../assets/imagenes/colorDelLogo.png")}></Image>
-          <Image source={require("../../assets/imagenes/iconoTransparente.png")} style={styles.icono}></Image>
-        </View>
 
-      </View>
+    <View style={styles.container}>
+      {isLoading ?
+        (<View style={styles.Spinner}><ActivityIndicator /></View>) :
+        (<View style={styles.header}>
+          <View style={styles.headerLeft}>
+            <Image source={require("../../assets/imagenes/colorDelLogo.png")} style={styles.forma}></Image>
+            <Image source={require("../../assets/imagenes/titulo3.png")} style={styles.nombre}></Image>
+          </View>
+          <View style={styles.headerRight}>
+            <Image source={require("../../assets/imagenes/colorDelLogo.png")}></Image>
+            <Image source={require("../../assets/imagenes/iconoTransparente.png")} style={styles.icono}></Image>
+          </View>
+
+        </View>)}
 
       <View style={styles.body}>
         <Text style={styles.titulo}>Estos son los planes de tu semana ...</Text>

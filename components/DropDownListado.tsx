@@ -1,56 +1,62 @@
 import { NavigationHelpersContext, useNavigation } from '@react-navigation/native';
-import { ActionCodeInfo } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { Touchable, TouchableOpacity, View, Text, StyleSheet, Image } from 'react-native';
 import { HomeScreenNavigationProp } from '../navigation/types';
 import MealDay from '../screens/MealDayScreen/MealDayScreen';
+import { useFonts } from 'expo-font';
+import { Adamina_400Regular } from '@expo-google-fonts/adamina'
+import Icon from 'react-native-vector-icons/Ionicons';
 
 interface IDropDown {
   text: string,
   data: Array<any>,
   value: any,
-  onSelect: (item: any) => void,
-  color1: string,
-  color2: string,
-  tam: string,
-  colorLetra: string
-  redirigir: boolean,
-  dia: string
+  onSelect: (item: any) => void
 
 
 }
 
 
-const DropDown = ({ text, data, value, onSelect, color1, color2, colorLetra, tam, redirigir, dia }: IDropDown) => {
+const DropDown = ({ text, data, value, onSelect }: IDropDown) => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const [showOption, setShowOption] = useState(false)
+  const [loaded] = useFonts({
+    "Adamina_400Regular": Adamina_400Regular,
+  });
   const onSelectedItem = (val: any) => {
     setShowOption(false)
     onSelect(val)
-    if (redirigir) {
-      let tipo = val.name
-      navigation.navigate('MealDay', { Tipo: tipo, Dia: dia })
-    }
+    let tipo = val.name
+    navigation.navigate('ListExercicies')
 
+
+  }
+  if (!loaded) {
+    return null;
   }
   return (
     <View>
-      <TouchableOpacity style={{ ...styles.textInput, backgroundColor: color2 }} activeOpacity={0.8} onPress={() => setShowOption(!showOption)} >
-        <Text style={{ ...styles.texto, fontSize: parseInt(tam), color: colorLetra }}>{!!value ? value?.name : text}</Text>
-        <Image source={require('../assets/iconos/arrow_drop_down_FILL0_wght400_GRAD0_opsz48.png')} style={styles.icono2}></Image>
+      <TouchableOpacity style={{ ...styles.textInput }} onPress={() => setShowOption(!showOption)} >
+
+        <Text style={{ ...styles.texto, fontFamily: 'Adamina_400Regular', position: 'absolute' }}>{text}</Text>
+
+        <View style={{ marginLeft: 300 }}>
+          <Icon size={30} name="caret-down-outline" color='#ffff'  ></Icon>
+        </View>
+
 
       </TouchableOpacity>
-      {showOption && (<View>{data.map((val, i) => {
+      {showOption && (<View>{data.map((val, id: any) => {
 
         return (
           <TouchableOpacity
-            key={String(i)}
+            key={id}
             onPress={() => onSelectedItem(val)}
             style={{
-              backgroundColor: value?.id == val.id ? color1 : color2, paddingHorizontal: 6, paddingVertical: 8, borderRadius: 8, width: '70%', alignItems: 'center',
-              justifyContent: 'space-between', minHeight: 42, flexDirection: 'row', marginTop: 8, marginLeft: 60
+              backgroundColor: '#7DB065', paddingHorizontal: 6, paddingVertical: 8, borderRadius: 8, width: '90%', alignItems: 'center',
+              minHeight: 42, flexDirection: 'row', marginTop: 8, marginLeft: 30, opacity: 0.65,
             }}>
-            <Text style={{ ...styles.texto, fontSize: parseInt(tam), color: colorLetra }}>{val.name}
+            <Text style={{ ...styles.valores, fontFamily: 'Adamina_400Regular' }}>{val.valueOf()}
             </Text>
 
           </TouchableOpacity>
@@ -129,17 +135,15 @@ const styles = StyleSheet.create({
 
   },
   textInput: {
-    width: 360,
-    height: 50,
-    backgroundColor: '#F8F1CC',
-    alignItems: 'center',
-    justifyContent: 'center',
-
+    width: 400,
+    height: 55,
+    backgroundColor: '#7DB065',
+    flexDirection: 'row',
+    opacity: 0.65,
     marginTop: 30,
-    marginLeft: 20,
-    fontSize: 25,
-    padding: 15,
-    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 15,
   },
   button: {
     alignSelf: 'center',
@@ -150,14 +154,22 @@ const styles = StyleSheet.create({
   },
   texto: {
 
+    color: '#ffff',
+
+    fontSize: 40,
+
+  },
+  valores: {
     position: 'absolute',
-    // color: '#907761',
+    color: '#ffff',
     padding: 15,
+    fontSize: 20
   },
   buttonText: {
     textAlign: 'center',
     marginTop: 11,
     fontSize: 20,
+    fontFamily: 'Adamina_400Regular'
 
 
   },
