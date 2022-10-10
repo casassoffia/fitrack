@@ -16,11 +16,10 @@ export default StyleSheet.create({
 
   },
   header: {
-    marginTop:'10%',
+    marginTop:'20%',
     flex: 0.45,
-    justifyContent:'center'
-   
-    
+    flexDirection: 'row',
+    backgroundColor:'red'
 
   },
   fotoInicial: {
@@ -30,9 +29,7 @@ export default StyleSheet.create({
 
   },
   forma: {
-    width: 410,
-  // marginLeft:200
-   height:200
+    
 
   },
   titulo: {
@@ -50,7 +47,7 @@ export default StyleSheet.create({
   },
   textoTitulo: {
     fontSize: 25,
-    color:'#fff'
+    color:'#221816'
     
   },
 
@@ -74,12 +71,12 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     flexDirection: 'column',
-    marginBottom: 600
+    marginBottom: 100
   },
   contendor: {
     marginTop:'2%',
     width: '90%',
-    height: '80%',
+    height: '100%',
     backgroundColor: '#9CCC65',
     opacity:0.65,
     alignItems: 'center',
@@ -89,7 +86,7 @@ export default StyleSheet.create({
    contendor1: {
     marginTop:'2%',
     width: '90%',
-    height: '75%',
+    height: '100%',
     backgroundColor: '#9CCC65',
     opacity:0.65,
     alignItems: 'center',
@@ -128,8 +125,11 @@ export default StyleSheet.create({
    
   },
   textoIngredientes: {
-    fontSize: 20,
-    color:'#45322e'
+    fontSize: 15,
+    color: '#45322e',
+    textAlign: 'center',
+    width:200
+   
   },
    textoRecetas: {
      fontSize: 16,
@@ -137,24 +137,28 @@ export default StyleSheet.create({
   },
   paso: {
     backgroundColor: '#EFE6CF',
-   
     width: '90%',
     height: 150,
     marginTop:10,
-  //  justifyContent: 'center',
+    justifyContent: 'center',
     borderRadius: 50,
-    padding:'2%'
+   alignSelf: 'center',
+    flexDirection: 'row',
+    
+    padding:'5%'
+
   },
   circulo: {
-  width: 60,
-  height: 60,
-  borderRadius: 60 / 2,
-  backgroundColor: 'white',
-  alignItems: 'center',
- justifyContent: 'center',
+        width: 50,
+        height: 50,
+        borderRadius: 60 / 2,
+        backgroundColor: 'white',
+        alignItems: 'center',
+    justifyContent: 'center',
+       
    
- 
-  },
+       
+    },
   numeroCirculo: {
    fontSize:20
   },

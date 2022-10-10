@@ -13,6 +13,10 @@ import ListExerciciesScreen from '../screens/ListExercises/ListExerciciesScreen'
 import ListMealsScreen from '../screens/ListMealScreen/ListMealsScreen'
 import AddExercicieScreen from '../screens/AddExercicieScreen/AddExercicieScreen'
 import AddMealScreen from '../screens/AddEMealScreen/AddMealScreen'
+import ExercicieDayScreen from '../screens/ExercicieDayScreen/ExercicieDayScreen'
+import SearchScreen from '../screens/SearchScreen/SearchScreen'
+import ListGymsScreen from '../screens/ListGymsScreen/ListGymsScreen'
+import ListSupplementsScreen from '../screens/ListSupplementsScreen/ListSuplementsScreen'
 
 import { HomeStackNavigatorParamList } from './types';
 
@@ -37,6 +41,10 @@ const HomeStackNavigator = () => {
             <HomeStack.Screen name="ListMeals" options={{ headerShown: false }} component={ListMealsScreen} />
             <HomeStack.Screen name="AddMeal" options={{ headerShown: false }} component={AddMealScreen} />
             <HomeStack.Screen name="AddExercicie" options={{ headerShown: false }} component={AddExercicieScreen} />
+            <HomeStack.Screen name="ExercicieDay" options={{ headerShown: false }} component={ExercicieDayScreen} />
+            <HomeStack.Screen name="Search" options={{ headerShown: false }} component={SearchScreen} />
+            <HomeStack.Screen name="ListGym" options={{ headerShown: false }} component={ListGymsScreen} />
+            <HomeStack.Screen name="ListSupplements" options={{ headerShown: false }} component={ListSupplementsScreen} />
         </HomeStack.Navigator>
     )
 }

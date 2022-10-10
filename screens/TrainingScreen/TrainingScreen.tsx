@@ -89,10 +89,11 @@ const Training = () => {
             </View>
 
           </View>
-          {ejerciciosDelUsuario.map((nombre: any, key: any) => <View key={key} style={styles.contenedorNombre}>
-            <Text style={{ ...styles.textoNombre, fontFamily: "Adamina_400Regular" }}>{nombre}</Text>
+          {ejerciciosDelUsuario.map((nombre: any, key: any) =>
+            <TouchableOpacity key={key} style={styles.contenedorNombre} onPress={() => navigation.navigate('ExercicieDay', { NombreEjercicio: nombre })}>
+              <Text style={{ ...styles.textoNombre, fontFamily: "Adamina_400Regular" }}>{nombre}</Text>
 
-          </View>
+            </TouchableOpacity>
           )}
 
 

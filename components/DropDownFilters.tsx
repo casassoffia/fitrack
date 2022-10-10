@@ -1,24 +1,55 @@
+import { NavigationHelpersContext, useNavigation } from '@react-navigation/native';
 import { ActionCodeInfo } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { Touchable, TouchableOpacity, View, Text, StyleSheet, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { HomeScreenNavigationProp } from '../navigation/types';
-import { useNavigation } from '@react-navigation/native';
-import { Icon as Icon2 } from '@rneui/themed';
+import MealDay from '../screens/MealDayScreen/MealDayScreen';
+
+interface IDropDown {
+  text: string,
+  data: Array<any>,
+  value: any,
+  onSelect: (item: any) => void,
 
 
-const NavBar = () => {
 
-  const navigation = useNavigation<HomeScreenNavigationProp>();
+}
+
+const DropDownFilters = ({ text, data, value, onSelect }: IDropDown) => {
+
+
+  const [showOption, setShowOption] = useState(false)
+  const onSelectedItem = (val: any) => {
+    setShowOption(false)
+    onSelect(val)
+
+
+  }
   return (
-    <View style={styles.NavContainer}>
-      <View style={styles.NavBar}>
-        <Icon name="search-outline" size={30} color="#fff" onPress={() => navigation.navigate('Search')} ></Icon>
-        <Icon name="barbell-outline" size={30} color="#fff" onPress={() => navigation.navigate('ListExercicies')} ></Icon>
-        <Icon name="home-outline" size={30} color="#fff" onPress={() => navigation.navigate('Plan')} ></Icon>
-        <Icon2 type='material-community' name="silverware-fork-knife" color="#fff" onPress={() => navigation.navigate('ListMeals')} ></Icon2>
-        <Icon name="person-circle-outline" size={30} color="#fff" onPress={() => navigation.navigate('Home')} ></Icon>
-      </View>
+    <View>
+      <TouchableOpacity style={{ ...styles.textInput, backgroundColor: '#7DB065', }} activeOpacity={0.8} onPress={() => setShowOption(!showOption)} >
+        <Text style={{ ...styles.texto, fontSize: 12, fontFamily: 'Adamina_400Regular' }}>{!!value ? value?.name : text}</Text>
+        <View style={{ marginLeft: 125 }}>
+          <Icon size={20} name="caret-down-outline" color='#ffff'  ></Icon>
+        </View>
+      </TouchableOpacity>
+      {showOption && (<View>{data.map((val, i) => {
+
+        return (
+          <TouchableOpacity
+            key={String(i)}
+            onPress={() => onSelectedItem(val)}
+            style={{
+              backgroundColor: value?.id == val.id ? '#61b254' : '#7DB065', paddingHorizontal: 6, paddingVertical: 8, borderRadius: 8, width: '70%', alignItems: 'center',
+              justifyContent: 'space-between', minHeight: 42, flexDirection: 'row', marginTop: 8, marginLeft: 60
+            }}>
+            <Text style={{ ...styles.texto, fontSize: 12, }}>{val.name}
+            </Text>
+
+          </TouchableOpacity>
+        )
+      })}</View>)}
     </View>
   );
 }
@@ -62,10 +93,9 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
   icono2: {
-
     width: 50,
     height: 50,
-    marginLeft: 300,
+    marginLeft: 130,
     position: 'relative'
   },
   body: {
@@ -92,13 +122,14 @@ const styles = StyleSheet.create({
 
   },
   textInput: {
-    width: 350,
-    height: 60,
+    width: 180,
+    height: 50,
     backgroundColor: '#F8F1CC',
     alignItems: 'center',
     justifyContent: 'center',
+
     marginTop: 30,
-    marginLeft: 25,
+    marginLeft: 20,
     fontSize: 25,
     padding: 15,
     borderRadius: 20,
@@ -111,9 +142,9 @@ const styles = StyleSheet.create({
 
   },
   texto: {
-    fontSize: 18,
+
     position: 'absolute',
-    color: '#907761',
+    // color: '#907761',
     padding: 15,
   },
   buttonText: {
@@ -121,24 +152,9 @@ const styles = StyleSheet.create({
     marginTop: 11,
     fontSize: 20,
 
-  },
-  NavContainer: {
-    position: 'absolute',
-    alignItems: 'center',
-    bottom: 20,
 
   },
-  NavBar: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    backgroundColor: '#61b254',
-    width: '90%',
-    height: '100%',
-    justifyContent: 'space-evenly',
-    borderRadius: 40
-
-  }
 })
 
 
-export default NavBar;
+export default DropDownFilters;

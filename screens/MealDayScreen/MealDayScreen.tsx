@@ -63,11 +63,11 @@ const MealDay = () => {
                     setNombre(alimento.nombre)
                     setReceta(alimento.receta)
                     setIngredientes(alimento.ingredientes)
-                    UserMethods.separarIngredientes(alimento.ingredientes, ',').then(
+                    UserMethods.separarParrafo(alimento.ingredientes, '?').then(
                         (listado) => {
                             listadoingre = listado
                             setCantidades(listado)
-                            UserMethods.separarIngredientes(alimento.receta, '.').then(
+                            UserMethods.separarParrafo(alimento.receta, '?').then(
                                 (recetas) => {
                                     recetaDesa = recetas
                                     setRecetaDesayuno(recetaDesa)
@@ -86,11 +86,11 @@ const MealDay = () => {
                     setNombre(alimento.nombre)
                     setReceta(alimento.receta)
                     setIngredientes(alimento.ingredientes)
-                    UserMethods.separarIngredientes(alimento.ingredientes, ',').then(
+                    UserMethods.separarParrafo(alimento.ingredientes, '?').then(
                         (listado) => {
                             listadoingre = listado
                             setCantidades(listado)
-                            UserMethods.separarIngredientes(alimento.receta, '.').then(
+                            UserMethods.separarParrafo(alimento.receta, '.').then(
                                 (recetas) => {
                                     recetaDesa = recetas
                                     setRecetaDesayuno(recetaDesa)
@@ -110,11 +110,11 @@ const MealDay = () => {
                     setNombre(alimento.nombre)
                     setReceta(alimento.receta)
                     setIngredientes(alimento.ingredientes)
-                    UserMethods.separarIngredientes(alimento.ingredientes, ',').then(
+                    UserMethods.separarParrafo(alimento.ingredientes, '?').then(
                         (listado) => {
                             listadoingre = listado
                             setCantidades(listado)
-                            UserMethods.separarIngredientes(alimento.receta, '.').then(
+                            UserMethods.separarParrafo(alimento.receta, '?').then(
                                 (recetas) => {
                                     recetaDesa = recetas
                                     setRecetaDesayuno(recetaDesa)
@@ -137,7 +137,7 @@ const MealDay = () => {
 
                 <View style={styles.header}>
 
-                    <Image source={require("../../assets/imagenes/pruebaCabecera.png")} style={styles.forma}></Image>
+                    <Image source={require("../../assets/imagenes/cabecera1.png")} style={styles.forma}></Image>
 
 
 

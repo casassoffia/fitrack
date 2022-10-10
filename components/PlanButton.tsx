@@ -18,7 +18,7 @@ export function PlanButton({ text, action }: ButtonPlan) {
                 backgroundColor: '#7DB065',
                 marginTop: 20,
                 marginLeft: 20,
-                borderRadius: 20,
+                borderRadius: 12,
 
             }}
         >
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     button: {
         alignSelf: 'center',
         width: '90%',
-        height: 50,
+        height: 70,
         alignItems: 'center',
         justifyContent: 'center',
         shadowColor: "#000",

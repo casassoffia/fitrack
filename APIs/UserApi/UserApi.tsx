@@ -317,6 +317,27 @@ const UserMethods = {
 
 
     },
+    getEjerciciobyName: async function (nombrePasado: string) {
+
+
+        const q = query(collection(db, "ejercicios"), where("nombre", "==", nombrePasado))
+        const querySnapshot = await getDocs(q);
+        let ejercicio
+        let nombre = "", descripcion = "", tipo = ""
+        querySnapshot.forEach((doc) => {
+            ejercicio = doc.data()
+            nombre = ejercicio.nombre;
+            descripcion = ejercicio.descripcion;
+            tipo = ejercicio.tipo;
+
+        });
+
+
+
+        return { nombre, descripcion, tipo }
+
+
+    },
     sendNameData: async function (name: string, email: string, password: string) {
         const docRef = await addDoc(collection(db, "usuarios"), {
             nombre: name,
@@ -375,7 +396,7 @@ const UserMethods = {
             max = ejercicio.id
 
         });
-        let descripcion = paso1 + ". " + paso2 + ". " + paso3
+        let descripcion = paso1 + "? " + paso2 + "? " + paso3
         let id = max + 1
         await setDoc(doc(db, "ejercicios", id.toString()), {
             nombre: nombre,
@@ -491,10 +512,11 @@ const UserMethods = {
         return numero
 
     },
-    separarIngredientes: async function (ingredientes: string, separado: string) {
+    separarParrafo: async function (ingredientes: string, separado: string) {
 
         var listado = ingredientes.split(separado)
-
+        console.log("listado")
+        console.log(listado)
         return listado
 
     }

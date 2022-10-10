@@ -93,6 +93,7 @@ const ListExercicies = () => {
   const [ejercicioGluteo, setEjercicioGlueto] = useState('')
   const [ejercicioPecho, setEjercicioPecho] = useState('')
   const accion = (item: any) => {
+
     setEjercicioHombro(item)
   }
   const accion2 = (item: any) => {

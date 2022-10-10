@@ -1,34 +1,53 @@
 import { NavigationHelpersContext, useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
-import { Touchable, TouchableOpacity, View, Text, StyleSheet, Image } from 'react-native';
+import { Touchable, TouchableOpacity, View, Text, StyleSheet, Image, } from 'react-native';
 import { HomeScreenNavigationProp } from '../navigation/types';
 import MealDay from '../screens/MealDayScreen/MealDayScreen';
 import { useFonts } from 'expo-font';
 import { Adamina_400Regular } from '@expo-google-fonts/adamina'
 import Icon from 'react-native-vector-icons/Ionicons';
+import { CheckBox } from 'react-native-elements';
+import DropDownFilters from './DropDownFilters';
+import { ButtonFilters } from './ButtonFilters';
+import { DocumentData } from 'firebase/firestore';
+import GymMethods from '../APIs/UserApi/GymAPi';
+// import CheckBox from '@react-native-community/checkbox';
 
 interface IDropDown {
   text: string,
-  data: Array<any>,
-  value: string,
+  suplementos: Array<DocumentData>
   onSelect: (item: any) => void
+
+
 
 
 }
 
+let precios = [{ id: 1, name: 'Selecciona un rango' }, { id: 2, name: '10-20' }, { id: 3, name: '20-30' }, { id: 4, name: '30-40' }, { id: 5, name: '40-50' }, { id: 6, name: '50-60' }, { id: 7, name: '60-70' }]
+let sabores = [{ id: 1, name: 'Selecciona un sabor' }, { id: 2, name: 'Chocolate' }, { id: 3, name: 'Fresa' }, { id: 4, name: 'Vainilla' }]
 
-const DropDown = ({ text, data, value, onSelect }: IDropDown) => {
+const SuplementoFilters = ({ text, suplementos, onSelect }: IDropDown) => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const [showOption, setShowOption] = useState(false)
+
+  const [selectedPrice, setSelectedPrice] = useState('')
+  const [selectedSabor, setSelectedSabores] = useState('')
+
   const [loaded] = useFonts({
     "Adamina_400Regular": Adamina_400Regular,
   });
   const onSelectedItem = (val: any) => {
     setShowOption(false)
-    onSelect(val)
+
     navigation.navigate('ExercicieDay', { NombreEjercicio: val })
 
 
+  }
+  const accion = (item: any) => {
+    setSelectedPrice(item)
+  }
+  const accion2 = (item: any) => {
+    setSelectedSabores(item)
   }
   if (!loaded) {
     return null;
@@ -37,30 +56,24 @@ const DropDown = ({ text, data, value, onSelect }: IDropDown) => {
     <View>
       <TouchableOpacity style={{ ...styles.textInput }} onPress={() => setShowOption(!showOption)} >
 
-        <Text style={{ ...styles.texto, fontFamily: 'Adamina_400Regular', position: 'absolute' }}>{text}</Text>
 
-        <View style={{ marginLeft: 300 }}>
-          <Icon size={30} name="caret-down-outline" color='#ffff'  ></Icon>
+
+        <View >
+          <Icon name="filter-outline" size={30} color='#ffff' style={{ marginRight: 300 }} ></Icon>
         </View>
+        <Text style={{ ...styles.texto, fontFamily: 'Adamina_400Regular', position: 'absolute' }}>{text}</Text>
 
 
       </TouchableOpacity>
-      {showOption && (<View>{data.map((val, id: any) => {
 
-        return (
-          <TouchableOpacity
-            key={id}
-            onPress={() => onSelectedItem(val)}
-            style={{
-              backgroundColor: '#7DB065', paddingHorizontal: 6, paddingVertical: 8, borderRadius: 8, width: '90%', alignItems: 'center',
-              minHeight: 42, flexDirection: 'row', marginTop: 8, marginLeft: 30, opacity: 0.65,
-            }}>
-            <Text style={{ ...styles.valores, fontFamily: 'Adamina_400Regular' }}>{val.valueOf()}
-            </Text>
+      {showOption && (<View>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <DropDownFilters text="Selecciona un rango" onSelect={accion} data={precios} value={selectedPrice} ></DropDownFilters>
+          <DropDownFilters text="Selecciona un sabor" onSelect={accion2} data={sabores} value={selectedSabor} ></DropDownFilters></View>
 
-          </TouchableOpacity>
-        )
-      })}</View>)}
+
+        <ButtonFilters action={() => GymMethods.getSuplementosFilter(selectedPrice, selectedSabor)} text={'Aplicar Filtros'} color={'#EFE6CF'} onSelect={onSelect}></ButtonFilters>
+      </View>)}
     </View>
   );
 }
@@ -94,26 +107,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffff',
     flexDirection: 'row',
   },
-  icono: {
-
-    width: 70,
-    height: 70,
-    borderRadius: 100,
-    resizeMode: 'contain',
-    marginLeft: 130,
-    marginTop: 20
-  },
-  icono2: {
-
-    width: 50,
-    height: 50,
-    marginLeft: 300,
-    position: 'relative'
-  },
   body: {
     flex: 1,
     backgroundColor: '#61b254',
     flexDirection: 'column',
+  },
+  checkbox: {
+    marginRight: 200
+
+
   },
   nombre: {
     fontSize: 30,
@@ -175,4 +177,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default DropDown;
+export default SuplementoFilters;
