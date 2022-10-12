@@ -33,9 +33,8 @@ const Login = () => {
   const handleSignIn = async () => {
     await signInWithEmailAndPassword(auth, email, password)
       .then(userCredential => {
-        console.log('Signed in!')
+
         const user = userCredential.user;
-        console.log(user)
         navigation.navigate("Plan")
       })
       .catch(error => {

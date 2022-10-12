@@ -333,7 +333,6 @@ const UserMethods = {
         });
 
 
-
         return { nombre, descripcion, tipo }
 
 

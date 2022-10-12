@@ -17,6 +17,7 @@ import ExercicieDayScreen from '../screens/ExercicieDayScreen/ExercicieDayScreen
 import SearchScreen from '../screens/SearchScreen/SearchScreen'
 import ListGymsScreen from '../screens/ListGymsScreen/ListGymsScreen'
 import ListSupplementsScreen from '../screens/ListSupplementsScreen/ListSuplementsScreen'
+import CardScreen from '../screens/CardScreen/CardScreen'
 
 import { HomeStackNavigatorParamList } from './types';
 
@@ -45,6 +46,7 @@ const HomeStackNavigator = () => {
             <HomeStack.Screen name="Search" options={{ headerShown: false }} component={SearchScreen} />
             <HomeStack.Screen name="ListGym" options={{ headerShown: false }} component={ListGymsScreen} />
             <HomeStack.Screen name="ListSupplements" options={{ headerShown: false }} component={ListSupplementsScreen} />
+            <HomeStack.Screen name="Card" options={{ headerShown: false }} component={CardScreen} />
         </HomeStack.Navigator>
     )
 }

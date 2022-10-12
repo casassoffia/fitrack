@@ -21,9 +21,7 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [nombre, setNombre] = useState('');
   const [confirm, setConfirm] = useState('');
-  const [errorEmail, setErrorEmail] = useState('')
-  const [errorPassword, setErrorPassword] = useState('')
-  const [errorConfirm, setErrorConfirm] = useState('')
+
   const defaultFormValues = () => {
     return { email: "", password: "", confirm: "" }
   }

@@ -69,7 +69,7 @@ export default StyleSheet.create({
     paso: {
         backgroundColor: '#7DB065',
         width: '85%',
-        height: 150,
+        height: 200,
         marginTop: 10,
         justifyContent: 'center',
         borderRadius: 50,
@@ -81,13 +81,11 @@ export default StyleSheet.create({
     },
     paso2: {
         backgroundColor: '#EFE6CF',
-        width: '80%',
+        width: '90%',
         height: '100%',
-        marginTop: 10,
         justifyContent: 'center',
         borderRadius: 50,
-        alignSelf: 'center',
-        flexDirection: 'row',
+        alignItems: 'center',
 
         padding: '5%'
 
@@ -96,7 +94,7 @@ export default StyleSheet.create({
         fontSize: 20,
         color: '#45322e',
         textAlign: 'center',
-        width: 200
+
 
     },
     carritoposicion: {
@@ -105,7 +103,32 @@ export default StyleSheet.create({
 
 
 
-    }
+    },
+    button: {
+        alignSelf: 'center',
+        width: '50%',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+        padding: '2%',
+        backgroundColor: '#7DB065',
+        height: 50,
+        marginTop: 20
+
+
+    },
+    buttonText: {
+        textAlign: 'center',
+        fontSize: 20,
+
+        color: '#613000'
+
+    },
 
 
 

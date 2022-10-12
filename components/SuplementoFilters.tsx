@@ -10,7 +10,7 @@ import { CheckBox } from 'react-native-elements';
 import DropDownFilters from './DropDownFilters';
 import { ButtonFilters } from './ButtonFilters';
 import { DocumentData } from 'firebase/firestore';
-import GymMethods from '../APIs/UserApi/GymAPi';
+import GymMethods from '../APIs/GymAPi';
 // import CheckBox from '@react-native-community/checkbox';
 
 interface IDropDown {

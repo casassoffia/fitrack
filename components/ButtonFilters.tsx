@@ -1,7 +1,7 @@
 import { StyleSheet, Button, Text, View, Image, TouchableOpacity } from 'react-native';
 import React, { Component } from 'react';
 import { useFonts } from 'expo-font';
-import GymMethods from '../APIs/UserApi/GymAPi';
+import GymMethods from '../APIs/GymAPi';
 import { DocumentData } from 'firebase/firestore';
 import { Adamina_400Regular } from '@expo-google-fonts/adamina'
 interface IFiltros {

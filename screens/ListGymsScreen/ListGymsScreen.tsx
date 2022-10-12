@@ -15,7 +15,7 @@ import { Button } from '@rneui/themed';
 import firebase from "firebase/app";
 import "firebase/firestore";
 import { getAuth } from 'firebase/auth';
-import GymMethods from '../../APIs/UserApi/GymAPi'
+import GymMethods from '../../APIs/GymAPi'
 import { Route } from '@react-navigation/native';
 
 

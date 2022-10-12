@@ -18,6 +18,7 @@ export type HomeStackNavigatorParamList = {
   ListGym: undefined;
   ExercicieDay: { NombreEjercicio: string };
   ListSupplements: undefined;
+  Card: undefined;
 
 };
 
