@@ -35,7 +35,6 @@ export default StyleSheet.create({
     },
   forma: {
     borderBottomLeftRadius: 120,
-
   },
   titulo: {
     fontSize: 24,
@@ -49,6 +48,9 @@ export default StyleSheet.create({
 
     position: 'absolute',
 
+  },
+   nombreTitulo: {
+    marginTop: 110, marginLeft: 70, position: 'absolute', fontSize: 20, color: '#95520e'
   },
   icono: {
     width: 150,

@@ -10,6 +10,13 @@ export default StyleSheet.create({
     flexDirection: 'column',
 
   },
+  Spinner: {
+        display:'flex',
+        justifyContent:'center',
+        alignItems: 'center',
+        textAlign: 'center',
+        minHeight: 100
+    },
   headerRight: {
     flex: 1,
     flexDirection: 'column',
@@ -27,10 +34,10 @@ export default StyleSheet.create({
 
   },
   forma: {
-    marginTop: 20,
-    width:'100%'
+        width: '100%',
+        height: 300
 
-  },
+    },
   titulo: {
    marginTop:'10%',
     backgroundColor: '#7DB065',
@@ -56,6 +63,9 @@ export default StyleSheet.create({
 
     position: 'absolute',
 
+  },
+  nombreTitulo: {
+    marginTop: 200, marginLeft: 10, position: 'absolute', fontSize: 25, color: '#ffff'
   },
   icono: {
     width: 150,

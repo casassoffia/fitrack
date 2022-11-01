@@ -5,12 +5,13 @@ import { GenericButton } from '../../components/Button';
 import { useFonts } from 'expo-font';
 import Icon from 'react-native-vector-icons/Ionicons';
 import DropDown from '../../components/DropDown';
-import { SetStateAction, useEffect, useState } from 'react';
+import React, { SetStateAction, useEffect, useState } from 'react';
 import styles from './FormStyles'
-import UserMethods from '../../APIs/UserApi/UserApi'
+import UserMethods from '../../APIs/UserApi'
 import { getAuth } from 'firebase/auth';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../utils/Firebase';
+import { Adamina_400Regular } from '@expo-google-fonts/adamina'
 // import firestore from '@react-native-firebase/firestore'
 
 let options = [{ id: 1, name: 'Ganar masa muscular' }, { id: 2, name: 'Perder grasa' }, { id: 3, name: 'Mantener' }]
@@ -91,6 +92,7 @@ const Form = () => {
   if (!loaded) {
     return null;
   }
+
   return (
 
     <View style={styles.container}>
@@ -107,7 +109,7 @@ const Form = () => {
         </View>
       </View>
       <View style={styles.body}>
-        <Text style={styles.titulo}>Completa la siguiente información: </Text>
+        <Text style={{ ...styles.titulo, fontFamily: "Adamina_400Regular" }}>Completa la siguiente información: </Text>
         <ScrollView style={{ width: '100%' }} >
 
           <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text="Elige tu objetivo" onSelect={accion} data={options} value={selectedItem} color1='#eede89' color2='#F8F1CC' dia={''}  ></DropDown>
@@ -117,12 +119,13 @@ const Form = () => {
           <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text="Dias a la semana de entreno" onSelect={accion3} data={dias} value={selectedItem3} color1='#eede89' color2='#F8F1CC' dia={''} ></DropDown>
           <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text="Nivel" onSelect={accion4} data={nivel} value={selectedItem4} color1='#eede89' color2='#F8F1CC' dia={''} ></DropDown>
           {/* <GenericButton text="OK" action={() => navigation.navigate('Plan')} /> */}
-          <TouchableOpacity onPress={() => rellenarForm()} style={{
+          {/* <TouchableOpacity onPress={() => rellenarForm()} style={{
             ...styles.button,
             backgroundColor: '#F8F1CC',
             marginTop: 20
           }}>
-            <Text style={styles.buttonText}>OK</Text></TouchableOpacity>
+            <Text style={styles.buttonText}>OK</Text></TouchableOpacity> */}
+          <GenericButton text="OK" action={rellenarForm} color='#F8F1CC' />
 
         </ScrollView>
       </View>

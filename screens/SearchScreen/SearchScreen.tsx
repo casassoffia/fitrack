@@ -14,15 +14,15 @@ import { Button } from '@rneui/themed';
 import firebase from "firebase/app";
 import "firebase/firestore";
 import { getAuth } from 'firebase/auth';
-import UserMethods from '../../APIs/UserApi/UserApi'
+import UserMethods from '../../APIs/UserApi'
 import { Route } from '@react-navigation/native';
 import { PlanButton } from '../../components/PlanButton';
 import DropDown from '../../components/DropDown';
-import RellenarLunes from '../../APIs/UserApi/RellenarPlanesLunes';
-import RellenarMartes from '../../APIs/UserApi/RellenarPlanesMartes';
-import RellenarMiercoles from '../../APIs/UserApi/RellenarPlanesMiercoles';
-import RellenarJueves from '../../APIs/UserApi/RellenarPlanesJueves';
-import RellenarViernes from '../../APIs/UserApi/RellenarPlanesViernes';
+import RellenarLunes from '../../APIs/RellenarPlanesLunes';
+import RellenarMartes from '../../APIs/RellenarPlanesMartes';
+import RellenarMiercoles from '../../APIs/RellenarPlanesMiercoles';
+import RellenarJueves from '../../APIs/RellenarPlanesJueves';
+import RellenarViernes from '../../APIs/RellenarPlanesViernes';
 
 
 
@@ -65,7 +65,7 @@ const Search = () => {
                 <PlanButton text="Suplementos" action={() => navigation.navigate('ListSupplements')} />
 
 
-                <NavBar></NavBar>
+                <NavBar search={true} listExercicies={false} plan={false} listMeals={false} profile={false}></NavBar>
             </View>
 
         </View >

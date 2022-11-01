@@ -87,13 +87,11 @@ export default StyleSheet.create({
     },
     paso2: {
         backgroundColor: '#EFE6CF',
-        width: '80%',
+        width: '90%',
         height: '100%',
-        marginTop: 10,
         justifyContent: 'center',
         borderRadius: 50,
-        alignSelf: 'center',
-        flexDirection: 'row',
+        alignItems: 'center',
 
         padding: '5%'
 
@@ -102,7 +100,6 @@ export default StyleSheet.create({
         fontSize: 20,
         color: '#45322e',
         textAlign: 'center',
-        width: 200
 
     },
 

@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Pressable, FlatList, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, Pressable, FlatList, Image, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { useFonts } from 'expo-font';
@@ -15,7 +15,7 @@ import { Button } from '@rneui/themed';
 import firebase from "firebase/app";
 import "firebase/firestore";
 import { getAuth } from 'firebase/auth';
-import UserMethods from '../../APIs/UserApi/UserApi'
+import UserMethods from '../../APIs/UserApi'
 import { Route } from '@react-navigation/native';
 
 
@@ -33,14 +33,14 @@ const ListMeals = () => {
   });
 
   const navigation = useNavigation<HomeScreenNavigationProp>();
-
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [desayunos, setDesayunos] = useState<any>([])
   const [comidas, setComidas] = useState<any>([])
   const [cenas, setCenas] = useState<any>([])
 
 
   useEffect(() => {
-
+    setIsLoading(true)
     UserMethods.getNombresAlimentos("desayunos").then(
       (desa) => {
         setDesayunos(desa)
@@ -58,7 +58,7 @@ const ListMeals = () => {
 
       }
 
-    )
+    ).finally(() => setIsLoading(false))
 
   }, [])
   const [desayuno, setDesayuno] = useState('')
@@ -84,26 +84,32 @@ const ListMeals = () => {
   return (
     <><ScrollView style={{ height: '100%' }}>
       <View style={styles.container}>
-        <View style={styles.header}>
-          <Image source={require("../../assets/imagenes/pruebaCabecera.png")} style={styles.forma}></Image>
-        </View>
+        {isLoading ?
+          (<View style={styles.Spinner}><ActivityIndicator /></View>) :
+          (<View style={styles.container}>
+            <View style={styles.header}>
 
-        <View style={styles.body}>
+              <Image source={require("../../assets/imagenes/cabecera2.png")} style={styles.forma}></Image>
+              <Text style={{ ...styles.nombreTitulo, fontFamily: "Adamina_400Regular" }}>Coge más ideas para </Text>
+              <Text style={{ ...styles.nombreTitulo, marginTop: 230, fontFamily: "Adamina_400Regular" }}> tus comidas</Text>
+            </View>
 
-          <DropDownListado text="Desayunos" onSelect={accion} data={desayunos.valueOf()} value={desayuno}  ></DropDownListado>
-          <DropDownListado text="Comidas" onSelect={accion2} data={comidas.valueOf()} value={comida}  ></DropDownListado>
-          <DropDownListado text="Cenas" onSelect={accion3} data={cenas.valueOf()} value={cena}  ></DropDownListado>
+            <View style={styles.body}>
 
-          <AnyadirButton text="Añadir Receta" action={() => navigation.navigate('AddMeal')} />
+              <DropDownListado text="Desayunos" onSelect={accion} data={desayunos.valueOf()} value={desayuno} view={"Comida"} ></DropDownListado>
+              <DropDownListado text="Comidas" onSelect={accion2} data={comidas.valueOf()} value={comida} view={"Comida"}  ></DropDownListado>
+              <DropDownListado text="Cenas" onSelect={accion3} data={cenas.valueOf()} value={cena} view={"Comida"} ></DropDownListado>
 
-        </View>
+              <AnyadirButton text="Añadir Receta" action={() => navigation.navigate('AddMeal')} />
 
+            </View>
+          </View>)}
 
       </View>
 
     </ScrollView>
       <View style={{ alignItems: 'center' }}>
-        <NavBar></NavBar>
+        <NavBar search={false} listExercicies={false} plan={false} listMeals={true} profile={false}></NavBar>
       </View></>
 
 

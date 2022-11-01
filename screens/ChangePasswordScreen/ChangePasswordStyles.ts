@@ -23,6 +23,14 @@ export default StyleSheet.create({
     backgroundColor: '#61b254',
     flexDirection: 'row',
   },
+  pie: {
+    flex: 0.1,
+    flexDirection: 'column',
+    position: 'absolute',
+    backgroundColor: '#61b254',
+    bottom: '7%'
+
+  },
  icono: {
 
     width: 70,
@@ -40,11 +48,9 @@ export default StyleSheet.create({
   nombre: {
     fontSize: 30,
     justifyContent: 'center',
-
     marginLeft: 150,
     color: '#fff',
     fontFamily: 'lob'
-
   },
   titulo: {
     fontSize: 35,
@@ -52,31 +58,20 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 25,
-    
+    marginTop: 25,
 
   },
   textInput: {
     width: 350,
-    padding: 15,
-    height: 55,
+    height: 60,
     backgroundColor: '#F8F1CC',
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 30,
     marginLeft: 25,
-    fontSize: 18,
+    fontSize: 25,
+    padding: 15,
     borderRadius: 20,
-      color:'#A3998E'
-
-  },
-  scrollView: {
-    backgroundColor: '#fff',
-    marginHorizontal: 40,
-  },
-  pie: {
-    flex: 0.1,
-    flexDirection: 'column',
-    backgroundColor: '#61b254',
   },
   button: {
     alignSelf: 'center',
@@ -93,4 +88,12 @@ export default StyleSheet.create({
     fontSize: 20,
 
   },
+        buttonTextOut: {
+        textAlign: 'center',
+        fontSize: 15,
+      marginTop:20,
+          color: '#fff',
+       
+
+    },
 })

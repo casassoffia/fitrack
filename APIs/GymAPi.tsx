@@ -38,9 +38,9 @@ const GymMethods = {
                 q = query(q, where("nivel", "==", 2))
 
             } else if (precioSeleccionado.name.valueOf() == "40-50") {
-                q = query(q, where("precio", "==", 3))
+                q = query(q, where("nivel", "==", 3))
             } else if (precioSeleccionado.name.valueOf() == "50-60") {
-                q = query(q, where("precio", "==", 4))
+                q = query(q, where("nivel", "==", 4))
             }
         }
 
@@ -93,6 +93,23 @@ const GymMethods = {
         return suplementos
 
     },
+    getUrlImages: async function () {
+        const q = query(collection(db, "suplementos"))
+        let urls: Array<String> = []
+        let suplemento
+        let url: string
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            suplemento = doc.data()
+            url = suplemento.imagen
+
+            urls.push(url)
+
+        });
+
+        return urls
+
+    },
     getSuplementosFromUser: async function () {
         const auth = getAuth()
         const userLogued = auth.currentUser;
@@ -140,17 +157,22 @@ const GymMethods = {
 
         });
         let encontrado = false
-        for (let i = 0; i < cestaUsuario.length; i++) {
-            console.log(cestaUsuario[i].id)
-            console.log(suplemento.id)
+        if (cestaUsuario != null) {
+            for (let i = 0; i < cestaUsuario.length; i++) {
+                console.log(cestaUsuario[i].id)
+                console.log(suplemento.id)
 
-            if (cestaUsuario[i].id == suplemento.id) {
-                cestaUsuario[i].cantidad = cestaUsuario[i].cantidad + 1
-                encontrado = true
+                if (cestaUsuario[i].id == suplemento.id) {
+                    cestaUsuario[i].cantidad = cestaUsuario[i].cantidad + 1
+                    encontrado = true
+                }
             }
+
         }
+
         if (!encontrado) {
             suplemento.cantidad = 1
+            cestaUsuario = []
             cestaUsuario.push(suplemento)
             console.log(cestaUsuario)
 
@@ -230,11 +252,12 @@ const GymMethods = {
 
 
             if (cestaUsuario[i].id == idSuplemento) {
-                cestaUsuario.splice(i - 1, 1)
+                // cestaUsuario.splice(i - 1, 1)
+                cestaUsuario = cestaUsuario.filter((item) => item.id != idSuplemento)
 
             }
         }
-        console.log("cestaUsuario")
+
         console.log(cestaUsuario)
         const update = await updateDoc(usuarioref, {
             Carrito: cestaUsuario

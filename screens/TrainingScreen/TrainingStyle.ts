@@ -18,7 +18,7 @@ export default StyleSheet.create({
   header: {
     flex: 0.45,
     flexDirection: 'row',
-    backgroundColor:'red'
+   
 
   },
   fotoInicial: {
@@ -28,10 +28,12 @@ export default StyleSheet.create({
 
   },
   forma: {
-    marginTop: 20,
-    width:'100%'
+        // borderBottomLeftRadius: 120,
 
-  },
+        width: '100%',
+        height: 300
+
+    },
   titulo: {
    marginTop:'10%',
     backgroundColor: '#7DB065',
@@ -58,6 +60,9 @@ export default StyleSheet.create({
     position: 'absolute',
 
   },
+   nombreTitulo: {
+    marginTop: 200, marginLeft: 20, position: 'absolute', fontSize: 30, color: '#ffff'
+  },
   icono: {
     width: 150,
     height: 150,
@@ -71,7 +76,7 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     flexDirection: 'column',
-    marginBottom:300
+    marginBottom:310
   },
   contenedor: {
     width: '100%',
@@ -79,7 +84,8 @@ export default StyleSheet.create({
     backgroundColor: '#D9EFCF',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius:50
+    borderRadius: 50,
+    marginTop:10
   },
   contenedorInterior: {
     width: '90%',
@@ -88,7 +94,8 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: '5%',
-    borderRadius:50
+    borderRadius: 50,
+  
   },
   contenedorNombre: {
     width: '90%',
@@ -111,10 +118,11 @@ export default StyleSheet.create({
   },
   textoInterior: {
     fontSize: 16,
-    // fontFamily:'ada'
+    color: '#613000'
   },
    textoNombre: {
-    fontSize:20
+     fontSize: 20,
+      color: '#613000'
   }
   
 

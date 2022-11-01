@@ -34,11 +34,11 @@ export default StyleSheet.create({
   icono: {
 
     width: 70,
-    height: 70,
-    borderRadius: 100,
-    resizeMode: 'contain',
+     height: 70,
+     borderRadius: 80 / 2,
+    marginTop: 50,
     marginLeft: 130,
-    marginTop: 20
+    
   },
   body: {
     flex: 1,
@@ -72,6 +72,7 @@ export default StyleSheet.create({
     fontSize: 25,
     padding: 15,
     borderRadius: 20,
+      color:'#A3998E'
   },
   button: {
     alignSelf: 'center',
@@ -88,4 +89,15 @@ export default StyleSheet.create({
     fontSize: 20,
 
   },
+        buttonTextOut: {
+        textAlign: 'center',
+        fontSize: 15,
+          marginTop: 20,
+          width: 240,
+      marginLeft:100,
+          color: '#fff',
+
+       
+
+    },
 })

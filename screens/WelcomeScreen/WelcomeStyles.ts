@@ -26,11 +26,11 @@ export default StyleSheet.create({
   icono: {
 
     width: 70,
-    height: 70,
-    borderRadius: 100,
-    resizeMode: 'contain',
+     height: 70,
+     borderRadius: 80 / 2,
+    marginTop: 50,
     marginLeft: 130,
-    marginTop: 20
+    
   },
   body: {
     flex: 1,

@@ -7,12 +7,13 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import DropDown from '../../components/DropDown';
 import { SetStateAction, useEffect, useState } from 'react';
 import styles from './AddExercicieStyles'
-import UserMethods from '../../APIs/UserApi/UserApi'
+import UserMethods from '../../APIs/UserApi'
 import { getAuth } from 'firebase/auth';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../utils/Firebase';
 import { Adamina_400Regular } from '@expo-google-fonts/adamina'
-// import firestore from '@react-native-firebase/firestore'
+import React from 'react';
+
 
 let ejercicios = [{ id: 1, name: 'Hombro' }, { id: 2, name: 'Espalda' }, { id: 3, name: 'Biceps' }, { id: 4, name: 'Triceps' }, { id: 5, name: 'Pecho' }, { id: 6, name: 'Pierna' }, { id: 7, name: 'Gluteo' }]
 let sexo = [{ id: 1, name: 'Femenino' }, { id: 2, name: 'Masculino' }, { id: 3, name: 'Otros' }]
@@ -43,7 +44,7 @@ const AddExercicie = () => {
 
             UserMethods.crearEjercicio(nombre, primero, segundo, tercero, nivelSeleccionado, tipoEjercicio).finally(
                 () => {
-                    navigation.navigate("ListExercicies")
+                    navigation.navigate("ListExercicies", { reload: true })
                 }
             )
 
@@ -94,7 +95,7 @@ const AddExercicie = () => {
 
                     <View style={styles.headerLeft}>
                         <Text style={{ marginTop: 50 }}>
-                            <Icon name="chevron-back-outline" size={30} color="#fff" onPress={() => navigation.navigate('ListExercicies')} ></Icon>
+                            <Icon name="chevron-back-outline" size={30} color="#fff" onPress={() => navigation.navigate('ListExercicies', { reload: true })} ></Icon>
                         </Text>
                     </View>
                     <View style={styles.headerRight}>
@@ -108,7 +109,7 @@ const AddExercicie = () => {
                     <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text="Indica el tipo de ejercicio" onSelect={accion} data={ejercicios} value={tipoEjercicio} color1='#eede89' color2='#F8F1CC' dia={''}  ></DropDown>
                     <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text="Nivel del Ejercicio" onSelect={accion2} data={nivel} value={nivelSeleccionado} color1='#eede89' color2='#F8F1CC' dia={''} ></DropDown>
                     <TextInput onChangeText={text => setNombre(text)} style={styles.textInput} value={nombre} placeholder="Nombre del Ejercicio" maxLength={37} ></TextInput>
-                    <Text style={styles.aclaracion}>* Por favor explica el ejercico en tres pasos</Text>
+                    <Text style={styles.aclaracion}>* Por favor explica el ejercicio en tres pasos</Text>
                     <TextInput onChangeText={text => setPrimero(text)} style={styles.textPasos} value={primero} placeholder="Primer Paso" maxLength={150} ></TextInput>
                     <TextInput onChangeText={text => setSegundo(text)} style={styles.textPasos} value={segundo} placeholder="Segundo Paso" maxLength={150} ></TextInput>
                     <TextInput onChangeText={text => setTercero(text)} style={styles.textPasos} value={tercero} placeholder="Tercer Paso" maxLength={150} ></TextInput>

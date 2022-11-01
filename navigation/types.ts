@@ -5,13 +5,14 @@ export type HomeStackNavigatorParamList = {
   Login: undefined;
   Register: undefined;
   Form: undefined;
-  Plan: undefined;
-  PlanDay: { Day: string };
+  Plan:  {reload:boolean};
+  PlanDay: { Day: string, numDias: number,  reload:boolean};
   Welcome: undefined;
   MealDay: { Tipo: string, Dia: string };
+  Meal: { nombre: string , Tipo:string};
   Training: { Dia: string };
-  ListExercicies: undefined;
-  ListMeals: undefined;
+  ListExercicies:  {reload:boolean};
+  ListMeals: {reload:boolean};
   AddExercicie: undefined;
   AddMeal: undefined;
   Search: undefined;
@@ -19,10 +20,12 @@ export type HomeStackNavigatorParamList = {
   ExercicieDay: { NombreEjercicio: string };
   ListSupplements: undefined;
   Card: undefined;
+  Profile:{success:boolean},
+  ProfileEdit: { nombre: any; edad: any; email: any; nivel: any; num_dias: any; peso: any; plan: any; sexo: any; },
+  ChangePassword: undefined;
 
 };
 
 export type HomeScreenNavigationProp = NativeStackNavigationProp<
-  HomeStackNavigatorParamList,
-  'Login'
+  HomeStackNavigatorParamList
 >;

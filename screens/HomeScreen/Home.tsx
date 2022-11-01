@@ -5,14 +5,15 @@ import { useFonts } from 'expo-font';
 import { HomeScreenNavigationProp } from '../../navigation/types';
 import { GenericButton } from '../../components/Button';
 import styles from './HomeStyle'
+import React from 'react';
 
 const Home = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const [loaded] = useFonts({
     lob: require('../../assets/fonts/Lobster-Regular.ttf'),
-    //noto: require('./assets/fonts/NotoSerifHK-VariableFont_wght.ttf'),
 
   });
+
   if (!loaded) {
     return null;
   }

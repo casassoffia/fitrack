@@ -15,7 +15,7 @@ import { Button } from '@rneui/themed';
 import firebase from "firebase/app";
 import "firebase/firestore";
 import { getAuth } from 'firebase/auth';
-import UserMethods from '../../APIs/UserApi/UserApi'
+import UserMethods from '../../APIs/UserApi'
 import { Route } from '@react-navigation/native';
 
 
@@ -125,18 +125,20 @@ const ListExercicies = () => {
     <><ScrollView style={{ height: '100%' }}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Image source={require("../../assets/imagenes/pruebaCabecera.png")} style={styles.forma}></Image>
+          <Image source={require("../../assets/imagenes/cabecera3.png")} style={styles.forma}></Image>
+          <Text style={{ ...styles.nombreTitulo, fontFamily: "Adamina_400Regular" }}>Coge más ideas para </Text>
+          <Text style={{ ...styles.nombreTitulo, marginTop: 230, fontFamily: "Adamina_400Regular" }}> tus rutinas</Text>
         </View>
 
         <View style={styles.body}>
 
-          <DropDownListado text="Hombro" onSelect={accion} data={ejerciciosHombro.valueOf()} value={ejercicioHombro}  ></DropDownListado>
-          <DropDownListado text="Espalda" onSelect={accion2} data={ejerciciosEspalda.valueOf()} value={ejercicioEspalda}  ></DropDownListado>
-          <DropDownListado text="Biceps" onSelect={accion3} data={ejerciciosBiceps.valueOf()} value={ejercicioBiceps}  ></DropDownListado>
-          <DropDownListado text="Triceps" onSelect={accion4} data={ejerciciosTriceps.valueOf()} value={ejercicioTriceps}  ></DropDownListado>
-          <DropDownListado text="Pecho" onSelect={accion7} data={ejerciciosPecho.valueOf()} value={ejercicioPecho}  ></DropDownListado>
-          <DropDownListado text="Pierna" onSelect={accion5} data={ejerciciosPierna.valueOf()} value={ejercicioPiernas}  ></DropDownListado>
-          <DropDownListado text="Glúteo" onSelect={accion6} data={ejerciciosGlueto.valueOf()} value={ejercicioGluteo}  ></DropDownListado>
+          <DropDownListado text="Hombro" onSelect={accion} data={ejerciciosHombro.valueOf()} value={ejercicioHombro} view={"Ejercicio"}></DropDownListado>
+          <DropDownListado text="Espalda" onSelect={accion2} data={ejerciciosEspalda.valueOf()} value={ejercicioEspalda} view={"Ejercicio"} ></DropDownListado>
+          <DropDownListado text="Biceps" onSelect={accion3} data={ejerciciosBiceps.valueOf()} value={ejercicioBiceps} view={"Ejercicio"} ></DropDownListado>
+          <DropDownListado text="Triceps" onSelect={accion4} data={ejerciciosTriceps.valueOf()} value={ejercicioTriceps} view={"Ejercicio"} ></DropDownListado>
+          <DropDownListado text="Pecho" onSelect={accion7} data={ejerciciosPecho.valueOf()} value={ejercicioPecho} view={"Ejercicio"} ></DropDownListado>
+          <DropDownListado text="Pierna" onSelect={accion5} data={ejerciciosPierna.valueOf()} value={ejercicioPiernas} view={"Ejercicio"} ></DropDownListado>
+          <DropDownListado text="Glúteo" onSelect={accion6} data={ejerciciosGlueto.valueOf()} value={ejercicioGluteo} view={"Ejercicio"} ></DropDownListado>
 
           <AnyadirButton text="Añadir Ejercicio" action={() => navigation.navigate('AddExercicie')} />
 
@@ -147,7 +149,7 @@ const ListExercicies = () => {
 
     </ScrollView>
       <View style={{ alignItems: 'center' }}>
-        <NavBar></NavBar>
+        <NavBar search={false} listExercicies={true} plan={false} listMeals={false} profile={false}></NavBar>
       </View></>
 
 

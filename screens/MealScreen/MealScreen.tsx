@@ -4,7 +4,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { HomeScreenNavigationProp } from '../../navigation/types';
 import { ButtonDays } from '../../components/ButtonDays';
-import styles from './MealDayStyle'
+import styles from './MealStyle'
 import firestore from '@react-native-firebase/firestore'
 import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -21,11 +21,11 @@ import { PlanButton } from '../../components/PlanButton';
 import DropDown from '../../components/DropDown';
 import { Adamina_400Regular } from '@expo-google-fonts/adamina'
 
-const MealDay = () => {
+const Meal = () => {
     const navigation = useNavigation<HomeScreenNavigationProp>();
     const route: any = useRoute();
+    let [nombreComida, setNombreComida] = useState('')
     let [tipo, setTipo] = useState('')
-    let [dia, setDia] = useState('')
     const [titulo, setTitulo] = useState('')
     const [nombre, setNombre] = useState('')
     const [receta, setReceta] = useState('')
@@ -44,84 +44,37 @@ const MealDay = () => {
 
     });
     useEffect(() => {
+        // tipo = route.params.Tipo
+        setTipo(route.params.Tipo)
+        setNombreComida(route.params.nombre)
+        setTitulo(nombreComida)
 
-        tipo = route.params.Tipo
-        dia = route.params.Dia
+        //sacar la comida seleccionada 
+        UserMethods.getComidabyName(route.params.nombre, route.params.Tipo).then(
+            (comida) => {
+                alimento = comida
+                console.log("alimento")
+                console.log(alimento)
+                setNombre(alimento.nombre)
+                setReceta(alimento.receta)
+                setIngredientes(alimento.ingredientes)
+                UserMethods.separarParrafo(alimento.ingredientes, ',').then(
+                    (listado) => {
+                        listadoingre = listado
+                        setCantidades(listado)
+                        UserMethods.separarParrafo(alimento.receta, '?').then(
+                            (recetas) => {
+                                recetaDesa = recetas
+                                setRecetaDesayuno(recetaDesa)
+                            }
+                        )
+                    }
+                )
+            }
+        )
 
-        let desayuno = "Desayuno"
-        let cena = "Cena"
-        let comida = "Comida"
 
 
-        if (tipo.valueOf() == desayuno.valueOf()) {
-            setTitulo("La comida mas importante del Día")
-            //sacar el desayuno del usuario
-            UserMethods.getDesayunoFromUser(dia).then(
-                (desayuno) => {
-                    alimento = desayuno
-                    setNombre(alimento.nombre)
-                    setReceta(alimento.receta)
-                    setIngredientes(alimento.ingredientes)
-                    UserMethods.separarParrafo(alimento.ingredientes, ',').then(
-                        (listado) => {
-                            listadoingre = listado
-                            setCantidades(listado)
-                            UserMethods.separarParrafo(alimento.receta, '?').then(
-                                (recetas) => {
-                                    recetaDesa = recetas
-                                    setRecetaDesayuno(recetaDesa)
-                                }
-                            )
-                        }
-                    )
-                }
-            )
-
-        } else if (tipo.valueOf() == comida.valueOf()) {
-            setTitulo("Para seguir teniendo energía")
-            UserMethods.getComidaFromUser(dia).then(
-                (comida) => {
-                    alimento = comida
-                    setNombre(alimento.nombre)
-                    setReceta(alimento.receta)
-                    setIngredientes(alimento.ingredientes)
-                    UserMethods.separarParrafo(alimento.ingredientes, ',').then(
-                        (listado) => {
-                            listadoingre = listado
-                            setCantidades(listado)
-                            UserMethods.separarParrafo(alimento.receta, '?').then(
-                                (recetas) => {
-                                    recetaDesa = recetas
-                                    setRecetaDesayuno(recetaDesa)
-                                }
-                            )
-                        }
-                    )
-                }
-            )
-        } else {
-            setTitulo("Para terminar bien el dia ...")
-            UserMethods.getComidaFromUser(dia).then(
-                (cena) => {
-                    alimento = cena
-                    setNombre(alimento.nombre)
-                    setReceta(alimento.receta)
-                    setIngredientes(alimento.ingredientes)
-                    UserMethods.separarParrafo(alimento.ingredientes, ',').then(
-                        (listado) => {
-                            listadoingre = listado
-                            setCantidades(listado)
-                            UserMethods.separarParrafo(alimento.receta, '?').then(
-                                (recetas) => {
-                                    recetaDesa = recetas
-                                    setRecetaDesayuno(recetaDesa)
-                                }
-                            )
-                        }
-                    )
-                }
-            )
-        }
 
     }, [])
     if (!loaded) {
@@ -188,13 +141,13 @@ const MealDay = () => {
             </View >
         </ScrollView>
             <View style={{ alignItems: 'center' }}>
-                <NavBar search={false} listExercicies={false} plan={false} listMeals={false} profile={false}></NavBar>
+                <NavBar></NavBar>
             </View></>
 
     )
 }
 
-export default MealDay;
+export default Meal;
 
 
 

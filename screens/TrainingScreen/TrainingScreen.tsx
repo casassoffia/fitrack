@@ -15,7 +15,7 @@ import { Button } from '@rneui/themed';
 import firebase from "firebase/app";
 import "firebase/firestore";
 import { getAuth } from 'firebase/auth';
-import UserMethods from '../../APIs/UserApi/UserApi'
+import UserMethods from '../../APIs/UserApi'
 import { Route } from '@react-navigation/native';
 import { PlanButton } from '../../components/PlanButton';
 
@@ -41,7 +41,7 @@ const Training = () => {
   console.log(route.params.Dia)
   const [ejerciciosDelUsuario, setEjerciciosDelUsuario] = useState<any>([])
   let nombresDeEjercicios: any[] = []
-  const [recetaDesayuno, setRecetaDesayuno] = useState<any>([])
+
   useEffect(() => {
     setDia(route.params.Day)
 
@@ -76,7 +76,8 @@ const Training = () => {
     <><ScrollView style={{ height: '100%' }}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Image source={require("../../assets/imagenes/pruebaCabecera.png")} style={styles.forma}></Image>
+          <Image source={require("../../assets/imagenes/cabecera4.png")} style={styles.forma}></Image>
+          <Text style={{ ...styles.nombreTitulo, fontFamily: "Adamina_400Regular" }}>Tu rutina de hoy </Text>
         </View>
 
         <View style={styles.body}>

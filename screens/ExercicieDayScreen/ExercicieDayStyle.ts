@@ -16,10 +16,10 @@ export default StyleSheet.create({
 
   },
   header: {
-    marginTop:'20%',
+
     flex: 0.45,
     flexDirection: 'row',
-    backgroundColor:'red'
+  
 
   },
   fotoInicial: {
@@ -28,10 +28,11 @@ export default StyleSheet.create({
     borderBottomLeftRadius: 200,
 
   },
-  forma: {
-    
+ forma: {
+        width: '100%',
+        height: 300
 
-  },
+    },
   titulo: {
   
     backgroundColor: '#9CCC65',
@@ -57,6 +58,9 @@ export default StyleSheet.create({
 
     position: 'absolute',
 
+  },
+     nombreTitulo: {
+    marginTop: 200, marginLeft: 10, position: 'absolute', fontSize: 25, color: '#ffff'
   },
   icono: {
     width: 150,

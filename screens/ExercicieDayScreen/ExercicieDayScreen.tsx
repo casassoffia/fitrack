@@ -15,7 +15,7 @@ import { Button } from '@rneui/themed';
 import firebase from "firebase/app";
 import "firebase/firestore";
 import { getAuth } from 'firebase/auth';
-import UserMethods from '../../APIs/UserApi/UserApi'
+import UserMethods from '../../APIs/UserApi'
 import { Route } from '@react-navigation/native';
 import { PlanButton } from '../../components/PlanButton';
 import DropDown from '../../components/DropDown';
@@ -33,9 +33,8 @@ const ExercicieDay = () => {
     const [ref, setRef] = useState(0)
     const [pasos, setPasos] = useState<any>([])
     const [recetaDesayuno, setRecetaDesayuno] = useState<any>([])
-    let listadoIngredientes: string[] = [];
     let listadoPasos = []
-    let recetaDesa = []
+
 
     let ejercicioPasado: { nombre: any; descripcion: any; tipo: any; }
 
@@ -44,12 +43,8 @@ const ExercicieDay = () => {
 
     });
     useEffect(() => {
-        console.log(route.params.NombreEjercicio)
+
         setNombreEjercicio(route.params.NombreEjercicio)
-
-
-        let nombre2 = { nombre: "", receta: "", ingredientes: "" }
-
         setTitulo(nombreEjercicio)
         //sacar el ejercicio que me pasan
         UserMethods.getEjerciciobyName(route.params.NombreEjercicio).then(
@@ -82,7 +77,8 @@ const ExercicieDay = () => {
 
                 <View style={styles.header}>
 
-                    <Image source={require("../../assets/imagenes/pruebaCabecera.png")} style={styles.forma}></Image>
+                    <Image source={require("../../assets/imagenes/cabecera3.png")} style={styles.forma}></Image>
+                    <Text style={{ ...styles.nombreTitulo, fontFamily: "Adamina_400Regular" }}>{tipo} </Text>
 
 
 
@@ -91,7 +87,7 @@ const ExercicieDay = () => {
                 <View style={styles.body}>
 
                     <View style={styles.titulo}>
-                        <Text style={{ ...styles.textoTitulo, fontFamily: "Adamina_400Regular" }}>{tipo}</Text>
+                        <Text style={{ ...styles.textoTitulo, fontFamily: "Adamina_400Regular" }}>{nombreEjercicio}</Text>
                     </View>
 
                     <View style={styles.contendor1}>
@@ -119,7 +115,7 @@ const ExercicieDay = () => {
             </View >
         </ScrollView>
             <View style={{ alignItems: 'center' }}>
-                <NavBar></NavBar>
+                <NavBar search={false} listExercicies={false} plan={false} listMeals={false} profile={false}></NavBar>
             </View></>
 
     )

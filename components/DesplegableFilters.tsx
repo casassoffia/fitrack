@@ -2,29 +2,26 @@ import { NavigationHelpersContext, useNavigation } from '@react-navigation/nativ
 import React, { useEffect, useState } from 'react';
 import { Touchable, TouchableOpacity, View, Text, StyleSheet, Image, } from 'react-native';
 import { HomeScreenNavigationProp } from '../navigation/types';
-import MealDay from '../screens/MealDayScreen/MealDayScreen';
 import { useFonts } from 'expo-font';
 import { Adamina_400Regular } from '@expo-google-fonts/adamina'
 import Icon from 'react-native-vector-icons/Ionicons';
-import { CheckBox } from 'react-native-elements';
 import DropDownFilters from './DropDownFilters';
 import { ButtonFilters } from './ButtonFilters';
 import { DocumentData } from 'firebase/firestore';
 import GymMethods from '../APIs/GymAPi';
-// import CheckBox from '@react-native-community/checkbox';
+import DropDownCheckBox from './DropDownCheckBox';
 
 interface IDropDown {
   text: string,
   gimnasios: Array<DocumentData>,
   onSelect: (item: any) => void
 
-
-
-
 }
 
 let precios = [{ id: 1, name: 'Selecciona un rango' }, { id: 2, name: '20-30' }, { id: 3, name: '30-40' }, { id: 4, name: '40-50' }, { id: 5, name: '50-60' }]
-const DropDown = ({ text, gimnasios, onSelect }: IDropDown) => {
+
+const DesplegableFilters = ({ text, gimnasios, onSelect }: IDropDown) => {
+
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const [showOption, setShowOption] = useState(false)
   const [conPiscina, setConPiscina] = useState(false);
@@ -46,6 +43,9 @@ const DropDown = ({ text, gimnasios, onSelect }: IDropDown) => {
   const accion = (item: any) => {
     setSelectedItem(item)
   }
+  const cambiarEstado = (item: any) => {
+    setSelectedItem(item)
+  }
   if (!loaded) {
     return null;
   }
@@ -63,56 +63,13 @@ const DropDown = ({ text, gimnasios, onSelect }: IDropDown) => {
 
       </TouchableOpacity>
 
-      {showOption && (<View style={{ backgroundColor: 'rgba(125, 176, 101, 0.5)', borderRadius: 15 }}>
+      {showOption && (<View >
+
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <CheckBox
-              checked={conPiscina}
-              onPress={() => setConPiscina(!conPiscina)}
-              checkedIcon='dot-circle-o'
-              uncheckedIcon='circle-o'
-              style={styles.checkbox}
-              checkedColor='green'
+          <DropDownCheckBox conPiscina={conPiscina} isTenis={isTenis} isSpa={isSpa} isGuarderia={isGuarderia} text={'Selecciona un servicio'} setConPiscina={setConPiscina} setSpa={setSpa} setTenis={setTenis} setGuarderia={setGuarderia}></DropDownCheckBox>
+          <DropDownFilters text="Selecciona un precio" onSelect={accion} data={precios} value={selectedItem}   ></DropDownFilters>
 
-            />
-            <Text style={{ fontFamily: 'Adamina_400Regular' }}>Piscina</Text></View>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-
-            <CheckBox
-              checked={isTenis}
-              onPress={() => setTenis(!isTenis)}
-              checkedIcon='dot-circle-o'
-              uncheckedIcon='circle-o'
-              style={styles.checkbox}
-              checkedColor='green'
-
-            />
-            <Text >Pista de Tennis/Padel</Text></View></View>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <CheckBox
-              checked={isGuarderia}
-              onPress={() => setGuarderia(!isGuarderia)}
-              checkedIcon='dot-circle-o'
-              uncheckedIcon='circle-o'
-              style={styles.checkbox}
-              checkedColor='green'
-
-            />
-            <Text>Guarderia</Text></View>
-
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <CheckBox
-              checked={isSpa}
-              onPress={() => setSpa(!isSpa)}
-              checkedIcon='dot-circle-o'
-              uncheckedIcon='circle-o'
-              style={styles.checkbox}
-              checkedColor='green'
-
-            />
-            <Text>Spa</Text></View></View>
-        <DropDownFilters text="Selecciona un rango" onSelect={accion} data={precios} value={selectedItem}   ></DropDownFilters>
+        </View>
         <ButtonFilters action={() => GymMethods.getGymsFilter(conPiscina, isTenis, isSpa, isGuarderia, selectedItem)} text={'Aplicar Filtros'} color={'#EFE6CF'} onSelect={onSelect}></ButtonFilters>
       </View>)
       }
@@ -219,4 +176,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default DropDown;
+export default DesplegableFilters;

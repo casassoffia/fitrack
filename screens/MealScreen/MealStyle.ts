@@ -16,8 +16,11 @@ export default StyleSheet.create({
 
   },
   header: {
+
     flex: 0.45,
-    flexDirection: 'row',
+    flexDirection:'row'
+   
+    
 
   },
   fotoInicial: {
@@ -32,11 +35,11 @@ export default StyleSheet.create({
 
     },
   titulo: {
-   marginTop:'10%',
-    backgroundColor: '#7DB065',
+  
+    backgroundColor: '#9CCC65',
     opacity:0.65,
-    width: '97%',
-    height: 55,
+    width: '100%',
+    height: '10%',
     color: '#9CCC65',
     display: 'flex',
     alignItems: 'center',
@@ -45,7 +48,7 @@ export default StyleSheet.create({
     
   },
   textoTitulo: {
-    fontSize: 40,
+    fontSize: 25,
     color:'#fff'
     
   },
@@ -57,7 +60,7 @@ export default StyleSheet.create({
     position: 'absolute',
 
   },
-   nombreTitulo: {
+    nombreTitulo: {
     marginTop: 200, marginLeft: 10, position: 'absolute', fontSize: 25, color: '#ffff'
   },
   icono: {
@@ -73,35 +76,35 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     flexDirection: 'column',
-    marginBottom:200
+    marginBottom: 600
   },
-  contenedor: {
-    width: '100%',
-    height: '30%',
-    backgroundColor: '#D9EFCF',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius:50
-  },
-  contenedorInterior: {
+  contendor: {
+    marginTop:'2%',
     width: '90%',
-    height: '70%',
-    backgroundColor: '#EEEFB8',
-    justifyContent: 'center',
+    height: '80%',
+    backgroundColor: '#9CCC65',
+    opacity:0.65,
     alignItems: 'center',
-    padding: '5%',
-    borderRadius:50
-  },
-  contenedorNombre: {
-    width: '90%',
-    height: '12%',
-    marginTop:'10%',
-    backgroundColor: '#D9EFCF',
+    justifyContent:'center',
     borderRadius: 50,
-    alignContent: 'center',
-    justifyContent: 'center',
-    alignItems:'center',
-    padding: '8%',
+  },
+   contendor1: {
+    marginTop:'2%',
+    width: '90%',
+    height: '75%',
+    backgroundColor: '#9CCC65',
+    opacity:0.65,
+    alignItems: 'center',
+    justifyContent:'center',
+    borderRadius: 50,
+  },
+  ingredientes: {
+    alignItems: 'center',
+    justifyContent:'space-around',
+    width: '80%',
+    height: '80%',
+    backgroundColor: '#EFE6CF',
+    borderRadius: 50,
      shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -110,15 +113,40 @@ export default StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+     
   },
-  textoInterior: {
-    fontSize: 16,
+  receta: {
+    alignItems: 'center',
+    width: '100%',
+    height: '80%',
+   
 
+    borderRadius: 50,
+    
   },
-   textoNombre: {
-    fontSize:20
+  textoTituloIngredientes: {
+    color:'#221816',
+   fontSize:35
+   
   },
-     circulo: {
+  textoIngredientes: {
+    fontSize: 20,
+    color:'#45322e'
+  },
+   textoRecetas: {
+     fontSize: 16,
+     
+  },
+  paso: {
+    backgroundColor: '#EFE6CF',
+    width: '97%',
+    height: 150,
+    marginTop:10,
+  //  justifyContent: 'center',
+    borderRadius: 50,
+    padding:'2%'
+  },
+  circulo: {
   width: 60,
   height: 60,
   borderRadius: 60 / 2,
@@ -128,6 +156,20 @@ export default StyleSheet.create({
    
  
   },
+  numeroCirculo: {
+   fontSize:20
+  },
+  texto: {
+    // marginRight: '50%',
+    // marginTop: '10%'
+    backgroundColor: 'red',
+    width: '80%',
+    height: '70%',
+    
+   
+  }
+
+
   
 
 

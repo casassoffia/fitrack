@@ -7,9 +7,8 @@ export default StyleSheet.create({
     },
 
     header: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        flex: 0.45,
+        flexDirection: 'row',
 
     },
     fotoInicial: {
@@ -19,8 +18,6 @@ export default StyleSheet.create({
 
     },
     forma: {
-        // borderBottomLeftRadius: 120,
-
         width: '100%',
         height: 300
 
@@ -51,6 +48,9 @@ export default StyleSheet.create({
         position: 'absolute',
 
     },
+    nombreTitulo: {
+        marginTop: 180, marginLeft: 10, position: 'absolute', fontSize: 20, color: '#ffff'
+    },
     icono: {
         width: 150,
         height: 150,
@@ -68,35 +68,36 @@ export default StyleSheet.create({
     },
     paso: {
         backgroundColor: '#7DB065',
-        width: '85%',
+        width: '100%',
         height: 150,
         marginTop: 10,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         borderRadius: 50,
         alignSelf: 'center',
-        flexDirection: 'row',
+        // flexDirection: 'row',
+        padding: '5%',
 
-        padding: '5%'
 
     },
     paso2: {
-        backgroundColor: '#EFE6CF',
-        width: '80%',
-        height: '100%',
-        marginTop: 10,
+        width: '70%',
+        height: '60%',
         justifyContent: 'center',
         borderRadius: 50,
-        alignSelf: 'center',
-        flexDirection: 'row',
-
-        padding: '5%'
+        alignItems: 'center',
+        marginLeft: 30,
 
     },
     textoIngredientes: {
-        fontSize: 20,
-        color: '#45322e',
+        fontSize: 17,
+        color: '#ffff',
         textAlign: 'center',
-        width: 200
+
+    },
+    nombreSuplemento: {
+        fontSize: 20,
+        color: '#EFE6CF',
+        textAlign: 'center',
 
     },
     carritoposicion: {

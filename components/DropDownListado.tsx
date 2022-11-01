@@ -11,13 +11,14 @@ interface IDropDown {
   text: string,
   data: Array<any>,
   value: string,
-  onSelect: (item: any) => void
+  onSelect: (item: any) => void,
+  view: string
 
 
 }
 
 
-const DropDown = ({ text, data, value, onSelect }: IDropDown) => {
+const DropDown = ({ text, data, value, onSelect, view }: IDropDown) => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const [showOption, setShowOption] = useState(false)
   const [loaded] = useFonts({
@@ -26,7 +27,13 @@ const DropDown = ({ text, data, value, onSelect }: IDropDown) => {
   const onSelectedItem = (val: any) => {
     setShowOption(false)
     onSelect(val)
-    navigation.navigate('ExercicieDay', { NombreEjercicio: val })
+    if (view.valueOf() == "Ejercicio") {
+      navigation.navigate('ExercicieDay', { NombreEjercicio: val })
+    } else {
+
+      navigation.navigate('Meal', { nombre: val, Tipo: text.toString().toLowerCase() })
+    }
+
 
 
   }

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Touchable, TouchableOpacity, View, Text, StyleSheet, Image } from 'react-native';
 import { HomeScreenNavigationProp } from '../navigation/types';
 import MealDay from '../screens/MealDayScreen/MealDayScreen';
-
+import { Adamina_400Regular, useFonts } from '@expo-google-fonts/adamina'
 interface IDropDown {
   text: string,
   data: Array<any>,
@@ -22,9 +22,11 @@ interface IDropDown {
 
 
 const DropDown = ({ text, data, value, onSelect, color1, color2, colorLetra, tam, redirigir, dia }: IDropDown) => {
+
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const [showOption, setShowOption] = useState(false)
   const onSelectedItem = (val: any) => {
+
     setShowOption(false)
     onSelect(val)
     if (redirigir) {
@@ -33,10 +35,16 @@ const DropDown = ({ text, data, value, onSelect, color1, color2, colorLetra, tam
     }
 
   }
+  const [loaded] = useFonts({
+    "Adamina_400Regular": Adamina_400Regular,
+  });
+  if (!loaded) {
+    return null;
+  }
   return (
     <View>
       <TouchableOpacity style={{ ...styles.textInput, backgroundColor: color2 }} activeOpacity={0.8} onPress={() => setShowOption(!showOption)} >
-        <Text style={{ ...styles.texto, fontSize: parseInt(tam), color: colorLetra }}>{!!value ? value?.name : text}</Text>
+        <Text style={{ ...styles.texto, fontSize: parseInt(tam), color: colorLetra, fontFamily: 'Adamina_400Regular' }}>{!!value ? value?.name : text}</Text>
         <Image source={require('../assets/iconos/arrow_drop_down_FILL0_wght400_GRAD0_opsz48.png')} style={styles.icono2}></Image>
 
       </TouchableOpacity>
@@ -50,7 +58,7 @@ const DropDown = ({ text, data, value, onSelect, color1, color2, colorLetra, tam
               backgroundColor: value?.id == val.id ? color1 : color2, paddingHorizontal: 6, paddingVertical: 8, borderRadius: 8, width: '70%', alignItems: 'center',
               justifyContent: 'space-between', minHeight: 42, flexDirection: 'row', marginTop: 8, marginLeft: 60
             }}>
-            <Text style={{ ...styles.texto, fontSize: parseInt(tam), color: colorLetra }}>{val.name}
+            <Text style={{ ...styles.texto, fontSize: parseInt(tam), color: colorLetra, fontFamily: 'Adamina_400Regular' }}>{val.name}
             </Text>
 
           </TouchableOpacity>

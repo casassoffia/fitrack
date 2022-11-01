@@ -2,7 +2,7 @@ import { StyleSheet, View, Text, Pressable, FlatList, Image, TouchableOpacity } 
 import { collection, query, onSnapshot, orderBy, getDocs, QuerySnapshot, doc, addDoc, updateDoc, getDoc, where, setDoc, limit, DocumentData, Timestamp } from 'firebase/firestore';
 import firebase from "firebase/app";
 import "firebase/firestore";
-import { auth, db, firebaseConfig } from '../../utils/Firebase';
+import { auth, db, firebaseConfig } from '../utils/Firebase';
 import { getAuth } from 'firebase/auth';
 
 
@@ -24,6 +24,29 @@ const UserMethods = {
 
         return num
 
+    },
+    getUsuarioRegistrado: async function () {
+        const auth = getAuth()
+        const userLogued = auth.currentUser;
+        const q = query(collection(db, "usuarios"), where("email", "==", userLogued?.email))
+        let usuario
+        let nombre = "", edad = 0, email = "", nivel = "", num_dias = 0, peso = 0, plan = "", sexo = ""
+
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            usuario = doc.data()
+            nombre = usuario.nombre
+            edad = usuario.edad
+            email = usuario.email
+            nivel = usuario.nivel
+            num_dias = usuario.num_dias
+            peso = usuario.peso
+            plan = usuario.plan
+            sexo = usuario.sexo
+
+        });
+
+        return { nombre, edad, email, nivel, num_dias, peso, plan, sexo }
     },
     getEjercicio: async function (ref: number) {
 
@@ -248,8 +271,6 @@ const UserMethods = {
         });
 
         let nombres: any[] = []
-        console.log(tipo)
-        console.log(plan)
         const q = query(collection(db, tipo), where("plan", "==", plan.valueOf()))
         const querySnapshot = await getDocs(q);
         let alimento, nombre
@@ -259,7 +280,7 @@ const UserMethods = {
             nombre = alimento.nombre
             nombres.push(nombre)
         });
-
+        console.log(nombres)
 
 
         return nombres
@@ -337,6 +358,24 @@ const UserMethods = {
 
 
     },
+    getComidabyName: async function (nombrePasado: string, tipoPasado: string) {
+        const q = query(collection(db, tipoPasado), where("nombre", "==", nombrePasado))
+        const querySnapshot = await getDocs(q);
+        let comida
+        let nombre = "", receta = "", ingredientes = ""
+        querySnapshot.forEach((doc) => {
+            comida = doc.data()
+            nombre = comida.nombre;
+            receta = comida.receta;
+            ingredientes = comida.ingredientes;
+
+        });
+
+
+        return { nombre, receta, ingredientes }
+
+
+    },
     sendNameData: async function (name: string, email: string, password: string) {
         const docRef = await addDoc(collection(db, "usuarios"), {
             nombre: name,
@@ -385,6 +424,33 @@ const UserMethods = {
             comidaViernes: { desayuno: {}, comida: {}, cena: {} },
 
         });
+    },
+    updateUser: async function (nombre: string, email: string, edad: any, nivel: any, num_dias: any, peso: any, plan: any, sexo: any) {
+
+        let referenciaUser = ""
+        const auth = getAuth()
+        const userLogued = auth.currentUser;
+
+        const qUser = query(collection(db, "usuarios"), where("email", "==", userLogued?.email))
+        const querySnapshotUser = await getDocs(qUser);
+        querySnapshotUser.forEach((doc) => {
+            referenciaUser = doc.id
+        });
+        const usuarioref = doc(db, "usuarios", referenciaUser);
+        console.log("nivel")
+        console.log(nivel)
+        const update = await updateDoc(usuarioref, {
+            nombre: nombre,
+            email: email,
+            edad: edad,
+            nivel: nivel,
+            num_dias: num_dias,
+            peso: peso,
+            plan: plan,
+            sexo: sexo,
+
+        });
+
     },
     crearEjercicio: async function (nombre: string, paso1: string, paso2: string, paso3: string, nivel: any, tipo: any) {
         const q = query(collection(db, "ejercicios"), limit(1), orderBy("id", "desc"))
@@ -517,6 +583,37 @@ const UserMethods = {
         console.log("listado")
         console.log(listado)
         return listado
+
+    },
+    consejoAleatorio: async function () {
+        const q = query(collection(db, "frases"), limit(1), orderBy("id", "desc"))
+        let frase: DocumentData = []
+        let resultado: string = ''
+        let max = 0
+        let min = 1
+
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            frase = doc.data()
+            max = frase.id
+
+
+        });
+
+        let id = 0
+        id = Math.floor(Math.random() * (max - min + 1)) + min;
+        const qFrase = query(collection(db, "frases"), where("id", "==", id))
+        const querySnapshot2 = await getDocs(qFrase);
+        querySnapshot2.forEach((doc) => {
+            frase = doc.data()
+            resultado = frase.frase
+
+
+        });
+        console.log("resultado")
+        console.log(resultado)
+        return frase
+
 
     }
 

@@ -11,7 +11,7 @@ import DropDownFilters from './DropDownFilters';
 import { ButtonFilters } from './ButtonFilters';
 import { DocumentData } from 'firebase/firestore';
 import GymMethods from '../APIs/GymAPi';
-// import CheckBox from '@react-native-community/checkbox';
+
 
 interface IDropDown {
   text: string,

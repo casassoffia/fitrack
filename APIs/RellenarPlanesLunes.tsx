@@ -2,7 +2,7 @@ import { StyleSheet, View, Text, Pressable, FlatList, Image, TouchableOpacity } 
 import { collection, query, onSnapshot, orderBy, getDocs, QuerySnapshot, doc, addDoc, updateDoc, getDoc, where, setDoc, limit, DocumentData, Timestamp } from 'firebase/firestore';
 import firebase from "firebase/app";
 import "firebase/firestore";
-import { auth, db, firebaseConfig } from '../../utils/Firebase';
+import { auth, db, firebaseConfig } from '../utils/Firebase';
 import { getAuth } from 'firebase/auth';
 import UserMethods from './UserApi'
 import { useState } from 'react';

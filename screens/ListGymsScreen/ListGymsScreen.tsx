@@ -16,14 +16,8 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import { getAuth } from 'firebase/auth';
 import GymMethods from '../../APIs/GymAPi'
-import { Route } from '@react-navigation/native';
-
-
 import { Adamina_400Regular } from '@expo-google-fonts/adamina'
 
-import { AnyadirButton } from '../../components/AnyadirButton';
-
-import DropDownListado from '../../components/DropDownListado';
 
 
 
@@ -76,7 +70,10 @@ const ListGyms = () => {
                         <View key={id2} style={styles.paso}>
                             <View key={id2} style={styles.paso2}>
                                 <Text onPress={() => Linking.openURL(gimnasio.link)} style={{ ...styles.textoIngredientes, fontFamily: "Adamina_400Regular" }} >{gimnasio.nombre}  </Text>
-
+                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                    <Text style={{ ...styles.textoIngredientes, fontFamily: "Adamina_400Regular", }} > Precio:  </Text>
+                                    <Text style={{ ...styles.textoIngredientes, fontFamily: "Adamina_400Regular", }} >{gimnasio.precio} €/Mes</Text>
+                                </View>
                             </View>
 
                         </View>)}
@@ -93,7 +90,7 @@ const ListGyms = () => {
 
         </ScrollView>
             <View style={{ alignItems: 'center' }}>
-                <NavBar></NavBar>
+                <NavBar search={false} listExercicies={true} plan={false} listMeals={false} profile={false}></NavBar>
             </View></>
 
 

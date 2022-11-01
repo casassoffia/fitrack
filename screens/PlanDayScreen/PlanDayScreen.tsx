@@ -14,15 +14,15 @@ import { Button } from '@rneui/themed';
 import firebase from "firebase/app";
 import "firebase/firestore";
 import { getAuth } from 'firebase/auth';
-import UserMethods from '../../APIs/UserApi/UserApi'
+import UserMethods from '../../APIs/UserApi'
 import { Route } from '@react-navigation/native';
 import { PlanButton } from '../../components/PlanButton';
 import DropDown from '../../components/DropDown';
-import RellenarLunes from '../../APIs/UserApi/RellenarPlanesLunes';
-import RellenarMartes from '../../APIs/UserApi/RellenarPlanesMartes';
-import RellenarMiercoles from '../../APIs/UserApi/RellenarPlanesMiercoles';
-import RellenarJueves from '../../APIs/UserApi/RellenarPlanesJueves';
-import RellenarViernes from '../../APIs/UserApi/RellenarPlanesViernes';
+import RellenarLunes from '../../APIs/RellenarPlanesLunes';
+import RellenarMartes from '../../APIs/RellenarPlanesMartes';
+import RellenarMiercoles from '../../APIs/RellenarPlanesMiercoles';
+import RellenarJueves from '../../APIs/RellenarPlanesJueves';
+import RellenarViernes from '../../APIs/RellenarPlanesViernes';
 
 
 let options = [{ id: 1, name: 'Desayuno' }, { id: 2, name: 'Comida' }, { id: 3, name: 'Cena' }]
@@ -30,9 +30,27 @@ const PlanDay = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const route: any = useRoute();
   const [dia, setDia] = useState("")
+  const [frase2, setFrase] = useState("")
+  let reload = route.params.reload
+  let consejo: any
+  let lunes = "Lunes", martes = "Martes", miercoles = "Miercoles", jueves = "Jueves", viernes = "Viernes"
   useEffect(() => {
     setDia(route.params.Day)
-    let lunes = "Lunes", martes = "Martes", miercoles = "Miercoles", jueves = "Jueves", viernes = "viernes"
+    UserMethods.consejoAleatorio().then(
+      (frase) => {
+        console.log("frase")
+        console.log(frase.frase)
+        setFrase(frase.frase)
+        consejo = frase.frase
+        console.log(consejo)
+      }
+
+    )
+
+    console.log("consejo")
+    console.log(consejo)
+    // console.log(frase)
+
     if (lunes.valueOf() == route.params.Day.valueOf()) {
 
       RellenarLunes.rellenarLunesComida().then(
@@ -64,12 +82,15 @@ const PlanDay = () => {
     } else {
       RellenarViernes.rellenarViernesComida().then(
         () => {
+
           RellenarViernes.rellenarViernesEjercicio()
+
+
         })
     }
 
 
-  }, [])
+  }, [reload])
   const [selectedItem, setSelectedItem] = useState('')
   const accion = (item: any) => {
     setSelectedItem(item)
@@ -96,12 +117,19 @@ const PlanDay = () => {
         <View style={styles.titulo}>
           <Text style={styles.textoTitulo}>Rutina del {route.params.Day}</Text>
         </View>
+        {(route.params.numDias >= 2 && lunes.valueOf() == route.params.Day.valueOf()) ? (<PlanButton text="Ejercicios" action={() => navigation.navigate('Training', { Dia: route.params.Day })} />) : null}
+        {(route.params.numDias >= 4 && martes.valueOf() == route.params.Day.valueOf()) ? (<PlanButton text="Ejercicios" action={() => navigation.navigate('Training', { Dia: route.params.Day })} />) : null}
+        {(route.params.numDias >= 2 && miercoles.valueOf() == route.params.Day.valueOf()) ? (<PlanButton text="Ejercicios" action={() => navigation.navigate('Training', { Dia: route.params.Day })} />) : null}
+        {(route.params.numDias >= 5 && jueves.valueOf() == route.params.Day.valueOf()) ? (<PlanButton text="Ejercicios" action={() => navigation.navigate('Training', { Dia: route.params.Day })} />) : null}
+        {(route.params.numDias >= 3 && viernes.valueOf() == route.params.Day.valueOf()) ? (<PlanButton text="Ejercicios" action={() => navigation.navigate('Training', { Dia: route.params.Day })} />) : null}
 
-        <PlanButton text="Ejercicios" action={() => navigation.navigate('Training', { Dia: route.params.Day })} />
         <DropDown text="Alimentos" onSelect={accion} data={options} value={selectedItem} color2='#7DB065' tam='25' color1='#D9EFCF' colorLetra='#ffff' redirigir={true} dia={route.params.Day}></DropDown>
+        <View style={styles.paso}>
+          <Text style={{ color: '#fff' }}>Consejo!!!</Text>
+          <Text>{frase2}</Text>
+        </View>
 
-
-        <NavBar></NavBar>
+        <NavBar search={false} listExercicies={false} plan={false} listMeals={false} profile={false}></NavBar>
       </View>
 
     </View >

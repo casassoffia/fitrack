@@ -1,4 +1,5 @@
 import { StyleSheet, View, Text, Pressable, FlatList, Image, TextInput, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { HomeScreenNavigationProp } from '../../navigation/types';
 import { GenericButton } from '../../components/Button';
@@ -7,7 +8,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import DropDown from '../../components/DropDown';
 import { SetStateAction, useEffect, useState } from 'react';
 import styles from './AddMealStyles'
-import UserMethods from '../../APIs/UserApi/UserApi'
+import UserMethods from '../../APIs/UserApi'
 import { getAuth } from 'firebase/auth';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../utils/Firebase';
@@ -43,7 +44,7 @@ const AddExercicie = () => {
 
             UserMethods.crearReceta(nombre, primero, segundo, tercero, tipoSeleccionado, planSeleccionado, ingredientes).finally(
                 () => {
-                    navigation.navigate("ListMeals")
+                    navigation.navigate("ListMeals", { reload: true })
                 }
             )
 
@@ -94,7 +95,7 @@ const AddExercicie = () => {
 
                     <View style={styles.headerLeft}>
                         <Text style={{ marginTop: 50 }}>
-                            <Icon name="chevron-back-outline" size={30} color="#fff" onPress={() => navigation.navigate('ListExercicies')} ></Icon>
+                            <Icon name="chevron-back-outline" size={30} color="#fff" onPress={() => navigation.navigate('ListExercicies', { reload: true })} ></Icon>
                         </Text>
                     </View>
                     <View style={styles.headerRight}>
@@ -112,9 +113,9 @@ const AddExercicie = () => {
                     <Text style={styles.aclaracion}>* Por favor separa todos los ingredientes por una coma</Text>
                     <TextInput multiline onChangeText={text => setIngredientes(text)} style={styles.textPasos} value={ingredientes} placeholder="Ingredientes: 1 diente de ajo, 300g de espinacas, ..." maxLength={150} ></TextInput>
                     <Text style={styles.aclaracion}>* Por favor explica la receta en tres pasos</Text>
-                    <TextInput multiline onChangeText={text => setPrimero(text)} style={styles.textPasos} value={primero} placeholder="Primer Paso" maxLength={250} ></TextInput>
-                    <TextInput multiline onChangeText={text => setSegundo(text)} style={styles.textPasos} value={segundo} placeholder="Segundo Paso" maxLength={250} ></TextInput>
-                    <TextInput multiline onChangeText={text => setTercero(text)} style={styles.textPasos} value={tercero} placeholder="Tercer Paso" maxLength={250} ></TextInput>
+                    <TextInput multiline onChangeText={text => setPrimero(text)} style={styles.textPasos} value={primero} placeholder="Primer Paso" maxLength={129} ></TextInput>
+                    <TextInput multiline onChangeText={text => setSegundo(text)} style={styles.textPasos} value={segundo} placeholder="Segundo Paso" maxLength={129} ></TextInput>
+                    <TextInput multiline onChangeText={text => setTercero(text)} style={styles.textPasos} value={tercero} placeholder="Tercer Paso" maxLength={129} ></TextInput>
 
                     {/* <GenericButton text="OK" action={() => navigation.navigate('Plan')} /> */}
                     <TouchableOpacity onPress={() => rellenarForm()} style={{

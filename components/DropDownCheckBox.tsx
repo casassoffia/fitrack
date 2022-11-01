@@ -3,57 +3,80 @@ import { ActionCodeInfo } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { Touchable, TouchableOpacity, View, Text, StyleSheet, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { Adamina_400Regular, useFonts } from '@expo-google-fonts/adamina'
 
+import { CheckBox } from 'react-native-elements';
 interface IDropDown {
   text: string,
-  data: Array<any>,
-  value: any,
-  onSelect: (item: any) => void,
-
-
+  conPiscina: boolean,
+  isTenis: boolean
+  isSpa: boolean
+  isGuarderia: boolean
+  setConPiscina: Function
+  setTenis: Function
+  setGuarderia: Function
+  setSpa: Function
 
 }
 
-const DropDownFilters = ({ text, data, value, onSelect }: IDropDown) => {
-  const [loaded] = useFonts({
-    "Adamina_400Regular": Adamina_400Regular,
-  });
+const DropDownCheckBox = ({ text, conPiscina, setConPiscina, isTenis, setTenis, setGuarderia, isSpa, isGuarderia, setSpa }: IDropDown) => {
+
 
   const [showOption, setShowOption] = useState(false)
   const onSelectedItem = (val: any) => {
     setShowOption(false)
-    onSelect(val)
 
 
-  }
-  if (!loaded) {
-    return null;
   }
   return (
     <View>
       <TouchableOpacity style={{ ...styles.textInput, backgroundColor: '#7DB065', }} activeOpacity={0.8} onPress={() => setShowOption(!showOption)} >
-        <Text style={{ ...styles.texto }}>{!!value ? value?.name : text}</Text>
+        <Text style={{ ...styles.texto, fontSize: 15, fontFamily: 'Adamina_400Regular' }}>{text}</Text>
         <View style={{ marginLeft: 135 }}>
           <Icon size={20} name="caret-down-outline" color='#ffff'  ></Icon>
         </View>
       </TouchableOpacity>
-      {showOption && (<View>{data.map((val, i) => {
+      {showOption && (<View>
+        <View style={styles.checkBok}>
+          <CheckBox
+            checked={conPiscina}
+            onPress={() => setConPiscina(!conPiscina)}
+            checkedIcon='dot-circle-o'
+            uncheckedIcon='circle-o'
+            checkedColor='green'
 
-        return (
-          <TouchableOpacity
-            key={String(i)}
-            onPress={() => onSelectedItem(val)}
-            style={{
-              backgroundColor: value?.id == val.id ? '#61b254' : '#7DB065', paddingHorizontal: 6, paddingVertical: 8, borderRadius: 8, width: '80%', alignItems: 'center',
-              justifyContent: 'space-between', minHeight: 42, flexDirection: 'row', marginTop: 8, marginLeft: 30
-            }}>
-            <Text style={{ ...styles.texto, fontSize: 15, }}>{val.name}
-            </Text>
+          />
+          <Text style={{ ...styles.checkText, fontFamily: 'Adamina_400Regular' }}>Piscina</Text></View>
+        <View style={styles.checkBok}>
+          <CheckBox
+            checked={isTenis}
+            onPress={() => setTenis(!isTenis)}
+            checkedIcon='dot-circle-o'
+            uncheckedIcon='circle-o'
+            checkedColor='green'
 
-          </TouchableOpacity>
-        )
-      })}</View>)}
+          />
+          <Text style={{ ...styles.checkText, fontFamily: 'Adamina_400Regular' }}>Tennis/Padel</Text></View>
+        <View style={styles.checkBok}>
+          <CheckBox
+            checked={isGuarderia}
+            onPress={() => setGuarderia(!isGuarderia)}
+            checkedIcon='dot-circle-o'
+            uncheckedIcon='circle-o'
+            checkedColor='green'
+
+          />
+          <Text style={{ ...styles.checkText, fontFamily: 'Adamina_400Regular' }}>Guarderia</Text></View>
+        <View style={styles.checkBok}>
+          <CheckBox
+            checked={isSpa}
+            onPress={() => setSpa(!isSpa)}
+            checkedIcon='dot-circle-o'
+            uncheckedIcon='circle-o'
+            checkedColor='green'
+
+          />
+          <Text style={{ ...styles.checkText, fontFamily: 'Adamina_400Regular' }}>Spa</Text></View>
+      </View>)}
     </View>
   );
 }
@@ -125,6 +148,10 @@ const styles = StyleSheet.create({
     marginTop: 25,
 
   },
+  checkBok: {
+    backgroundColor: '#7DB065', borderRadius: 8, alignItems: 'center',
+    justifyContent: 'flex-start', minHeight: 42, flexDirection: 'row', marginTop: 8, marginLeft: 30, width: 165,
+  },
   textInput: {
     width: 180,
     height: 50,
@@ -146,20 +173,19 @@ const styles = StyleSheet.create({
 
   },
   texto: {
-    fontFamily: 'Adamina_400Regular',
+
     position: 'absolute',
     color: '#ffff',
     padding: 15,
-    fontSize: 15
   },
-  buttonText: {
-    textAlign: 'center',
-    marginTop: 11,
-    fontSize: 20,
+  checkText: {
+
+    color: '#fff',
+    fontSize: 15,
 
 
   },
 })
 
 
-export default DropDownFilters;
+export default DropDownCheckBox;

@@ -10,7 +10,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, co
 import React, { useState } from 'react';
 import styles from './RegisterStyles'
 import { auth } from '../../utils/Firebase'
-import UserMethods from '../../APIs/UserApi/UserApi'
+import UserMethods from '../../APIs/UserApi'
 import { validateEmail } from '../../utils/helpers';
 import { Input } from 'react-native-elements'
 
@@ -88,7 +88,7 @@ const Register = () => {
       <View style={styles.body}>
         <ScrollView style={{ width: '100%' }} >
           <Text style={styles.titulo}>Rellena la siguiente información </Text>
-          <TextInput onChangeText={text => setNombre(text)} style={styles.textInput} value={nombre} placeholder="Nombre Usuario" ></TextInput>
+          <TextInput onChangeText={text => setNombre(text)} style={styles.textInput} value={nombre} placeholder="Nombre y Apellidos del Usuario" ></TextInput>
           <TextInput style={styles.textInput} defaultValue={formData.email} onChangeText={text => setEmail(text.toLowerCase())} value={email.toLowerCase()} placeholder="Correo Electronico" ></TextInput>
           <TextInput onChangeText={text => setPassword(text)} style={styles.textInput} value={password} placeholder="Contraseña" secureTextEntry></TextInput>
           <TextInput onChangeText={text => setConfirm(text)} style={styles.textInput} placeholder="Confirmacion de contraseña" value={confirm} secureTextEntry></TextInput>

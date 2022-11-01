@@ -10,7 +10,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, co
 import React, { useState } from 'react';
 import styles from './WelcomeStyles'
 import { auth } from '../../utils/Firebase'
-import UserMethods from '../../APIs/UserApi/UserApi'
+import UserMethods from '../../APIs/UserApi'
 import { Adamina_400Regular } from '@expo-google-fonts/adamina';
 
 const Register = () => {
@@ -56,7 +56,7 @@ const Register = () => {
           <Text style={{ ...styles.texto, fontFamily: 'Adamina_400Regular' }}>Esperemos que disfrutes de esta aplicacion y recuerda que siempre puedes modificar tus datos desde la sección de usuario.</Text>
         </View>
 
-        <GenericButton text="Empezar el Cambio" action={() => navigation.navigate('Plan')} color='#F8F1CC' />
+        <GenericButton text="Empezar el Cambio" action={() => navigation.navigate('Plan', { reload: true })} color='#F8F1CC' />
       </View>
       <View style={styles.pie}>
         <Text style={styles.nombre}> fiTrack </Text>
