@@ -24,14 +24,14 @@ export default StyleSheet.create({
           flexDirection:'row',
         },
         icono: {
-            
-          width: 70,
-          height: 70,
-          borderRadius: 100,
-          resizeMode:'contain',
-          marginLeft:130,
-          marginTop:20
-       },
+
+    width: 70,
+     height: 70,
+     borderRadius: 80 / 2,
+    marginTop: 50,
+    marginLeft: 130,
+    
+  },
        body: {
         flex: 1,
         backgroundColor: '#61b254',
@@ -56,7 +56,7 @@ export default StyleSheet.create({
        
     },
     textInput:{
-      width: 350,
+      width: '90%',
       padding: 15,
       height: 55,
       backgroundColor: '#F8F1CC',
@@ -66,6 +66,8 @@ export default StyleSheet.create({
       marginLeft:25,
       fontSize: 18,
       borderRadius: 20,
+        color:'#A3998E'
+      
       
     },
     scrollView: {

@@ -6,7 +6,25 @@ import RegisterScreen from '../screens/RegisterScreen/Register'
 import FormScreen from '../screens/FormScreen/FormScreen'
 import PlanScreen from '../screens/PlansScreen/PlanScreen'
 import PlanDayScreen from '../screens/PlanDayScreen/PlanDayScreen'
+import WelcomeScreen from '../screens/WelcomeScreen/WelcomeScreen'
+import MealDayScreen from '../screens/MealDayScreen/MealDayScreen'
+import TrainingScreen from '../screens/TrainingScreen/TrainingScreen'
+import ListExerciciesScreen from '../screens/ListExercises/ListExerciciesScreen'
+import ListMealsScreen from '../screens/ListMealScreen/ListMealsScreen'
+import AddExercicieScreen from '../screens/AddExercicieScreen/AddExercicieScreen'
+import AddMealScreen from '../screens/AddEMealScreen/AddMealScreen'
+import ExercicieDayScreen from '../screens/ExercicieDayScreen/ExercicieDayScreen'
+import SearchScreen from '../screens/SearchScreen/SearchScreen'
+import ListGymsScreen from '../screens/ListGymsScreen/ListGymsScreen'
+import ListSupplementsScreen from '../screens/ListSupplementsScreen/ListSuplementsScreen'
+import CardScreen from '../screens/CardScreen/CardScreen'
+import ProfileScreen from '../screens/ProfileScreen/ProfileScreen'
+import ProfileEditScreen from '../screens/ProfileEditScreen/ProfileEditScreen'
+import MealScreen from '../screens/MealScreen/MealScreen'
+import ChangePasswordScreen from '../screens/ChangePasswordScreen/ChangePasswordScreen'
+
 import { HomeStackNavigatorParamList } from './types';
+
 
 
 const HomeStack = createNativeStackNavigator<HomeStackNavigatorParamList>();
@@ -21,6 +39,22 @@ const HomeStackNavigator = () => {
             <HomeStack.Screen name="Form" options={{ headerShown: false }} component={FormScreen} />
             <HomeStack.Screen name="Plan" options={{ headerShown: false }} component={PlanScreen} />
             <HomeStack.Screen name="PlanDay" options={{ headerShown: false }} component={PlanDayScreen} />
+            <HomeStack.Screen name="Welcome" options={{ headerShown: false }} component={WelcomeScreen} />
+            <HomeStack.Screen name="MealDay" options={{ headerShown: false }} component={MealDayScreen} />
+            <HomeStack.Screen name="Training" options={{ headerShown: false }} component={TrainingScreen} />
+            <HomeStack.Screen name="ListExercicies" options={{ headerShown: false }} component={ListExerciciesScreen} />
+            <HomeStack.Screen name="ListMeals" options={{ headerShown: false }} component={ListMealsScreen} />
+            <HomeStack.Screen name="AddMeal" options={{ headerShown: false }} component={AddMealScreen} />
+            <HomeStack.Screen name="AddExercicie" options={{ headerShown: false }} component={AddExercicieScreen} />
+            <HomeStack.Screen name="ExercicieDay" options={{ headerShown: false }} component={ExercicieDayScreen} />
+            <HomeStack.Screen name="Search" options={{ headerShown: false }} component={SearchScreen} />
+            <HomeStack.Screen name="ListGym" options={{ headerShown: false }} component={ListGymsScreen} />
+            <HomeStack.Screen name="ListSupplements" options={{ headerShown: false }} component={ListSupplementsScreen} />
+            <HomeStack.Screen name="Card" options={{ headerShown: false }} component={CardScreen} />
+            <HomeStack.Screen name="Profile" options={{ headerShown: false }} component={ProfileScreen} />
+            <HomeStack.Screen name="ProfileEdit" options={{ headerShown: false }} component={ProfileEditScreen} />
+            <HomeStack.Screen name="Meal" options={{ headerShown: false }} component={MealScreen} />
+            <HomeStack.Screen name="ChangePassword" options={{ headerShown: false }} component={ChangePasswordScreen} />
         </HomeStack.Navigator>
     )
 }

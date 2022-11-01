@@ -1,26 +1,35 @@
 import { StyleSheet, Button, Text, View, Image, TouchableOpacity } from 'react-native';
 import React, { Component } from 'react';
 import { useFonts } from 'expo-font';
+import { Adamina_400Regular } from '@expo-google-fonts/adamina'
 
 interface ButtonDays {
     text: string,
     action: Function,
 }
 export function ButtonDays({ text, action }: ButtonDays) {
-
+    const [loaded] = useFonts({
+        "Adamina_400Regular": Adamina_400Regular,
+    });
+    if (!loaded) {
+        return null;
+    }
 
     return (
         <TouchableOpacity onPress={() => action()}
             style={{
                 ...styles.button,
-                backgroundColor: '#D9EFCF',
+                backgroundColor: '#7DB065',
+                opacity: 0.65,
                 marginTop: 20,
                 borderRadius: 50,
+
 
             }}
         >
             <Text style={{
                 ...styles.buttonText,
+                fontFamily: 'Adamina_400Regular'
 
             }}>
                 {text}
@@ -51,7 +60,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 30,
 
-        color: '#86895d'
+        color: '#613000'
 
     },
 })

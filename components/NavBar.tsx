@@ -5,19 +5,62 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { HomeScreenNavigationProp } from '../navigation/types';
 import { useNavigation } from '@react-navigation/native';
 import { Icon as Icon2 } from '@rneui/themed';
+import { color } from 'react-native-reanimated';
 
+interface INavBar {
+  search: boolean,
+  listExercicies: boolean,
+  plan: boolean,
+  listMeals: boolean,
+  profile: boolean,
 
-const NavBar = () => {
+}
+const NavBar = ({ search, listExercicies, plan, listMeals, profile }: INavBar) => {
+  const [colorSearch, setSearch] = useState('')
+  const [colorPlan, setPlan] = useState('')
+  const [colorExercicies, setExercicies] = useState('')
+  const [colorMeals, setMeals] = useState('')
+  const [colorProfile, setProfile] = useState('')
+
+  useEffect(() => {
+    if (search) {
+      setSearch('green')
+    } else {
+      setSearch('#ffff')
+    }
+    if (plan) {
+      setPlan('green')
+
+    } else {
+      setPlan('#ffff')
+    }
+    if (listExercicies) {
+      setExercicies('green')
+    } else {
+      setExercicies('#ffff')
+    }
+    if (listMeals) {
+      setMeals('green')
+    } else {
+      setMeals('#ffff')
+    }
+    if (profile) {
+      setProfile('green')
+    } else {
+      setProfile('#ffff')
+    }
+  }, [])
+
 
   const navigation = useNavigation<HomeScreenNavigationProp>();
   return (
     <View style={styles.NavContainer}>
       <View style={styles.NavBar}>
-        <Icon name="search-outline" size={30} color="#fff" onPress={() => navigation.navigate('Home')} ></Icon>
-        <Icon name="barbell-outline" size={30} color="#fff" onPress={() => navigation.navigate('Home')} ></Icon>
-        <Icon name="home-outline" size={30} color="#fff" onPress={() => navigation.navigate('Plan')} ></Icon>
-        <Icon2 type='material-community' name="silverware-fork-knife" color="#fff" onPress={() => navigation.navigate('Home')} ></Icon2>
-        <Icon name="person-circle-outline" size={30} color="#fff" onPress={() => navigation.navigate('Home')} ></Icon>
+        <Icon name="search-outline" size={30} onPress={() => navigation.navigate('Search')} color={colorSearch}></Icon>
+        <Icon name="barbell-outline" size={30} color={colorExercicies} onPress={() => navigation.navigate('ListExercicies', { reload: false })} ></Icon>
+        <Icon name="home-outline" size={30} color={colorPlan} onPress={() => navigation.navigate('Plan', { reload: false })} ></Icon>
+        <Icon2 type='material-community' name="silverware-fork-knife" color={colorMeals} onPress={() => navigation.navigate('ListMeals', { reload: false })} ></Icon2>
+        <Icon name="person-circle-outline" size={30} color={colorProfile} onPress={() => navigation.navigate('Profile', { success: false })} ></Icon>
       </View>
     </View>
   );

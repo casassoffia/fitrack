@@ -10,7 +10,7 @@ import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '../../utils/Firebase';
 import React, { useEffect, useState } from 'react';
 import { firebase } from '@react-native-firebase/auth';
-// import auth from '@react-native-firebase/auth';
+import { Adamina_400Regular } from '@expo-google-fonts/adamina'
 
 
 
@@ -24,6 +24,7 @@ const Login = () => {
 
   const [loaded] = useFonts({
     lob: require('../../assets/fonts/Lobster-Regular.ttf'),
+    "Adamina_400Regular": Adamina_400Regular,
   });
   if (!loaded) {
     return null;
@@ -31,21 +32,23 @@ const Login = () => {
 
 
   const handleSignIn = async () => {
-    await signInWithEmailAndPassword(auth, email, password)
-      .then(userCredential => {
-        console.log('Signed in!')
-        const user = userCredential.user;
-        console.log(user)
-        navigation.navigate("Plan")
-      })
-      .catch(error => {
-        console.log('error')
-        console.log('aqui')
-        Alert.alert(error.message)
-        console.log(email)
-        console.log(password)
-        console.log(error)
-      })
+    if (email.valueOf() != '' && password.valueOf() != '') {
+      await signInWithEmailAndPassword(auth, email, password)
+        .then(userCredential => {
+
+          const user = userCredential.user;
+          navigation.navigate("Plan", { reload: false })
+        })
+        .catch(error => {
+
+          Alert.alert(error.message)
+
+        })
+    } else {
+      Alert.alert("No puedes dejar ninguno de los campos vacios")
+
+    }
+
   }
 
 
@@ -64,12 +67,29 @@ const Login = () => {
         </View>
       </View>
       <View style={styles.body}>
-        <Text style={styles.titulo}> Bienvenid@ de nuevo </Text>
-        <TextInput style={styles.textInput} onChangeText={text => setEmail(text)} value={email} placeholder="Correo Electronico"></TextInput>
-        <TextInput style={styles.textInput} onChangeText={text => setPassword(text)} value={password} placeholder="Contraseña" secureTextEntry></TextInput>
-        <GenericButton text="OK" action={handleSignIn} />
+        <Text style={{ ...styles.titulo, fontFamily: "Adamina_400Regular" }}> Bienvenid@ de nuevo </Text>
+        <TextInput style={{ ...styles.textInput, fontFamily: "Adamina_400Regular" }} onChangeText={(text => setEmail(text.toLowerCase()))} value={email} placeholder="Correo Electronico"></TextInput>
+        <TextInput style={{ ...styles.textInput, fontFamily: "Adamina_400Regular" }} onChangeText={text => setPassword(text)} value={password} placeholder="Contraseña" secureTextEntry></TextInput>
+        <TouchableOpacity onPress={() => navigation.navigate('ChangePassword')}
+          style={{ marginTop: 20, width: 170, marginLeft: 70, alignItems: 'center' }}
+        >
 
-        <Text style={styles.nombre}> fiTrack </Text>
+
+
+          <Text style={{
+            ...styles.buttonTextOut, fontFamily: 'Adamina_400Regular'
+            ,
+          }}>
+            ¿Te has olvidado de la contraseña?
+          </Text>
+
+
+        </TouchableOpacity>
+        <GenericButton text="OK" action={handleSignIn} color='#F8F1CC' />
+
+        <View style={styles.pie}>
+          <Text style={styles.nombre}> fiTrack </Text>
+        </View>
       </View>
     </View>
 

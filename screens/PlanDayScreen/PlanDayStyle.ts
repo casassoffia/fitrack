@@ -71,6 +71,13 @@ export default StyleSheet.create({
     flexDirection: 'column',
   },
   
-
+  paso: {
+    backgroundColor: '#7DB065',
+    width: '97%',
+    height: 150,
+    marginTop:30,
+    borderRadius: 50,
+    padding:'2%'
+  },
 
 })

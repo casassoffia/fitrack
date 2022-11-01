@@ -26,9 +26,15 @@ export default StyleSheet.create({
     borderBottomLeftRadius: 200,
 
   },
+    Spinner: {
+        display:'flex',
+        justifyContent:'center',
+        alignItems: 'center',
+        textAlign: 'center',
+        minHeight: 100
+    },
   forma: {
     borderBottomLeftRadius: 120,
-
   },
   titulo: {
     fontSize: 24,
@@ -42,6 +48,9 @@ export default StyleSheet.create({
 
     position: 'absolute',
 
+  },
+   nombreTitulo: {
+    marginTop: 110, marginLeft: 70, position: 'absolute', fontSize: 20, color: '#95520e'
   },
   icono: {
     width: 150,
