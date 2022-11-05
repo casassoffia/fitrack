@@ -100,8 +100,8 @@ const MealDay = () => {
                 }
             )
         } else {
-            setTitulo("Para terminar bien el dia ...")
-            UserMethods.getComidaFromUser(dia).then(
+
+            UserMethods.getCenaFromUser(dia).then(
                 (cena) => {
                     alimento = cena
                     setNombre(alimento.nombre)

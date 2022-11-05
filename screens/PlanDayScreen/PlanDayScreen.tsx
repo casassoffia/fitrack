@@ -23,6 +23,8 @@ import RellenarMartes from '../../APIs/RellenarPlanesMartes';
 import RellenarMiercoles from '../../APIs/RellenarPlanesMiercoles';
 import RellenarJueves from '../../APIs/RellenarPlanesJueves';
 import RellenarViernes from '../../APIs/RellenarPlanesViernes';
+import { Icon as Icon2 } from '@rneui/themed';
+import { Adamina_400Regular } from '@expo-google-fonts/adamina'
 
 
 let options = [{ id: 1, name: 'Desayuno' }, { id: 2, name: 'Comida' }, { id: 3, name: 'Cena' }]
@@ -34,6 +36,10 @@ const PlanDay = () => {
   let reload = route.params.reload
   let consejo: any
   let lunes = "Lunes", martes = "Martes", miercoles = "Miercoles", jueves = "Jueves", viernes = "Viernes"
+  const [loaded] = useFonts({
+    "Adamina_400Regular": Adamina_400Regular,
+
+  });
   useEffect(() => {
     setDia(route.params.Day)
     UserMethods.consejoAleatorio().then(
@@ -98,7 +104,9 @@ const PlanDay = () => {
 
 
 
-
+  if (!loaded) {
+    return null;
+  }
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -115,7 +123,7 @@ const PlanDay = () => {
 
       <View style={styles.body}>
         <View style={styles.titulo}>
-          <Text style={styles.textoTitulo}>Rutina del {route.params.Day}</Text>
+          <Text style={{ ...styles.textoTitulo, fontFamily: "Adamina_400Regular" }}>Rutina del {route.params.Day}</Text>
         </View>
         {(route.params.numDias >= 2 && lunes.valueOf() == route.params.Day.valueOf()) ? (<PlanButton text="Ejercicios" action={() => navigation.navigate('Training', { Dia: route.params.Day })} />) : null}
         {(route.params.numDias >= 4 && martes.valueOf() == route.params.Day.valueOf()) ? (<PlanButton text="Ejercicios" action={() => navigation.navigate('Training', { Dia: route.params.Day })} />) : null}
@@ -125,8 +133,15 @@ const PlanDay = () => {
 
         <DropDown text="Alimentos" onSelect={accion} data={options} value={selectedItem} color2='#7DB065' tam='25' color1='#D9EFCF' colorLetra='#ffff' redirigir={true} dia={route.params.Day}></DropDown>
         <View style={styles.paso}>
-          <Text style={{ color: '#fff' }}>Consejo!!!</Text>
-          <Text>{frase2}</Text>
+          <View style={styles.contendor1}>
+            <View style={{ flexDirection: 'row', justifyContent: 'flex-start', }}>
+              <Icon2 type='font-awesome' name="lightbulb-o" size={30} color={'#45322e'} style={styles.iconoBombilla} ></Icon2>
+              <Text style={{ ...styles.textConsejo, fontFamily: "Adamina_400Regular" }}>Consejo</Text>
+            </View>
+
+            <Text style={{ ...styles.textConsejo, marginTop: 20, fontFamily: "Adamina_400Regular" }}>{frase2}</Text>
+          </View>
+
         </View>
 
         <NavBar search={false} listExercicies={false} plan={false} listMeals={false} profile={false}></NavBar>

@@ -93,8 +93,8 @@ const RellenarLunes = {
             ref = doc.id
         })
         const usuarioref = doc(db, "usuarios", ref);
-
-        if ((usuario.semanaLunes < semanaCalculada)) {
+        let arrayvacio = new Array()
+        if ((usuario.semanaLunes < semanaCalculada) || JSON.stringify(usuario.ejerciciosLunes) === JSON.stringify(arrayvacio)) {
             UserMethods.numeroAlteatorioEjercicio(numeros).then(
                 (num1) => {
                     numeros.push(num1)
