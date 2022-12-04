@@ -112,12 +112,12 @@ const Form = () => {
         <Text style={{ ...styles.titulo, fontFamily: "Adamina_400Regular" }}>Completa la siguiente información: </Text>
         <ScrollView style={{ width: '100%' }} >
 
-          <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text="Elige tu objetivo" onSelect={accion} data={options} value={selectedItem} color1='#eede89' color2='#F8F1CC' dia={''}  ></DropDown>
+          <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text="Elige tu objetivo" onSelect={accion} data={options} value={selectedItem} color1='#eede89' color2='#F8F1CC' dia={''} number={0}  ></DropDown>
           <TextInput keyboardType='numeric' onChangeText={text => setEdad(text)} style={styles.textInput} value={edad} placeholder="Edad"></TextInput>
           <TextInput keyboardType='numeric' onChangeText={text => setPeso(text)} style={styles.textInput} value={peso.toString()} placeholder="Peso"></TextInput>
-          <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text="Sexo" onSelect={accion2} data={sexo} value={selectedItem2} color1='#eede89' color2='#F8F1CC' dia={''} ></DropDown>
-          <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text="Dias a la semana de entreno" onSelect={accion3} data={dias} value={selectedItem3} color1='#eede89' color2='#F8F1CC' dia={''} ></DropDown>
-          <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text="Nivel" onSelect={accion4} data={nivel} value={selectedItem4} color1='#eede89' color2='#F8F1CC' dia={''} ></DropDown>
+          <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text="Sexo" onSelect={accion2} data={sexo} value={selectedItem2} color1='#eede89' color2='#F8F1CC' dia={''} number={0} ></DropDown>
+          <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text="Dias a la semana de entreno" onSelect={accion3} data={dias} value={selectedItem3} color1='#eede89' color2='#F8F1CC' dia={''} number={0} ></DropDown>
+          <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text="Nivel" onSelect={accion4} data={nivel} value={selectedItem4} color1='#eede89' color2='#F8F1CC' dia={''} number={0} ></DropDown>
           {/* <GenericButton text="OK" action={() => navigation.navigate('Plan')} /> */}
           {/* <TouchableOpacity onPress={() => rellenarForm()} style={{
             ...styles.button,

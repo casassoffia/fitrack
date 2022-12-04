@@ -74,7 +74,7 @@ export default StyleSheet.create({
   paso: {
     backgroundColor: '#7DB065',
     width: '97%',
-    height: 200,
+    height: '40%',
     marginTop:30,
     borderRadius: 50,
     padding: '2%',

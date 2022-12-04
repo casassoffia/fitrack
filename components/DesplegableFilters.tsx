@@ -13,14 +13,13 @@ import DropDownCheckBox from './DropDownCheckBox';
 
 interface IDropDown {
   text: string,
-  gimnasios: Array<DocumentData>,
   onSelect: (item: any) => void
 
 }
 
-let precios = [{ id: 1, name: 'Selecciona un rango' }, { id: 2, name: '20-30' }, { id: 3, name: '30-40' }, { id: 4, name: '40-50' }, { id: 5, name: '50-60' }]
-
-const DesplegableFilters = ({ text, gimnasios, onSelect }: IDropDown) => {
+let precios = [{ id: 1, name: 'Selecciona un precio' }, { id: 2, name: '20-30€' }, { id: 3, name: '30-40€' }, { id: 4, name: '40-50€' }, { id: 5, name: '50-60€' }]
+let ciudades = [{ id: 1, name: 'Selecciona una ciudad' }, { id: 2, name: 'Alicante' }, { id: 3, name: 'Valencia' }, { id: 4, name: 'Madrid' }]
+const DesplegableFilters = ({ text, onSelect }: IDropDown) => {
 
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const [showOption, setShowOption] = useState(false)
@@ -29,32 +28,24 @@ const DesplegableFilters = ({ text, gimnasios, onSelect }: IDropDown) => {
   const [isGuarderia, setGuarderia] = useState(false);
   const [isSpa, setSpa] = useState(false);
   const [selectedItem, setSelectedItem] = useState('')
+  const [selectedciudad, setSelectedCiudad] = useState('')
 
   const [loaded] = useFonts({
     "Adamina_400Regular": Adamina_400Regular,
   });
-  const onSelectedItem = (val: any) => {
-    setShowOption(false)
-
-    navigation.navigate('ExercicieDay', { NombreEjercicio: val })
-
-
-  }
-  const accion = (item: any) => {
+  const cambiarPrecio = (item: any) => {
     setSelectedItem(item)
   }
-  const cambiarEstado = (item: any) => {
-    setSelectedItem(item)
+  const cambiarCiudad = (item: any) => {
+    setSelectedCiudad(item)
   }
+
   if (!loaded) {
     return null;
   }
   return (
     <View>
       <TouchableOpacity style={{ ...styles.textInput }} onPress={() => setShowOption(!showOption)} >
-
-
-
         <View >
           <Icon name="filter-outline" size={30} color='#ffff' style={{ marginRight: 300 }} ></Icon>
         </View>
@@ -67,10 +58,12 @@ const DesplegableFilters = ({ text, gimnasios, onSelect }: IDropDown) => {
 
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <DropDownCheckBox conPiscina={conPiscina} isTenis={isTenis} isSpa={isSpa} isGuarderia={isGuarderia} text={'Selecciona un servicio'} setConPiscina={setConPiscina} setSpa={setSpa} setTenis={setTenis} setGuarderia={setGuarderia}></DropDownCheckBox>
-          <DropDownFilters text="Selecciona un precio" onSelect={accion} data={precios} value={selectedItem}   ></DropDownFilters>
+          <DropDownFilters text="Selecciona un precio" onSelect={cambiarPrecio} data={precios} value={selectedItem}   ></DropDownFilters>
+
 
         </View>
-        <ButtonFilters action={() => GymMethods.getGymsFilter(conPiscina, isTenis, isSpa, isGuarderia, selectedItem)} text={'Aplicar Filtros'} color={'#EFE6CF'} onSelect={onSelect}></ButtonFilters>
+        <DropDownFilters text="Selecciona una ciudad" onSelect={cambiarCiudad} data={ciudades} value={selectedciudad}   ></DropDownFilters>
+        <ButtonFilters action={() => GymMethods.getGymsFilter(conPiscina, isTenis, isSpa, isGuarderia, selectedItem, selectedciudad)} text={'Aplicar Filtros'} color={'#EFE6CF'} onSelect={onSelect}></ButtonFilters>
       </View>)
       }
     </View >

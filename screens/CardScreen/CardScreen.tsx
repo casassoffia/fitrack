@@ -68,8 +68,12 @@ const Card = () => {
             <View style={styles.container}>
                 <View style={styles.header}>
 
-                    <Image source={require("../../assets/imagenes/cabecera4.png")} style={styles.forma}></Image>
-
+                    <Image source={require("../../assets/imagenes/cabecerasuplementos.png")} style={styles.forma}></Image>
+                    <Text style={{ ...styles.iconoAtras }}>
+                        <Icon name="chevron-back-outline" size={30} color="#ffff" onPress={() => navigation.navigate('ListSupplements')} ></Icon>
+                    </Text>
+                    <Text style={{ ...styles.nombreTitulo, fontFamily: "Adamina_400Regular" }}>Resumen de tu  </Text>
+                    <Text style={{ ...styles.nombreTitulo, marginTop: 130, marginLeft: 40, fontFamily: "Adamina_400Regular" }}>pedido  </Text>
 
 
                 </View>
@@ -109,10 +113,12 @@ const Card = () => {
                     )}
                     {/* //Despues de finalizar hay que borrar el carrito */}
                     <View>
-                        <Text>Total de tu compra es: {num}</Text>
+                        {(suplementos.length != 0) ? (<Text style={{ fontFamily: 'Adamina_400Regular', fontSize: 17, marginTop: 30, color: '#613000' }}>El total de tu compra es: {num} €</Text>) : null}
+
+
                     </View>
 
-                    <View style={{ marginTop: 90 }}>
+                    <View style={{ marginTop: 30 }}>
                         {(suplementos.length == 0) ? (<Text style={{ fontFamily: 'Adamina_400Regular', fontSize: 17, color: '#221816' }}>Tu cesta esta vacía!</Text>) : null}
 
                     </View>

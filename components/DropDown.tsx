@@ -16,13 +16,14 @@ interface IDropDown {
   tam: string,
   colorLetra: string
   redirigir: boolean,
-  dia: string
+  dia: string,
+  number: number
 
 
 }
 
 
-const DropDown = ({ text, data, value, onSelect, color1, color2, colorLetra, tam, redirigir, dia }: IDropDown) => {
+const DropDown = ({ text, data, value, onSelect, color1, color2, colorLetra, tam, redirigir, dia, number }: IDropDown) => {
 
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const [showOption, setShowOption] = useState(false)
@@ -32,7 +33,7 @@ const DropDown = ({ text, data, value, onSelect, color1, color2, colorLetra, tam
     onSelect(val)
     if (redirigir) {
       let tipo = val.name
-      navigation.navigate('MealDay', { Tipo: tipo, Dia: dia })
+      navigation.navigate('MealDay', { Tipo: tipo, Dia: dia, numDias: number })
     }
 
   }

@@ -7,9 +7,8 @@ export default StyleSheet.create({
     },
 
     header: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        flex: 0.45,
+        flexDirection: 'row',
 
     },
     fotoInicial: {
@@ -18,12 +17,18 @@ export default StyleSheet.create({
         borderBottomLeftRadius: 200,
 
     },
+    iconoAtras: {
+        marginTop: 50,
+        marginLeft: 10,
+        position: 'absolute'
+    },
     forma: {
-        // borderBottomLeftRadius: 120,
-
         width: '100%',
-        height: 300
+        height: 200
 
+    },
+    nombreTitulo: {
+        marginTop: 100, marginLeft: 10, position: 'absolute', fontSize: 20, color: '#ffff'
     },
     titulo: {
         marginTop: '10%',
@@ -64,6 +69,7 @@ export default StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         flexDirection: 'column',
+        marginBottom: 200
 
     },
     paso: {
@@ -81,6 +87,7 @@ export default StyleSheet.create({
     },
     paso2: {
         backgroundColor: '#EFE6CF',
+
         width: '90%',
         height: '100%',
         justifyContent: 'center',
@@ -92,7 +99,8 @@ export default StyleSheet.create({
     },
     textoIngredientes: {
         fontSize: 20,
-        color: '#45322e',
+        color: '#613000',
+
         textAlign: 'center',
 
 
@@ -118,8 +126,8 @@ export default StyleSheet.create({
         padding: '2%',
         backgroundColor: '#7DB065',
         height: 50,
-        marginTop: 20
-
+        // marginTop: 3,
+        borderRadius: 20,
 
     },
     buttonText: {

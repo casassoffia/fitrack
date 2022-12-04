@@ -14,7 +14,7 @@ import NavBar from '../../components/NavBar';
 import { Button } from '@rneui/themed';
 import firebase from "firebase/app";
 import "firebase/firestore";
-import { getAuth } from 'firebase/auth';
+import { getAuth, reload } from 'firebase/auth';
 import UserMethods from '../../APIs/UserApi'
 import { Route } from '@react-navigation/native';
 import { PlanButton } from '../../components/PlanButton';
@@ -89,7 +89,9 @@ const Meal = () => {
 
                     <Image source={require("../../assets/imagenes/cabecera2.png")} style={styles.forma}></Image>
                     <Text style={{ ...styles.nombreTitulo, fontFamily: "Adamina_400Regular" }}>Aqui tienes los pasos...</Text>
-
+                    <Text style={{ ...styles.iconoAtras }}>
+                        <Icon name="chevron-back-outline" size={30} color="#613000" onPress={() => navigation.navigate('ListMeals', { reload: false })} ></Icon>
+                    </Text>
 
 
 
@@ -141,7 +143,7 @@ const Meal = () => {
             </View >
         </ScrollView>
             <View style={{ alignItems: 'center' }}>
-                <NavBar></NavBar>
+                <NavBar search={false} listExercicies={false} plan={false} listMeals={false} profile={false}></NavBar>
             </View></>
 
     )

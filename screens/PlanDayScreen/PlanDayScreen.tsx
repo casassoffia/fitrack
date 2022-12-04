@@ -44,18 +44,14 @@ const PlanDay = () => {
     setDia(route.params.Day)
     UserMethods.consejoAleatorio().then(
       (frase) => {
-        console.log("frase")
-        console.log(frase.frase)
+
         setFrase(frase.frase)
-        consejo = frase.frase
-        console.log(consejo)
+
       }
 
     )
 
-    console.log("consejo")
-    console.log(consejo)
-    // console.log(frase)
+
 
     if (lunes.valueOf() == route.params.Day.valueOf()) {
 
@@ -125,13 +121,13 @@ const PlanDay = () => {
         <View style={styles.titulo}>
           <Text style={{ ...styles.textoTitulo, fontFamily: "Adamina_400Regular" }}>Rutina del {route.params.Day}</Text>
         </View>
-        {(route.params.numDias >= 2 && lunes.valueOf() == route.params.Day.valueOf()) ? (<PlanButton text="Ejercicios" action={() => navigation.navigate('Training', { Dia: route.params.Day })} />) : null}
-        {(route.params.numDias >= 4 && martes.valueOf() == route.params.Day.valueOf()) ? (<PlanButton text="Ejercicios" action={() => navigation.navigate('Training', { Dia: route.params.Day })} />) : null}
-        {(route.params.numDias >= 2 && miercoles.valueOf() == route.params.Day.valueOf()) ? (<PlanButton text="Ejercicios" action={() => navigation.navigate('Training', { Dia: route.params.Day })} />) : null}
-        {(route.params.numDias >= 5 && jueves.valueOf() == route.params.Day.valueOf()) ? (<PlanButton text="Ejercicios" action={() => navigation.navigate('Training', { Dia: route.params.Day })} />) : null}
-        {(route.params.numDias >= 3 && viernes.valueOf() == route.params.Day.valueOf()) ? (<PlanButton text="Ejercicios" action={() => navigation.navigate('Training', { Dia: route.params.Day })} />) : null}
+        {(route.params.numDias >= 2 && lunes.valueOf() == route.params.Day.valueOf()) ? (<PlanButton text="Ejercicios" action={() => navigation.navigate('Training', { Dia: route.params.Day, numDias: route.params.numDias })} />) : null}
+        {(route.params.numDias >= 4 && martes.valueOf() == route.params.Day.valueOf()) ? (<PlanButton text="Ejercicios" action={() => navigation.navigate('Training', { Dia: route.params.Day, numDias: route.params.numDias })} />) : null}
+        {(route.params.numDias >= 2 && miercoles.valueOf() == route.params.Day.valueOf()) ? (<PlanButton text="Ejercicios" action={() => navigation.navigate('Training', { Dia: route.params.Day, numDias: route.params.numDias })} />) : null}
+        {(route.params.numDias >= 5 && jueves.valueOf() == route.params.Day.valueOf()) ? (<PlanButton text="Ejercicios" action={() => navigation.navigate('Training', { Dia: route.params.Day, numDias: route.params.numDias })} />) : null}
+        {(route.params.numDias >= 3 && viernes.valueOf() == route.params.Day.valueOf()) ? (<PlanButton text="Ejercicios" action={() => navigation.navigate('Training', { Dia: route.params.Day, numDias: route.params.numDias })} />) : null}
 
-        <DropDown text="Alimentos" onSelect={accion} data={options} value={selectedItem} color2='#7DB065' tam='25' color1='#D9EFCF' colorLetra='#ffff' redirigir={true} dia={route.params.Day}></DropDown>
+        <DropDown text="Alimentos" onSelect={accion} data={options} value={selectedItem} color2='#7DB065' tam='25' color1='#D9EFCF' colorLetra='#ffff' redirigir={true} dia={route.params.Day} number={route.params.numDias}></DropDown>
         <View style={styles.paso}>
           <View style={styles.contendor1}>
             <View style={{ flexDirection: 'row', justifyContent: 'flex-start', }}>

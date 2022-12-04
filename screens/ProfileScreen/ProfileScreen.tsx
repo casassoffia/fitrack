@@ -24,7 +24,6 @@ import UserApi from '../../APIs/UserApi';
 import { Icon as Icon2 } from '@rneui/themed';
 
 
-let options = [{ id: 1, name: 'Desayuno' }, { id: 2, name: 'Comida' }, { id: 3, name: 'Cena' }]
 const Profile = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const [nombre, setNombre] = useState('')
@@ -33,12 +32,14 @@ const Profile = () => {
   const [edad, setEdad] = useState(0)
   const [num_dias, setNumDias] = useState(0)
   const [peso, setPeso] = useState(0)
+  const [arrayPesos, setArrayPesos] = useState<any>()
+  const [arrayFechas, setArrayFechas] = useState<any>()
   const [plan, setPlan] = useState('')
   const [sexo, setSexo] = useState('')
 
+
   const route: any = useRoute();
-  let succes = route.params.success
-  const [isShow, setShow] = useState(false)
+  let success = route.params.success
 
   const [loaded] = useFonts({
     "Adamina_400Regular": Adamina_400Regular,
@@ -53,15 +54,19 @@ const Profile = () => {
         setNivel(usuarioDevuelto.nivel)
         setEdad(usuarioDevuelto.edad)
         setNumDias(usuarioDevuelto.num_dias)
-        setPeso(usuarioDevuelto.peso)
+        setPeso(usuarioDevuelto.lastPeso)
         setPlan(usuarioDevuelto.plan)
         setSexo(usuarioDevuelto.sexo)
+        setArrayPesos(usuarioDevuelto.arrayPeso)
+        console.log("arrayPesos desde el perfil")
+        console.log(arrayPesos)
+        setArrayFechas(usuarioDevuelto.arrayFechas)
 
       }
     )
 
 
-  }, [succes])
+  }, [success])
   const [selectedItem, setSelectedItem] = useState<DocumentData>()
   const accion = (item: any) => {
     setSelectedItem(item)
@@ -136,10 +141,25 @@ const Profile = () => {
             </View>
           </View>
           <View style={styles.paso}>
-            <Text style={{ ...styles.textoRecuadroFuera, fontFamily: "Adamina_400Regular" }}>Peso: </Text>
+            <Text style={{ ...styles.textoRecuadroFuera, fontFamily: "Adamina_400Regular" }}>Peso actual: </Text>
             <View style={styles.paso2}>
               <Text style={{ ...styles.textoRecuadro, fontFamily: "Adamina_400Regular" }}>{peso} </Text>
             </View>
+            <TouchableOpacity onPress={() => navigation.navigate('Weight')}
+              style={{ alignItems: 'center', marginTop: 10 }}
+            >
+
+
+
+              <Text style={{
+                color: '#ffff', fontFamily: 'Adamina_400Regular'
+
+              }}>
+                Ver historial del peso
+              </Text>
+
+
+            </TouchableOpacity>
           </View>
 
           <View style={styles.paso}>
@@ -148,7 +168,7 @@ const Profile = () => {
               <Text style={{ ...styles.textoRecuadro, fontFamily: "Adamina_400Regular" }}>{sexo} </Text>
             </View>
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate('ProfileEdit', { nombre: nombre, edad: edad, email: email, nivel: nivel, num_dias: num_dias, peso: peso, plan: plan, sexo: sexo })}
+          <TouchableOpacity onPress={() => navigation.navigate('ProfileEdit', { nombre: nombre, edad: edad, email: email, nivel: nivel, num_dias: num_dias, peso: peso, plan: plan, sexo: sexo, arrayPesos: arrayPesos, arrayFechas: arrayFechas, succes: success })}
             style={{
               ...styles.button,
               backgroundColor: '#EFE6CF',

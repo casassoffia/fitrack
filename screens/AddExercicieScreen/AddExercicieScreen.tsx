@@ -94,9 +94,7 @@ const AddExercicie = () => {
                 <View style={styles.header}>
 
                     <View style={styles.headerLeft}>
-                        <Text style={{ marginTop: 50 }}>
-                            <Icon name="chevron-back-outline" size={30} color="#fff" onPress={() => navigation.navigate('ListExercicies', { reload: true })} ></Icon>
-                        </Text>
+
                     </View>
                     <View style={styles.headerRight}>
                         <Image source={require("../../assets/imagenes/iconoBueno2.jpeg")} style={styles.icono}></Image>
@@ -106,8 +104,8 @@ const AddExercicie = () => {
                     <Text style={{ ...styles.titulo, fontFamily: 'Adamina_400Regular' }}>Rellena la siguiente información sobre el ejercicio que desea añadir: </Text>
 
 
-                    <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text="Indica el tipo de ejercicio" onSelect={accion} data={ejercicios} value={tipoEjercicio} color1='#eede89' color2='#F8F1CC' dia={''}  ></DropDown>
-                    <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text="Nivel del Ejercicio" onSelect={accion2} data={nivel} value={nivelSeleccionado} color1='#eede89' color2='#F8F1CC' dia={''} ></DropDown>
+                    <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text="Indica el tipo de ejercicio" onSelect={accion} data={ejercicios} value={tipoEjercicio} color1='#eede89' color2='#F8F1CC' dia={''} number={0}  ></DropDown>
+                    <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text="Nivel del Ejercicio" onSelect={accion2} data={nivel} value={nivelSeleccionado} color1='#eede89' color2='#F8F1CC' dia={''} number={0} ></DropDown>
                     <TextInput onChangeText={text => setNombre(text)} style={styles.textInput} value={nombre} placeholder="Nombre del Ejercicio" maxLength={37} ></TextInput>
                     <Text style={styles.aclaracion}>* Por favor explica el ejercicio en tres pasos</Text>
                     <TextInput onChangeText={text => setPrimero(text)} style={styles.textPasos} value={primero} placeholder="Primer Paso" maxLength={150} ></TextInput>
@@ -116,12 +114,21 @@ const AddExercicie = () => {
 
 
                     {/* <GenericButton text="OK" action={() => navigation.navigate('Plan')} /> */}
-                    <TouchableOpacity onPress={() => rellenarForm()} style={{
-                        ...styles.button,
-                        backgroundColor: '#F8F1CC',
-                        marginTop: 20
-                    }}>
-                        <Text style={styles.buttonText}>OK</Text></TouchableOpacity>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                        <TouchableOpacity onPress={() => rellenarForm()} style={{
+                            ...styles.button,
+                            backgroundColor: '#F8F1CC',
+                            marginTop: 20
+                        }}>
+                            <Text style={styles.buttonText}>OK</Text></TouchableOpacity>
+
+                        <TouchableOpacity onPress={() => navigation.navigate('ListExercicies', { reload: false })} style={{
+                            ...styles.button,
+                            backgroundColor: '#F8F1CC',
+                            marginTop: 20
+                        }}>
+                            <Text style={styles.buttonText}>Cancel</Text></TouchableOpacity>
+                    </View>
 
 
                 </View>

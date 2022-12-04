@@ -89,9 +89,13 @@ const ListMeals = () => {
           (<View style={styles.container}>
             <View style={styles.header}>
 
+
               <Image source={require("../../assets/imagenes/cabecera2.png")} style={styles.forma}></Image>
+
               <Text style={{ ...styles.nombreTitulo, fontFamily: "Adamina_400Regular" }}>Coge más ideas para </Text>
               <Text style={{ ...styles.nombreTitulo, marginTop: 230, fontFamily: "Adamina_400Regular" }}> tus comidas</Text>
+
+
             </View>
 
             <View style={styles.body}>

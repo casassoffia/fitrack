@@ -33,7 +33,7 @@ const MealDay = () => {
     const [ref, setRef] = useState(0)
     const [cantidades, setCantidades] = useState<any>([])
     const [recetaDesayuno, setRecetaDesayuno] = useState<any>([])
-    let listadoIngredientes: string[] = [];
+    let num = route.params.numDias
     let listadoingre = []
     let recetaDesa = []
 
@@ -136,7 +136,9 @@ const MealDay = () => {
 
                     <Image source={require("../../assets/imagenes/cabecera2.png")} style={styles.forma}></Image>
                     <Text style={{ ...styles.nombreTitulo, fontFamily: "Adamina_400Regular" }}>Aqui tienes los pasos...</Text>
-
+                    <Text style={{ ...styles.iconoAtras }}>
+                        <Icon name="chevron-back-outline" size={30} color="#613000" onPress={() => navigation.navigate('PlanDay', { Day: route.params.Dia, numDias: num, reload: false })} ></Icon>
+                    </Text>
 
 
 

@@ -19,7 +19,7 @@ export default StyleSheet.create({
     },
     forma: {
         width: '100%',
-        height: 300
+        height: 200
 
     },
     titulo: {
@@ -48,8 +48,13 @@ export default StyleSheet.create({
         position: 'absolute',
 
     },
+    iconoAtras: {
+        marginTop: 50,
+        marginLeft: 10,
+        position: 'absolute'
+    },
     nombreTitulo: {
-        marginTop: 180, marginLeft: 10, position: 'absolute', fontSize: 20, color: '#ffff'
+        marginTop: 70, marginLeft: 10, position: 'absolute', fontSize: 20, color: '#ffff'
     },
     icono: {
         width: 150,
@@ -64,6 +69,7 @@ export default StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         flexDirection: 'column',
+        marginTop: 20
 
     },
     paso: {
@@ -85,7 +91,8 @@ export default StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 50,
         alignItems: 'center',
-        marginLeft: 30,
+        marginLeft: 50,
+        marginTop: 10
 
     },
     textoIngredientes: {
@@ -95,7 +102,7 @@ export default StyleSheet.create({
 
     },
     nombreSuplemento: {
-        fontSize: 20,
+        fontSize: 18,
         color: '#EFE6CF',
         textAlign: 'center',
 

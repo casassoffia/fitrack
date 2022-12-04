@@ -23,7 +23,7 @@ interface IDropDown {
 
 }
 
-let precios = [{ id: 1, name: 'Selecciona un rango' }, { id: 2, name: '10-20' }, { id: 3, name: '20-30' }, { id: 4, name: '30-40' }, { id: 5, name: '40-50' }, { id: 6, name: '50-60' }, { id: 7, name: '60-70' }]
+let precios = [{ id: 1, name: 'Selecciona un precio' }, { id: 2, name: '10-20€' }, { id: 3, name: '20-30€' }, { id: 4, name: '30-40€' }, { id: 5, name: '40-50€' }, { id: 6, name: '50-60€' }, { id: 7, name: '60-70€' }]
 let sabores = [{ id: 1, name: 'Selecciona un sabor' }, { id: 2, name: 'Chocolate' }, { id: 3, name: 'Fresa' }, { id: 4, name: 'Vainilla' }]
 
 const SuplementoFilters = ({ text, suplementos, onSelect }: IDropDown) => {
@@ -68,7 +68,7 @@ const SuplementoFilters = ({ text, suplementos, onSelect }: IDropDown) => {
 
       {showOption && (<View>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <DropDownFilters text="Selecciona un rango" onSelect={accion} data={precios} value={selectedPrice} ></DropDownFilters>
+          <DropDownFilters text="Selecciona un precio" onSelect={accion} data={precios} value={selectedPrice} ></DropDownFilters>
           <DropDownFilters text="Selecciona un sabor" onSelect={accion2} data={sabores} value={selectedSabor} ></DropDownFilters></View>
 
 

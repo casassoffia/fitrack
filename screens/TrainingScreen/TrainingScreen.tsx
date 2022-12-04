@@ -36,14 +36,14 @@ const Training = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const route: any = useRoute();
   const [dia, setDia] = useState("")
-  // let ejerciciosDelUsuario = []
+  let num = route.params.numDias
   console.log("route.params.Day")
   console.log(route.params.Dia)
   const [ejerciciosDelUsuario, setEjerciciosDelUsuario] = useState<any>([])
   let nombresDeEjercicios: any[] = []
 
   useEffect(() => {
-    setDia(route.params.Day)
+    setDia(route.params.Dia)
 
     UserMethods.getEjerciciosFromUser(route.params.Dia).then(
       (ejercicios) => {
@@ -78,6 +78,9 @@ const Training = () => {
         <View style={styles.header}>
           <Image source={require("../../assets/imagenes/cabecera4.png")} style={styles.forma}></Image>
           <Text style={{ ...styles.nombreTitulo, fontFamily: "Adamina_400Regular" }}>Tu rutina de hoy </Text>
+          <Text style={{ ...styles.iconoAtras }}>
+            <Icon name="chevron-back-outline" size={30} color="#613000" onPress={() => navigation.navigate('PlanDay', { Day: dia, numDias: num, reload: false })}  ></Icon>
+          </Text>
         </View>
 
         <View style={styles.body}>
@@ -105,7 +108,7 @@ const Training = () => {
 
     </ScrollView>
       <View style={{ alignItems: 'center' }}>
-        <NavBar></NavBar>
+        <NavBar search={false} listExercicies={false} plan={false} listMeals={false} profile={false}></NavBar>
       </View></>
 
 

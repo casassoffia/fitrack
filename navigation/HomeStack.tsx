@@ -22,6 +22,7 @@ import ProfileScreen from '../screens/ProfileScreen/ProfileScreen'
 import ProfileEditScreen from '../screens/ProfileEditScreen/ProfileEditScreen'
 import MealScreen from '../screens/MealScreen/MealScreen'
 import ChangePasswordScreen from '../screens/ChangePasswordScreen/ChangePasswordScreen'
+import WeightScreen from '../screens/WeightScreen/WeightScreen'
 
 import { HomeStackNavigatorParamList } from './types';
 
@@ -55,6 +56,7 @@ const HomeStackNavigator = () => {
             <HomeStack.Screen name="ProfileEdit" options={{ headerShown: false }} component={ProfileEditScreen} />
             <HomeStack.Screen name="Meal" options={{ headerShown: false }} component={MealScreen} />
             <HomeStack.Screen name="ChangePassword" options={{ headerShown: false }} component={ChangePasswordScreen} />
+            <HomeStack.Screen name="Weight" options={{ headerShown: false }} component={WeightScreen} />
         </HomeStack.Navigator>
     )
 }

@@ -4,6 +4,7 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import { auth, db, firebaseConfig } from '../utils/Firebase';
 import { getAuth } from 'firebase/auth';
+import { DateTime } from 'luxon';
 
 
 const UserMethods = {
@@ -31,6 +32,8 @@ const UserMethods = {
         const q = query(collection(db, "usuarios"), where("email", "==", userLogued?.email))
         let usuario
         let nombre = "", edad = 0, email = "", nivel = "", num_dias = 0, peso = 0, plan = "", sexo = ""
+        let arrayPeso: Array<any> = []
+        let arrayFechas: Array<Date> = []
 
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
@@ -40,13 +43,17 @@ const UserMethods = {
             email = usuario.email
             nivel = usuario.nivel
             num_dias = usuario.num_dias
-            peso = usuario.peso
+            arrayPeso = usuario.peso
+            arrayFechas = usuario.fecha
             plan = usuario.plan
             sexo = usuario.sexo
 
         });
 
-        return { nombre, edad, email, nivel, num_dias, peso, plan, sexo }
+        let lastPeso = arrayPeso[arrayPeso.length - 1]
+        console.log("lastPeso")
+        console.log(lastPeso)
+        return { nombre, edad, email, nivel, num_dias, lastPeso, plan, sexo, arrayPeso, arrayFechas }
     },
     getEjercicio: async function (ref: number) {
 
@@ -400,7 +407,8 @@ const UserMethods = {
         querySnapshot.forEach((doc) => {
             ref = doc.id
         });
-
+        let arrayPeso: Array<number> = [parseInt(peso)]
+        let arrayFecha: Array<Date> = [new Date()]
         const usuarioref = doc(db, "usuarios", ref);
         const update = await setDoc(usuarioref, {
             edad: parseInt(edad),
@@ -408,8 +416,8 @@ const UserMethods = {
             num_dias: parseInt(numDias.name),
             email: email,
             nombre: nombre,
-            peso: parseInt(peso),
-
+            peso: arrayPeso,
+            fecha: arrayFecha,
             plan: plan.name,
             sexo: sexo.name,
             semanaLunes: 0,
@@ -425,29 +433,27 @@ const UserMethods = {
 
         });
     },
-    updateUser: async function (nombre: string, email: string, edad: any, nivel: any, num_dias: any, peso: any, plan: any, sexo: any, cambiadoPlan: boolean, cambiadoNivel: boolean) {
+    updateUser: async function (nombre: string, email: string, edad: any, nivel: any, num_dias: any, arrayPesos: any, plan: any, sexo: any, cambiadoPlan: boolean, cambiadoNivel: boolean, arrayFechas: any) {
 
         let referenciaUser = ""
         const auth = getAuth()
         const userLogued = auth.currentUser;
-
         const qUser = query(collection(db, "usuarios"), where("email", "==", userLogued?.email))
         const querySnapshotUser = await getDocs(qUser);
         querySnapshotUser.forEach((doc) => {
             referenciaUser = doc.id
         });
         const usuarioref = doc(db, "usuarios", referenciaUser);
-        console.log("nivel")
-        console.log(nivel)
         const update = await updateDoc(usuarioref, {
             nombre: nombre,
             email: email,
             edad: edad,
             nivel: nivel,
             num_dias: num_dias,
-            peso: peso,
+            peso: arrayPesos,
             plan: plan,
             sexo: sexo,
+            fecha: arrayFechas
 
         });
         if (cambiadoPlan) {
@@ -618,21 +624,6 @@ const UserMethods = {
 
     },
     numeroAlteatorioEjercicio: async function (numeros: Array<number>) {
-        // const q = query(collection(db, "ejercicios"), limit(1), orderBy("id", "desc"))
-        // let cena;
-        // let max = 0
-        // let min = 1
-
-        // const querySnapshot = await getDocs(q);
-        // querySnapshot.forEach((doc) => {
-        //     cena = doc.data()
-        //     max = cena.id
-
-        // });
-        // let numero = 0
-        // do {
-        //     numero = Math.floor(Math.random() * (max - min + 1)) + min;
-        // } while (numeros.includes(numero) && numero != 0)
         const auth = getAuth()
         const userLogued = auth.currentUser;
         const q2 = query(collection(db, "usuarios"), where("email", "==", userLogued?.email))

@@ -16,8 +16,9 @@ export default StyleSheet.create({
 
     },
     header: {
-        flex: 0.2,
-        flexDirection: 'row',
+
+        flex: 0.45,
+        flexDirection: 'row'
 
     },
     fotoInicial: {
@@ -26,9 +27,13 @@ export default StyleSheet.create({
         borderBottomLeftRadius: 200,
 
     },
+    nombreTitulo: {
+        marginTop: 50, position: 'absolute', fontSize: 20, color: '#ffff'
+    },
     forma: {
-        borderBottomLeftRadius: 120,
-        width: '100%'
+
+        width: '100%',
+        height: 200
 
     },
     titulo: {
@@ -98,7 +103,7 @@ export default StyleSheet.create({
     },
     textoIngredientes: {
         fontSize: 20,
-        color: '#45322e',
+        color: '#613000',
         textAlign: 'center',
 
     },

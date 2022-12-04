@@ -8,9 +8,9 @@ export type HomeStackNavigatorParamList = {
   Plan:  {reload:boolean};
   PlanDay: { Day: string, numDias: number,  reload:boolean};
   Welcome: undefined;
-  MealDay: { Tipo: string, Dia: string };
+  MealDay: { Tipo: string, Dia: string, numDias: number };
   Meal: { nombre: string , Tipo:string};
-  Training: { Dia: string };
+  Training: { Dia: string,numDias: number };
   ListExercicies:  {reload:boolean};
   ListMeals: {reload:boolean};
   AddExercicie: undefined;
@@ -21,8 +21,9 @@ export type HomeStackNavigatorParamList = {
   ListSupplements: undefined;
   Card: undefined;
   Profile:{success:boolean},
-  ProfileEdit: { nombre: any; edad: any; email: any; nivel: any; num_dias: any; peso: any; plan: any; sexo: any; },
+  ProfileEdit: { nombre: any; edad: any; email: any; nivel: any; num_dias: any; peso: any; plan: any; sexo: any; arrayPesos: any, arrayFechas:any, succes:boolean };
   ChangePassword: undefined;
+  Weight: undefined;
 
 };
 
