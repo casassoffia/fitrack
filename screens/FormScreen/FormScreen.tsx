@@ -101,7 +101,7 @@ const Form = () => {
 
         <View style={styles.headerLeft}>
           <Text style={{ marginTop: 50 }}>
-            <Icon name="chevron-back-outline" size={30} color="#fff" onPress={() => navigation.navigate('Register')} ></Icon>
+
           </Text>
         </View>
         <View style={styles.headerRight}>

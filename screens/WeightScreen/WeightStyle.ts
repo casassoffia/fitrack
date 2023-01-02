@@ -34,6 +34,11 @@ export default StyleSheet.create({
     borderBottomLeftRadius: 120,
 
   },
+       iconoAtras: {
+    marginTop: 90,
+    marginLeft: 30,
+    position: 'absolute'
+  },
   titulo: {
    marginTop:'10%',
     backgroundColor: '#7DB065',

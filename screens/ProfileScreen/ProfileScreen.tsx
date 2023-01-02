@@ -11,7 +11,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { auth, db, firebaseConfig } from '../../utils/Firebase';
 import { collection, query, onSnapshot, orderBy, getDocs, QuerySnapshot, doc, getDoc, where, DocumentData } from 'firebase/firestore';
 import NavBar from '../../components/NavBar';
-
+import Icon from 'react-native-vector-icons/Ionicons';
 import firebase from "firebase/app";
 import "firebase/firestore";
 import { getAuth } from 'firebase/auth';
@@ -94,6 +94,7 @@ const Profile = () => {
 
             <Image source={require("../../assets/imagenes/titulo3.png")} style={styles.nombre}></Image>
 
+
           </View>
           <View style={styles.headerRight}>
             <Image source={require("../../assets/imagenes/colorDelLogo.png")}></Image>
@@ -145,21 +146,7 @@ const Profile = () => {
             <View style={styles.paso2}>
               <Text style={{ ...styles.textoRecuadro, fontFamily: "Adamina_400Regular" }}>{peso} </Text>
             </View>
-            <TouchableOpacity onPress={() => navigation.navigate('Weight')}
-              style={{ alignItems: 'center', marginTop: 10 }}
-            >
 
-
-
-              <Text style={{
-                color: '#ffff', fontFamily: 'Adamina_400Regular'
-
-              }}>
-                Ver historial del peso
-              </Text>
-
-
-            </TouchableOpacity>
           </View>
 
           <View style={styles.paso}>
@@ -168,6 +155,29 @@ const Profile = () => {
               <Text style={{ ...styles.textoRecuadro, fontFamily: "Adamina_400Regular" }}>{sexo} </Text>
             </View>
           </View>
+          <TouchableOpacity onPress={() => navigation.navigate('Weight')}
+            style={{
+              ...styles.button,
+              backgroundColor: '#EFE6CF',
+
+              borderRadius: 50,
+
+            }}
+          >
+
+            <View style={{ ...styles.circulo }}>
+              <Icon2 type='font-awesome-5' name="weight" color="#613000" style={{}}></Icon2>
+            </View>
+
+            <Text style={{
+              ...styles.buttonText, fontFamily: 'Adamina_400Regular'
+
+            }}>
+              Historial del peso
+            </Text>
+
+
+          </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('ProfileEdit', { nombre: nombre, edad: edad, email: email, nivel: nivel, num_dias: num_dias, peso: peso, plan: plan, sexo: sexo, arrayPesos: arrayPesos, arrayFechas: arrayFechas, succes: success })}
             style={{
               ...styles.button,
@@ -191,6 +201,7 @@ const Profile = () => {
 
 
           </TouchableOpacity>
+
           <TouchableOpacity onPress={(signOutUser)}
             style={{ marginTop: 100, marginRight: 50 }}
           >

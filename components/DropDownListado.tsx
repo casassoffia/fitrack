@@ -18,7 +18,7 @@ interface IDropDown {
 }
 
 
-const DropDown = ({ text, data, value, onSelect, view }: IDropDown) => {
+const DropDownListado = ({ text, data, value, onSelect, view }: IDropDown) => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const [showOption, setShowOption] = useState(false)
   const [loaded] = useFonts({
@@ -182,4 +182,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default DropDown;
+export default DropDownListado;

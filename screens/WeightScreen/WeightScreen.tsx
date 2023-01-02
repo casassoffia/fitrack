@@ -11,7 +11,7 @@ import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-ta
 import { auth, db, firebaseConfig } from '../../utils/Firebase';
 import { collection, query, onSnapshot, orderBy, getDocs, QuerySnapshot, doc, getDoc, where, DocumentData, Timestamp } from 'firebase/firestore';
 import NavBar from '../../components/NavBar';
-
+import Icon from 'react-native-vector-icons/Ionicons';
 import firebase from "firebase/app";
 import "firebase/firestore";
 import { getAuth } from 'firebase/auth';
@@ -74,6 +74,9 @@ const Profile = () => {
             <Image source={require("../../assets/imagenes/colorDelLogo.png")} style={styles.forma}></Image>
 
             <Image source={require("../../assets/imagenes/titulo3.png")} style={styles.nombre}></Image>
+            <Text style={{ ...styles.iconoAtras }}>
+              <Icon name="chevron-back-outline" size={30} color="#95520e" onPress={() => navigation.navigate('Profile', { success: false })} ></Icon>
+            </Text>
 
           </View>
           <View style={styles.headerRight}>
