@@ -51,6 +51,11 @@ export default StyleSheet.create({
     color:'#fff'
     
   },
+       iconoAtras: {
+    marginTop: 70,
+    marginLeft: 10,
+    position: 'absolute'
+  },
 
   nombre: {
     width: 150,

@@ -25,6 +25,7 @@ import RellenarJueves from '../../APIs/RellenarPlanesJueves';
 import RellenarViernes from '../../APIs/RellenarPlanesViernes';
 import { Icon as Icon2 } from '@rneui/themed';
 import { Adamina_400Regular } from '@expo-google-fonts/adamina'
+import DropDownListado from '../../components/DropDownListado';
 
 
 let options = [{ id: 1, name: 'Desayuno' }, { id: 2, name: 'Comida' }, { id: 3, name: 'Cena' }]
