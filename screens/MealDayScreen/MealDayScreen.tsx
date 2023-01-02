@@ -168,8 +168,8 @@ const MealDay = () => {
                                     <View style={styles.circulo}>
                                         <Text style={styles.numeroCirculo}>{id}</Text>
                                     </View>
-                                    <View style={{ width: 250, height: 100, marginBottom: 30, marginLeft: 10 }}>
-                                        <Text style={{ fontSize: 17, fontFamily: "Adamina_400Regular" }}>{receta}</Text>
+                                    <View style={{ width: 250, height: 150, marginBottom: 30, marginLeft: 10, alignItems: 'center' }}>
+                                        <Text style={{ fontSize: 16, fontFamily: "Adamina_400Regular" }}>{receta}</Text>
                                     </View>
 
 

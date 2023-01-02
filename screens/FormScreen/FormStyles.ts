@@ -36,6 +36,7 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: '#61b254',
     flexDirection: 'column',
+    
   },
   nombre: {
     fontSize: 30,
@@ -47,12 +48,8 @@ export default StyleSheet.create({
 
   },
   titulo: {
-    fontSize: 35,
-    color: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginLeft: 25,
-    
+    color:'#fff',
+       marginTop: 150, marginLeft: 20, position: 'absolute', fontSize: 24
 
   },
   textInput: {

@@ -646,8 +646,10 @@ const UserMethods = {
 
 
         });
+
         do {
             ejerAleatorio = ejercicios[Math.floor(Math.random() * ejercicios.length)];
+
             numero = ejerAleatorio.id
         } while (numeros.includes(numero) && numero != 0)
         return numero

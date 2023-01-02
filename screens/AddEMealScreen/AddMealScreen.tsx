@@ -18,7 +18,7 @@ import { Adamina_400Regular } from '@expo-google-fonts/adamina'
 let tiposComidas = [{ id: 1, name: 'Desayuno' }, { id: 2, name: 'Comida' }, { id: 3, name: 'Cena' }]
 let plan = [{ id: 1, name: 'Ganar masa muscular' }, { id: 2, name: 'Perder grasa' }, { id: 3, name: 'Mantener' }]
 
-const AddExercicie = () => {
+const AddMeal = () => {
 
     const navigation = useNavigation<HomeScreenNavigationProp>();
     const auth = getAuth()
@@ -143,4 +143,4 @@ const AddExercicie = () => {
 
     )
 }
-export default AddExercicie;
+export default AddMeal;

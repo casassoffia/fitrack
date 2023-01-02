@@ -3,6 +3,7 @@ import { getAuth } from 'firebase/auth';
 import { initializeFirestore } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
 import firebase from 'firebase/compat/app'
+import { getPerformance } from "firebase/performance";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDdcT5u5luXEkn-OxI2Fz_CLqu-3de6YVQ",
@@ -14,6 +15,7 @@ export const firebaseConfig = {
 };
 
 const app = firebase.initializeApp(firebaseConfig);
+const perf = getPerformance(app);
 const db = getFirestore();
 const auth = getAuth(app);
 

@@ -100,16 +100,17 @@ const Form = () => {
       <View style={styles.header}>
 
         <View style={styles.headerLeft}>
-          <Text style={{ marginTop: 30 }}>
+          <Text style={{ marginTop: 50 }}>
             <Icon name="chevron-back-outline" size={30} color="#fff" onPress={() => navigation.navigate('Register')} ></Icon>
           </Text>
         </View>
         <View style={styles.headerRight}>
           <Image source={require("../../assets/imagenes/iconoBueno2.jpeg")} style={styles.icono}></Image>
         </View>
+        <Text style={{ ...styles.titulo, fontFamily: "Adamina_400Regular" }}>Completa la siguiente información: </Text>
       </View>
       <View style={styles.body}>
-        <Text style={{ ...styles.titulo, fontFamily: "Adamina_400Regular" }}>Completa la siguiente información: </Text>
+
         <ScrollView style={{ width: '100%' }} >
 
           <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text="Elige tu objetivo" onSelect={accion} data={options} value={selectedItem} color1='#eede89' color2='#F8F1CC' dia={''} number={0}  ></DropDown>

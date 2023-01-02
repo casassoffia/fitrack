@@ -81,7 +81,7 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     flexDirection: 'column',
-    marginBottom: 600
+    marginBottom: 650
   },
   contendor: {
     marginTop:'2%',
@@ -145,7 +145,7 @@ export default StyleSheet.create({
   paso: {
     backgroundColor: '#EFE6CF',
     width: '97%',
-    height: 150,
+    height: 200,
     marginTop:10,
     borderRadius: 50,
     padding:'2%'

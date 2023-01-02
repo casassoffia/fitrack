@@ -11,7 +11,7 @@ import { DocumentData } from 'firebase/firestore';
 import GymMethods from '../APIs/GymAPi';
 import DropDownCheckBox from './DropDownCheckBox';
 
-interface IDropDown {
+interface IDropDownFilters {
   text: string,
   onSelect: (item: any) => void
 
@@ -19,7 +19,7 @@ interface IDropDown {
 
 let precios = [{ id: 1, name: 'Selecciona un precio' }, { id: 2, name: '20-30€' }, { id: 3, name: '30-40€' }, { id: 4, name: '40-50€' }, { id: 5, name: '50-60€' }]
 let ciudades = [{ id: 1, name: 'Selecciona una ciudad' }, { id: 2, name: 'Alicante' }, { id: 3, name: 'Valencia' }, { id: 4, name: 'Madrid' }]
-const DesplegableFilters = ({ text, onSelect }: IDropDown) => {
+const DesplegableFilters = ({ text, onSelect }: IDropDownFilters) => {
 
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const [showOption, setShowOption] = useState(false)

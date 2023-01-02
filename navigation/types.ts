@@ -19,7 +19,6 @@ export type HomeStackNavigatorParamList = {
   ListGym: undefined;
   ExercicieDay: { NombreEjercicio: string };
   ListSupplements: undefined;
-  Card: undefined;
   Profile:{success:boolean},
   ProfileEdit: { nombre: any; edad: any; email: any; nivel: any; num_dias: any; peso: any; plan: any; sexo: any; arrayPesos: any, arrayFechas:any, succes:boolean };
   ChangePassword: undefined;
