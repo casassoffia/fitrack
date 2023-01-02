@@ -26,11 +26,11 @@ export default StyleSheet.create({
   icono: {
 
     width: 70,
-    height: 70,
-    borderRadius: 100,
-    resizeMode: 'contain',
+     height: 70,
+     borderRadius: 80 / 2,
+    marginTop: 50,
     marginLeft: 130,
-    marginTop: 50
+    
   },
   body: {
     flex: 1,
@@ -99,11 +99,11 @@ export default StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: '#61b254',
   },
-  button: {
+    button: {
     alignSelf: 'center',
     borderRadius: 10,
-    width: '50%',
-    height: '5%',
+    width: 150,
+    height: 50,
      shadowColor: "#000",
     shadowOffset: {
       width: 0,

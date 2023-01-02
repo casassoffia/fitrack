@@ -79,11 +79,13 @@ const ExercicieDay = () => {
 
                     <Image source={require("../../assets/imagenes/cabecera3.png")} style={styles.forma}></Image>
                     <Text style={{ ...styles.nombreTitulo, fontFamily: "Adamina_400Regular" }}>{tipo} </Text>
-
+                    <Text style={{ ...styles.iconoAtras }}>
+                        <Icon name="chevron-back-outline" size={30} color="#613000" onPress={() => navigation.navigate('ListExercicies', { reload: false })} ></Icon>
+                    </Text>
 
 
                 </View>
-                {/* <ScrollView > */}
+
                 <View style={styles.body}>
 
                     <View style={styles.titulo}>

@@ -9,15 +9,16 @@ import { SetStateAction, useEffect, useState } from 'react';
 import styles from './ProfileEditStyles'
 import UserMethods from '../../APIs/UserApi'
 import { getAuth } from 'firebase/auth';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { collection, getDocs, query, Timestamp, where } from 'firebase/firestore';
 import { db } from '../../utils/Firebase';
 import { Adamina_400Regular } from '@expo-google-fonts/adamina'
 import React from 'react';
+import { validateEmail } from '../../utils/helpers';
 
 
 
 
-const AddExercicie = () => {
+const ProfileEdit = () => {
     const route: any = useRoute();
     let options = [{ id: 1, name: 'Ganar masa muscular' }, { id: 2, name: 'Perder grasa' }, { id: 3, name: 'Mantener' }]
     let listadoSexo = [{ id: 1, name: 'Femenino' }, { id: 2, name: 'Masculino' }, { id: 3, name: 'Otros' }, { id: 4, name: route.params.sexo }]
@@ -29,21 +30,25 @@ const AddExercicie = () => {
     const [email, setEmail] = useState(route.params.email)
     const [nivel, setNivel] = useState('')
     let nivelUpdate: any
+    let cambiadoNivel: boolean
     const [edad, setEdad] = useState(route.params.edad)
     const [num_dias, setNumDias] = useState(0)
     let num_diasUpdate: any
     const [peso, setPeso] = useState(route.params.peso)
+    let arrayPeso: Array<any> = []
+    let arrayFecha: Array<any> = []
+    const [arrayPesos, setArrayPesos] = useState(route.params.arrayPesos)
+    const [arrayFechas, setArrayFechas] = useState(route.params.arrayFechas)
+
+    const [cambiadoPeso, setCambiadoPeso] = useState<boolean>(false)
     const [plan, setPlan] = useState('')
+    let cambiadoPlan: boolean
     let planUpdate: any
     const [sexo, setSexo] = useState('')
     let sexoUpdate: any
 
     const cambiarNivel = (item: any) => {
-
-        // nivel = item
-
         setNivel(item)
-
     }
     const cambiarDias = (item: any) => {
         setNumDias(item)
@@ -54,16 +59,22 @@ const AddExercicie = () => {
     const cambiarSexo = (item: any) => {
         setSexo(item)
     }
+    const cambiarPeso = (text: string) => {
+        setCambiadoPeso(true)
+        setPeso(text)
+
+    }
 
     const rellenarForm = async () => {
 
         if (nivel.valueOf() == '') {
             nivelUpdate = route.params.nivel.toString()
-
+            cambiadoNivel = false
         } else {
             let item: any
             item = nivel
             nivelUpdate = item.name
+            cambiadoNivel = true
 
         }
         if (num_dias.valueOf() == 0) {
@@ -77,10 +88,12 @@ const AddExercicie = () => {
         }
         if (plan.valueOf() == '') {
             planUpdate = route.params.plan.toString()
+            cambiadoPlan = false
         } else {
             let item: any
             item = plan
             planUpdate = item.name
+            cambiadoPlan = true
         }
         if (sexo.valueOf() == '') {
             sexoUpdate = route.params.sexo.toString()
@@ -91,51 +104,52 @@ const AddExercicie = () => {
         }
 
 
+        if (cambiadoPeso) {
 
-        UserMethods.updateUser(nombre, email, edad, nivelUpdate, num_diasUpdate, peso, planUpdate, sexoUpdate).finally(
-            () => {
-                navigation.navigate("Profile", { success: true })
-            }
-        )
+            arrayPeso = route.params.arrayPesos
+            arrayPeso.push(parseInt(peso))
+            arrayFecha = route.params.arrayFechas
+            arrayFecha.push(Timestamp.now())
 
 
 
-        // }
+        } else {
+            arrayPeso = route.params.arrayPesos
+        }
+        if (validateData()) {
+
+            UserMethods.updateUser(nombre, email, edad, nivelUpdate, num_diasUpdate, arrayPeso, planUpdate, sexoUpdate, cambiadoPlan, cambiadoNivel, arrayFecha).finally(
+                () => {
+                    navigation.navigate("Profile", { success: !route.params.succes })
+                }
+            )
+        }
+
+
+
+
 
     }
-    // const validateData = () => {
-    //     let isValid = true
-
-    //     if (nombre.valueOf() == "") {
-    //         Alert.alert("No puedes dejar ningun campo en blanco")
-    //         isValid = false
-    //     }
-    //     if (nivelSeleccionado.valueOf() == "") {
-
-    //         Alert.alert("Debes seleccionar un nivel")
-    //         isValid = false
-    //     }
-    //     if (tipoEjercicio.valueOf() == "") {
-    //         Alert.alert("Debes seleccionar un tipo de ejercicio")
-    //         isValid = false
-    //     }
-    //     if (nombre.valueOf() == "") {
-    //         Alert.alert("Debes indicar un nombre para el ejercicio")
-    //         isValid = false
-    //     }
-    //     if (primero.valueOf() == "" || segundo.valueOf() == "" || tercero.valueOf() == "") {
-    //         Alert.alert("No puedes dejar ninguno de los pasos en blanco")
-    //         isValid = false
-    //     }
-
-    //     return isValid
-    // }
+    const validateData = () => {
+        let isValid = true
+        if (nombre.length == 0 || edad.length == 0 || peso.length == 0 || email.length == 0) {
+            Alert.alert("No puedes dejar ningun campo en blanco")
+            isValid = false
+        }
+        if (!validateEmail(email)) {
+            Alert.alert("El formato del email no es correcto")
+            isValid = false
+        }
+        return isValid
+    }
     const [loaded] = useFonts({
         lob: require('../../assets/fonts/Lobster-Regular.ttf'),
     });
     useEffect(() => {
-        // console.log("route.params.num_dias")
-        // console.log(route.params.num_dias)
+        console.log("route.params.arrayPesos")
+        console.log(route.params.arrayPesos)
+
+
     }, [])
     if (!loaded) {
         return null;
@@ -164,24 +178,34 @@ const AddExercicie = () => {
                     <Text style={{ ...styles.aclaracion, fontFamily: "Adamina_400Regular" }}>Edad: </Text>
                     <TextInput keyboardType='numeric' onChangeText={text => setEdad(text)} style={{ ...styles.textInput, fontFamily: "Adamina_400Regular" }} value={edad} placeholder={route.params.edad.toString()}></TextInput>
                     <Text style={{ ...styles.aclaracion, fontFamily: "Adamina_400Regular" }}>Peso: </Text>
-                    <TextInput keyboardType='numeric' onChangeText={text => setPeso(text)} style={{ ...styles.textInput, fontFamily: "Adamina_400Regular" }} value={peso} placeholder={route.params.peso.toString()}></TextInput>
+                    <TextInput keyboardType='numeric' onChangeText={text => { cambiarPeso(text) }} style={{ ...styles.textInput, fontFamily: "Adamina_400Regular" }} value={peso} placeholder={route.params.peso.toString()}></TextInput>
                     <Text style={{ ...styles.aclaracion, fontFamily: "Adamina_400Regular" }}>Nº de dias que entrenas a la semana: </Text>
-                    <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text={route.params.num_dias} onSelect={cambiarDias} data={dias} value={num_dias} color1='#eede89' color2='#F8F1CC' dia={''}  ></DropDown>
+                    <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text={route.params.num_dias} onSelect={cambiarDias} data={dias} value={num_dias} color1='#eede89' color2='#F8F1CC' dia={''} number={0}  ></DropDown>
                     <Text style={{ ...styles.aclaracion, fontFamily: "Adamina_400Regular" }}>Tu nivel: </Text>
-                    <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text={route.params.nivel} onSelect={cambiarNivel} data={listadoNivel} value={nivel} color1='#eede89' color2='#F8F1CC' dia={''} ></DropDown>
+                    <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text={route.params.nivel} onSelect={cambiarNivel} data={listadoNivel} value={nivel} color1='#eede89' color2='#F8F1CC' dia={''} number={0} ></DropDown>
                     <Text style={{ ...styles.aclaracion, fontFamily: "Adamina_400Regular" }}>Tu objetivo: </Text>
-                    <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text={route.params.plan} onSelect={cambiarPlan} data={options} value={plan} color1='#eede89' color2='#F8F1CC' dia={''}  ></DropDown>
+                    <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text={route.params.plan} onSelect={cambiarPlan} data={options} value={plan} color1='#eede89' color2='#F8F1CC' dia={''} number={0}  ></DropDown>
                     <Text style={{ ...styles.aclaracion, fontFamily: "Adamina_400Regular" }}>Sexo: </Text>
-                    <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text={route.params.sexo} onSelect={cambiarSexo} data={listadoSexo} value={sexo} color1='#eede89' color2='#F8F1CC' dia={''} ></DropDown>
+                    <DropDown tam='20' colorLetra='#A3998E' redirigir={false} text={route.params.sexo} onSelect={cambiarSexo} data={listadoSexo} value={sexo} color1='#eede89' color2='#F8F1CC' dia={''} number={0} ></DropDown>
 
 
-                    {/* <GenericButton text="OK" action={() => navigation.navigate('Plan')} />  */}
-                    <TouchableOpacity onPress={() => rellenarForm()} style={{
-                        ...styles.button,
-                        backgroundColor: '#F8F1CC',
-                        marginTop: 20
-                    }}>
-                        <Text style={styles.buttonText}>OK</Text></TouchableOpacity>
+
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                        <TouchableOpacity onPress={() => rellenarForm()} style={{
+                            ...styles.button,
+                            backgroundColor: '#F8F1CC',
+                            marginTop: 20
+                        }}>
+                            <Text style={styles.buttonText}>OK</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate('Profile', { success: false })} style={{
+                            ...styles.button,
+                            backgroundColor: '#F8F1CC',
+                            marginTop: 20
+                        }}>
+                            <Text style={styles.buttonText}>Cancel</Text></TouchableOpacity>
+                    </View>
+
+
 
 
                 </View>
@@ -195,4 +219,4 @@ const AddExercicie = () => {
 
     )
 }
-export default AddExercicie;
+export default ProfileEdit;

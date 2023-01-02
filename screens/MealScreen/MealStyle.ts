@@ -63,6 +63,11 @@ export default StyleSheet.create({
     nombreTitulo: {
     marginTop: 200, marginLeft: 10, position: 'absolute', fontSize: 25, color: '#ffff'
   },
+     iconoAtras: {
+    marginTop: 70,
+    marginLeft: 10,
+    position: 'absolute'
+  },
   icono: {
     width: 150,
     height: 150,

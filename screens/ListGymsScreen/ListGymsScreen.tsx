@@ -60,12 +60,15 @@ const ListGyms = () => {
         <><ScrollView style={{ height: '100%' }}>
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Image source={require("../../assets/imagenes/pruebaCabecera.png")} style={styles.forma}></Image>
+                    <Image source={require("../../assets/imagenes/cabeceragym.png")} style={styles.forma}></Image>
+                    <Text style={{ ...styles.nombreTitulo, marginLeft: 10, fontFamily: "Adamina_400Regular" }}>Encuentra el gimnasio </Text>
+                    <Text style={{ ...styles.nombreTitulo, marginTop: 100, fontFamily: "Adamina_400Regular" }}> que más se adapte </Text>
+                    <Text style={{ ...styles.nombreTitulo, marginLeft: 10, marginTop: 150, fontFamily: "Adamina_400Regular" }}> a tus necesidades </Text>
                 </View>
 
                 <View style={styles.body}>
 
-                    <DesplegableFilters text='Filters' onSelect={cambiarGimnsasios} gimnasios={gimnasios} ></DesplegableFilters>
+                    <DesplegableFilters text='Filters' onSelect={cambiarGimnsasios}  ></DesplegableFilters>
                     {gimnasios.map((gimnasio: any, id2: any) =>
                         <View key={id2} style={styles.paso}>
                             <View key={id2} style={styles.paso2}>
@@ -90,7 +93,7 @@ const ListGyms = () => {
 
         </ScrollView>
             <View style={{ alignItems: 'center' }}>
-                <NavBar search={false} listExercicies={true} plan={false} listMeals={false} profile={false}></NavBar>
+                <NavBar search={false} listExercicies={false} plan={false} listMeals={false} profile={false}></NavBar>
             </View></>
 
 

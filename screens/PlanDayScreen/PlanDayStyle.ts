@@ -74,10 +74,30 @@ export default StyleSheet.create({
   paso: {
     backgroundColor: '#7DB065',
     width: '97%',
-    height: 150,
+    height: '40%',
     marginTop:30,
     borderRadius: 50,
+    padding: '2%',
+    justifyContent: 'center',
+    alignItems:'center'
+  },
+    contendor1: {
+    marginTop:'2%',
+    width: '90%',
+    height: '90%',
+   backgroundColor: '#EFE6CF',
+    alignItems:'center',
+    //  justifyContent:'space-evenly',
+      borderRadius: 50,
     padding:'2%'
   },
+  textConsejo: {
+    color:'#45322e',
+    fontSize: 20,
+    
+  },
+  iconoBombilla: {
+ marginRight:10
+  }
 
 })

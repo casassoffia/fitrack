@@ -63,6 +63,11 @@ export default StyleSheet.create({
     nombreTitulo: {
     marginTop: 200, marginLeft: 10, position: 'absolute', fontSize: 25, color: '#ffff'
   },
+     iconoAtras: {
+    marginTop: 70,
+    marginLeft: 10,
+    position: 'absolute'
+  },
   icono: {
     width: 150,
     height: 150,
@@ -76,7 +81,7 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     flexDirection: 'column',
-    marginBottom: 600
+    marginBottom: 650
   },
   contendor: {
     marginTop:'2%',
@@ -139,11 +144,9 @@ export default StyleSheet.create({
   },
   paso: {
     backgroundColor: '#EFE6CF',
-   
     width: '97%',
-    height: 150,
+    height: 200,
     marginTop:10,
-  //  justifyContent: 'center',
     borderRadius: 50,
     padding:'2%'
   },

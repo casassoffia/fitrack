@@ -17,12 +17,6 @@ import { getAuth } from 'firebase/auth';
 import UserMethods from '../../APIs/UserApi'
 import { Route } from '@react-navigation/native';
 import { PlanButton } from '../../components/PlanButton';
-import DropDown from '../../components/DropDown';
-import RellenarLunes from '../../APIs/RellenarPlanesLunes';
-import RellenarMartes from '../../APIs/RellenarPlanesMartes';
-import RellenarMiercoles from '../../APIs/RellenarPlanesMiercoles';
-import RellenarJueves from '../../APIs/RellenarPlanesJueves';
-import RellenarViernes from '../../APIs/RellenarPlanesViernes';
 
 
 

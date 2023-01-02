@@ -31,11 +31,6 @@ export function ButtonList({ text, action }: IGenericButton) {
 }
 const styles = StyleSheet.create({
     button: {
-        // alignSelf: 'center',
-        // borderRadius: 10,
-        // width: '60%',
-        // height: '10%',
-        // marginTop: '10%',
         shadowColor: "#000",
         shadowOffset: {
             width: 0,

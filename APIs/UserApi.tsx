@@ -4,6 +4,7 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import { auth, db, firebaseConfig } from '../utils/Firebase';
 import { getAuth } from 'firebase/auth';
+import { DateTime } from 'luxon';
 
 
 const UserMethods = {
@@ -31,6 +32,8 @@ const UserMethods = {
         const q = query(collection(db, "usuarios"), where("email", "==", userLogued?.email))
         let usuario
         let nombre = "", edad = 0, email = "", nivel = "", num_dias = 0, peso = 0, plan = "", sexo = ""
+        let arrayPeso: Array<any> = []
+        let arrayFechas: Array<Date> = []
 
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
@@ -40,13 +43,17 @@ const UserMethods = {
             email = usuario.email
             nivel = usuario.nivel
             num_dias = usuario.num_dias
-            peso = usuario.peso
+            arrayPeso = usuario.peso
+            arrayFechas = usuario.fecha
             plan = usuario.plan
             sexo = usuario.sexo
 
         });
 
-        return { nombre, edad, email, nivel, num_dias, peso, plan, sexo }
+        let lastPeso = arrayPeso[arrayPeso.length - 1]
+        console.log("lastPeso")
+        console.log(lastPeso)
+        return { nombre, edad, email, nivel, num_dias, lastPeso, plan, sexo, arrayPeso, arrayFechas }
     },
     getEjercicio: async function (ref: number) {
 
@@ -400,7 +407,8 @@ const UserMethods = {
         querySnapshot.forEach((doc) => {
             ref = doc.id
         });
-
+        let arrayPeso: Array<number> = [parseInt(peso)]
+        let arrayFecha: Array<Date> = [new Date()]
         const usuarioref = doc(db, "usuarios", ref);
         const update = await setDoc(usuarioref, {
             edad: parseInt(edad),
@@ -408,8 +416,8 @@ const UserMethods = {
             num_dias: parseInt(numDias.name),
             email: email,
             nombre: nombre,
-            peso: parseInt(peso),
-
+            peso: arrayPeso,
+            fecha: arrayFecha,
             plan: plan.name,
             sexo: sexo.name,
             semanaLunes: 0,
@@ -425,31 +433,54 @@ const UserMethods = {
 
         });
     },
-    updateUser: async function (nombre: string, email: string, edad: any, nivel: any, num_dias: any, peso: any, plan: any, sexo: any) {
+    updateUser: async function (nombre: string, email: string, edad: any, nivel: any, num_dias: any, arrayPesos: any, plan: any, sexo: any, cambiadoPlan: boolean, cambiadoNivel: boolean, arrayFechas: any) {
 
         let referenciaUser = ""
         const auth = getAuth()
         const userLogued = auth.currentUser;
-
         const qUser = query(collection(db, "usuarios"), where("email", "==", userLogued?.email))
         const querySnapshotUser = await getDocs(qUser);
         querySnapshotUser.forEach((doc) => {
             referenciaUser = doc.id
         });
         const usuarioref = doc(db, "usuarios", referenciaUser);
-        console.log("nivel")
-        console.log(nivel)
         const update = await updateDoc(usuarioref, {
             nombre: nombre,
             email: email,
             edad: edad,
             nivel: nivel,
             num_dias: num_dias,
-            peso: peso,
+            peso: arrayPesos,
             plan: plan,
             sexo: sexo,
+            fecha: arrayFechas
 
         });
+        if (cambiadoPlan) {
+            const update = await updateDoc(usuarioref, {
+                semanaLunes: 0,
+                semanaMartes: 0,
+                semanaMiercoles: 0,
+                semanaJueves: 0,
+                semanaViernes: 0,
+                comidaLunes: { desayuno: {}, comida: {}, cena: {} },
+                comidaMartes: { desayuno: {}, comida: {}, cena: {} },
+                comidaMiercoles: { desayuno: {}, comida: {}, cena: {} },
+                comidaJueves: { desayuno: {}, comida: {}, cena: {} },
+                comidaViernes: { desayuno: {}, comida: {}, cena: {} },
+
+            });
+        }
+        if (cambiadoNivel) {
+            const update = await updateDoc(usuarioref, {
+                ejerciciosLunes: new Array(),
+                ejerciciosMartes: new Array(),
+                ejerciciosMiercoles: new Array(),
+                ejerciciosJueves: new Array(),
+                ejerciciosViernes: new Array(),
+
+            });
+        }
 
     },
     crearEjercicio: async function (nombre: string, paso1: string, paso2: string, paso3: string, nivel: any, tipo: any) {
@@ -502,78 +533,125 @@ const UserMethods = {
 
 
     numeroAlteatorioDesayuno: async function () {
-        const q = query(collection(db, "desayunos"), limit(1), orderBy("id", "desc"))
-        let numAleatorio, desayuno;
-        let max = 0
-        let min = 1
-
-        const querySnapshot = await getDocs(q);
-        querySnapshot.forEach((doc) => {
-            desayuno = doc.data()
-            max = desayuno.id
+        const auth = getAuth()
+        const userLogued = auth.currentUser;
+        const q2 = query(collection(db, "usuarios"), where("email", "==", userLogued?.email))
+        let usuario
+        let plan
+        const querySnapshot2 = await getDocs(q2);
+        querySnapshot2.forEach((doc) => {
+            usuario = doc.data()
+            plan = usuario.plan
 
         });
-        let numero = 0
-        numero = Math.floor(Math.random() * (max - min + 1)) + min;
+
+        const q = query(collection(db, "desayunos"), where("plan", "==", plan))
+        let desayunos: Array<DocumentData> = []
+        let desayunoAleatorio, numero = 0
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+
+            desayunos.push(doc.data())
+
+
+        });
+
+        desayunoAleatorio = desayunos[Math.floor(Math.random() * desayunos.length)];
+        numero = desayunoAleatorio.id
+
         return numero
 
     },
 
     numeroAlteatorioComida: async function () {
-        const q = query(collection(db, "comidas"), limit(1), orderBy("id", "desc"))
-        let comida;
-        let max = 0
-        let min = 1
-        const querySnapshot = await getDocs(q);
-        querySnapshot.forEach((doc) => {
-            comida = doc.data()
-            max = comida.id
+        const auth = getAuth()
+        const userLogued = auth.currentUser;
+        const q2 = query(collection(db, "usuarios"), where("email", "==", userLogued?.email))
+        let usuario
+        let plan
+        const querySnapshot2 = await getDocs(q2);
+        querySnapshot2.forEach((doc) => {
+            usuario = doc.data()
+            plan = usuario.plan
 
         });
 
-        let numero = 0
-        numero = Math.floor(Math.random() * (max - min + 1)) + min;
+        const q = query(collection(db, "comidas"), where("plan", "==", plan))
+        let comidas: Array<DocumentData> = []
+        let comidaAleatoria, numero = 0
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+
+            comidas.push(doc.data())
+
+
+        });
+
+        comidaAleatoria = comidas[Math.floor(Math.random() * comidas.length)];
+        numero = comidaAleatoria.id
 
         return numero
 
     },
     numeroAlteatorioCena: async function () {
-        const q = query(collection(db, "cenas"), limit(1), orderBy("id", "desc"))
-        let cena;
-        let max = 0
-        let min = 1
-
-        const querySnapshot = await getDocs(q);
-        querySnapshot.forEach((doc) => {
-            cena = doc.data()
-            max = cena.id
+        const auth = getAuth()
+        const userLogued = auth.currentUser;
+        const q2 = query(collection(db, "usuarios"), where("email", "==", userLogued?.email))
+        let usuario
+        let plan
+        const querySnapshot2 = await getDocs(q2);
+        querySnapshot2.forEach((doc) => {
+            usuario = doc.data()
+            plan = usuario.plan
 
         });
 
-        let numero = 0
-        numero = Math.floor(Math.random() * (max - min + 1)) + min;
+        const q = query(collection(db, "cenas"), where("plan", "==", plan))
+        let cenas: Array<DocumentData> = []
+        let cenaAleatoria, numero = 0
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+
+            cenas.push(doc.data())
+
+
+        });
+
+        cenaAleatoria = cenas[Math.floor(Math.random() * cenas.length)];
+        numero = cenaAleatoria.id
 
         return numero
 
     },
     numeroAlteatorioEjercicio: async function (numeros: Array<number>) {
-        const q = query(collection(db, "ejercicios"), limit(1), orderBy("id", "desc"))
-        let cena;
-        let max = 0
-        let min = 1
-
-        const querySnapshot = await getDocs(q);
-        querySnapshot.forEach((doc) => {
-            cena = doc.data()
-            max = cena.id
+        const auth = getAuth()
+        const userLogued = auth.currentUser;
+        const q2 = query(collection(db, "usuarios"), where("email", "==", userLogued?.email))
+        let usuario
+        let nivel
+        const querySnapshot2 = await getDocs(q2);
+        querySnapshot2.forEach((doc) => {
+            usuario = doc.data()
+            nivel = usuario.nivel
 
         });
-        let numero = 0
+
+        const q = query(collection(db, "ejercicios"), where("nivel", "==", nivel))
+        let ejercicios: Array<DocumentData> = []
+        let ejerAleatorio, numero = 0
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+
+            ejercicios.push(doc.data())
+
+
+        });
+
         do {
-            numero = Math.floor(Math.random() * (max - min + 1)) + min;
+            ejerAleatorio = ejercicios[Math.floor(Math.random() * ejercicios.length)];
+
+            numero = ejerAleatorio.id
         } while (numeros.includes(numero) && numero != 0)
-
-
         return numero
 
     },
@@ -602,6 +680,8 @@ const UserMethods = {
 
         let id = 0
         id = Math.floor(Math.random() * (max - min + 1)) + min;
+        console.log("id")
+        console.log(id)
         const qFrase = query(collection(db, "frases"), where("id", "==", id))
         const querySnapshot2 = await getDocs(qFrase);
         querySnapshot2.forEach((doc) => {
@@ -610,8 +690,7 @@ const UserMethods = {
 
 
         });
-        console.log("resultado")
-        console.log(resultado)
+
         return frase
 
 

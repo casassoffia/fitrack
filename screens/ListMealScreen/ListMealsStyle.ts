@@ -8,6 +8,7 @@ export default StyleSheet.create({
   headerLeft: {
     flex: 1,
     flexDirection: 'column',
+   
 
   },
   Spinner: {
@@ -67,6 +68,7 @@ export default StyleSheet.create({
   nombreTitulo: {
     marginTop: 200, marginLeft: 10, position: 'absolute', fontSize: 25, color: '#ffff'
   },
+ 
   icono: {
     width: 150,
     height: 150,

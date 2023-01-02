@@ -2,7 +2,7 @@ import { StyleSheet, Button, Text, View, Image, TouchableOpacity } from 'react-n
 import React, { Component } from 'react';
 import { useFonts } from 'expo-font';
 // import Icon from 'react-native-vector-icons/Icon';
-
+import { Adamina_400Regular } from '@expo-google-fonts/adamina'
 
 interface ButtonPlan {
     text: string,
@@ -10,7 +10,13 @@ interface ButtonPlan {
 }
 export function PlanButton({ text, action }: ButtonPlan) {
 
+    const [loaded] = useFonts({
+        "Adamina_400Regular": Adamina_400Regular,
 
+    });
+    if (!loaded) {
+        return null;
+    }
     return (
         <TouchableOpacity onPress={() => action()}
             style={{
@@ -58,7 +64,9 @@ const styles = StyleSheet.create({
     buttonText: {
         textAlign: 'center',
         fontSize: 25,
-        color: '#ffff'
+        color: '#ffff',
+        fontFamily: "Adamina_400Regular"
+
 
     },
     icono2: {

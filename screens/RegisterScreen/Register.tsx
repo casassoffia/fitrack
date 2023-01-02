@@ -45,7 +45,7 @@ const Register = () => {
           navigation.navigate("Form")
         })
         .catch(error => {
-          console.log(error)
+          Alert.alert(error.message)
         })
     }
 
@@ -76,24 +76,28 @@ const Register = () => {
       <View style={styles.header}>
 
         <View style={styles.headerLeft}>
-          <Text style={{ marginTop: 30 }}>
+          <Text style={{ marginTop: 40 }}>
             <Icon name="chevron-back-outline" size={30} color="#fff" onPress={() => navigation.navigate('Home')} ></Icon>
           </Text>
-
         </View>
         <View style={styles.headerRight}>
           <Image source={require("../../assets/imagenes/iconoBueno2.jpeg")} style={styles.icono}></Image>
         </View>
+
+        <Text style={styles.titulo}>Rellena la siguiente información </Text>
+
       </View>
       <View style={styles.body}>
         <ScrollView style={{ width: '100%' }} >
-          <Text style={styles.titulo}>Rellena la siguiente información </Text>
+
           <TextInput onChangeText={text => setNombre(text)} style={styles.textInput} value={nombre} placeholder="Nombre y Apellidos del Usuario" ></TextInput>
           <TextInput style={styles.textInput} defaultValue={formData.email} onChangeText={text => setEmail(text.toLowerCase())} value={email.toLowerCase()} placeholder="Correo Electronico" ></TextInput>
           <TextInput onChangeText={text => setPassword(text)} style={styles.textInput} value={password} placeholder="Contraseña" secureTextEntry></TextInput>
           <TextInput onChangeText={text => setConfirm(text)} style={styles.textInput} placeholder="Confirmacion de contraseña" value={confirm} secureTextEntry></TextInput>
 
           <GenericButton text="OK" action={handleCreateAccount} color='#F8F1CC' />
+          <GenericButton text="Cancel" action={() => navigation.navigate('Home')} color='#F8F1CC' />
+
 
 
         </ScrollView>

@@ -21,7 +21,7 @@ export function ButtonDays({ text, action }: ButtonDays) {
                 ...styles.button,
                 backgroundColor: '#7DB065',
                 opacity: 0.65,
-                marginTop: 20,
+                marginTop: 50,
                 borderRadius: 50,
 
 

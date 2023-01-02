@@ -33,7 +33,7 @@ const MealDay = () => {
     const [ref, setRef] = useState(0)
     const [cantidades, setCantidades] = useState<any>([])
     const [recetaDesayuno, setRecetaDesayuno] = useState<any>([])
-    let listadoIngredientes: string[] = [];
+    let num = route.params.numDias
     let listadoingre = []
     let recetaDesa = []
 
@@ -100,8 +100,8 @@ const MealDay = () => {
                 }
             )
         } else {
-            setTitulo("Para terminar bien el dia ...")
-            UserMethods.getComidaFromUser(dia).then(
+
+            UserMethods.getCenaFromUser(dia).then(
                 (cena) => {
                     alimento = cena
                     setNombre(alimento.nombre)
@@ -136,7 +136,9 @@ const MealDay = () => {
 
                     <Image source={require("../../assets/imagenes/cabecera2.png")} style={styles.forma}></Image>
                     <Text style={{ ...styles.nombreTitulo, fontFamily: "Adamina_400Regular" }}>Aqui tienes los pasos...</Text>
-
+                    <Text style={{ ...styles.iconoAtras }}>
+                        <Icon name="chevron-back-outline" size={30} color="#613000" onPress={() => navigation.navigate('PlanDay', { Day: route.params.Dia, numDias: num, reload: false })} ></Icon>
+                    </Text>
 
 
 
@@ -166,8 +168,8 @@ const MealDay = () => {
                                     <View style={styles.circulo}>
                                         <Text style={styles.numeroCirculo}>{id}</Text>
                                     </View>
-                                    <View style={{ width: 250, height: 100, marginBottom: 30, marginLeft: 10 }}>
-                                        <Text style={{ fontSize: 17, fontFamily: "Adamina_400Regular" }}>{receta}</Text>
+                                    <View style={{ width: 250, height: 150, marginBottom: 30, marginLeft: 10, alignItems: 'center' }}>
+                                        <Text style={{ fontSize: 16, fontFamily: "Adamina_400Regular" }}>{receta}</Text>
                                     </View>
 
 

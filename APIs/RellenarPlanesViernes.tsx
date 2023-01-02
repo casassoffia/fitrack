@@ -90,8 +90,8 @@ const RellenarViernes = {
             ref = doc.id
         })
         const usuarioref = doc(db, "usuarios", ref);
-
-        if ((usuario.semanaViernes < semanaCalculada)) {
+        let arrayvacio = new Array()
+        if ((usuario.semanaViernes < semanaCalculada) || usuario.ejerciciosViernes == arrayvacio) {
             UserMethods.numeroAlteatorioEjercicio(numeros).then(
                 (num1) => {
                     numeros.push(num1)

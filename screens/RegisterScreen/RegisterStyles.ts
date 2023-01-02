@@ -31,11 +31,13 @@ export default StyleSheet.create({
     marginTop: 50,
     marginLeft: 130,
     
+    
   },
        body: {
         flex: 1,
         backgroundColor: '#61b254',
-        flexDirection:'column',
+         flexDirection: 'column',
+       
     },
     nombre:{
         fontSize: 30,
@@ -47,12 +49,9 @@ export default StyleSheet.create({
         
       },
     titulo:{
-        fontSize: 35,
+    
         color:'#fff',
-        alignItems:'center',
-        justifyContent:'center',
-        marginLeft:25,
-        marginTop:25,
+       marginTop: 150, marginLeft: 20, position: 'absolute', fontSize: 29
        
     },
     textInput:{

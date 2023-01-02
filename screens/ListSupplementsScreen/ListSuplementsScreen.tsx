@@ -65,11 +65,16 @@ const ListSuplements = () => {
             <View style={styles.container}>
                 <View style={styles.header}>
 
-                    <Image source={require("../../assets/imagenes/cabecera4.png")} style={styles.forma}></Image>
-                    <Text style={{ ...styles.nombreTitulo, fontFamily: "Adamina_400Regular" }}>Súmale complementos</Text>
-                    <Text style={{ ...styles.nombreTitulo, marginTop: 210, fontFamily: "Adamina_400Regular" }}>que te ayuden a rendir más</Text>
+                    <Image source={require("../../assets/imagenes/cabecerasuplementos.png")} style={styles.forma}></Image>
+                    <Text style={{ ...styles.iconoAtras }}>
+                        <Icon name="chevron-back-outline" size={30} color="#ffff" onPress={() => navigation.navigate('ListSupplements')} ></Icon>
+                    </Text>
+                    <Text style={{ ...styles.nombreTitulo, fontFamily: "Adamina_400Regular" }}>Súmale </Text>
+                    <Text style={{ ...styles.nombreTitulo, marginTop: 110, marginLeft: 35, fontFamily: "Adamina_400Regular" }}>complementos</Text>
+
+                    <Text style={{ ...styles.nombreTitulo, marginLeft: 90, marginTop: 150, fontFamily: "Adamina_400Regular" }}>a tu rutina</Text>
                     <View style={styles.carritoposicion}>
-                        <Icon name="cart" size={30} style={{ marginLeft: 360, marginTop: 270, color: '#7DB065' }} onPress={() => navigation.navigate('Card')}  ></Icon>
+                        {/* <Icon name="cart" size={30} style={{ marginLeft: 360, marginTop: 210, color: '#7DB065' }} onPress={() => navigation.navigate('Card')}  ></Icon> */}
                     </View>
 
                 </View>
@@ -80,27 +85,20 @@ const ListSuplements = () => {
                     <SuplementoFilters text='Filters' onSelect={cambiarSuplementos} suplementos={suplementos} ></SuplementoFilters>
                     {suplementos.map((suplemento: any, id2: any) =>
                         <View key={id2} style={styles.paso}>
-                            <View style={{ marginLeft: 300 }}>
-                                <Icon2 type='material-community' name="cart-plus" color="#fff" onPress={() => GymMethods.anyadirSuplementoById(suplemento.id).finally(
-                                    () => {
-                                        alert("Tu suplemento se ha añadido correctamente al carrito")
-                                    }
-                                )} ></Icon2>
-                            </View>
+
                             <View style={styles.paso2}>
                                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-
-                                    <Image source={images[id2]} style={{ width: 90, height: 90 }}></Image>
+                                    <Image source={images[id2]} style={{ width: 90, height: 90, borderRadius: 50 }}></Image>
                                     <View style={{ flexDirection: 'column', width: 200, marginLeft: 10 }}>
-                                        <Text style={{ ...styles.nombreSuplemento, fontFamily: "Adamina_400Regular" }} >{suplemento.nombre}  </Text>
-                                        <View style={{ flexDirection: 'row', alignItems: 'center', }}>
+                                        <Text onPress={() => Linking.openURL(suplemento.link)} style={{ ...styles.nombreSuplemento, fontFamily: "Adamina_400Regular" }} >{suplemento.nombre}  </Text>
+                                        <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 30 }}>
                                             <Text style={{ ...styles.textoIngredientes, fontFamily: "Adamina_400Regular", }} > Sabor:  </Text>
 
                                             <Text style={{ ...styles.textoIngredientes, fontFamily: "Adamina_400Regular", }} >{suplemento.sabor}  </Text>
                                         </View>
-                                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                        <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 30 }}>
                                             <Text style={{ ...styles.textoIngredientes, fontFamily: "Adamina_400Regular", }} > Precio:  </Text>
-                                            <Text style={{ ...styles.textoIngredientes, fontFamily: "Adamina_400Regular", }} >{suplemento.precio}  </Text>
+                                            <Text style={{ ...styles.textoIngredientes, fontFamily: "Adamina_400Regular", }} >{suplemento.precio}€  </Text>
                                         </View>
                                     </View>
 

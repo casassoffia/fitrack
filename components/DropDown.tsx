@@ -5,6 +5,7 @@ import { Touchable, TouchableOpacity, View, Text, StyleSheet, Image } from 'reac
 import { HomeScreenNavigationProp } from '../navigation/types';
 import MealDay from '../screens/MealDayScreen/MealDayScreen';
 import { Adamina_400Regular, useFonts } from '@expo-google-fonts/adamina'
+import Icon from 'react-native-vector-icons/Ionicons';
 interface IDropDown {
   text: string,
   data: Array<any>,
@@ -15,13 +16,14 @@ interface IDropDown {
   tam: string,
   colorLetra: string
   redirigir: boolean,
-  dia: string
+  dia: string,
+  number: number
 
 
 }
 
 
-const DropDown = ({ text, data, value, onSelect, color1, color2, colorLetra, tam, redirigir, dia }: IDropDown) => {
+const DropDown = ({ text, data, value, onSelect, color1, color2, colorLetra, tam, redirigir, dia, number }: IDropDown) => {
 
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const [showOption, setShowOption] = useState(false)
@@ -31,7 +33,7 @@ const DropDown = ({ text, data, value, onSelect, color1, color2, colorLetra, tam
     onSelect(val)
     if (redirigir) {
       let tipo = val.name
-      navigation.navigate('MealDay', { Tipo: tipo, Dia: dia })
+      navigation.navigate('MealDay', { Tipo: tipo, Dia: dia, numDias: number })
     }
 
   }
@@ -45,7 +47,9 @@ const DropDown = ({ text, data, value, onSelect, color1, color2, colorLetra, tam
     <View>
       <TouchableOpacity style={{ ...styles.textInput, backgroundColor: color2 }} activeOpacity={0.8} onPress={() => setShowOption(!showOption)} >
         <Text style={{ ...styles.texto, fontSize: parseInt(tam), color: colorLetra, fontFamily: 'Adamina_400Regular' }}>{!!value ? value?.name : text}</Text>
-        <Image source={require('../assets/iconos/arrow_drop_down_FILL0_wght400_GRAD0_opsz48.png')} style={styles.icono2}></Image>
+        <View style={{ marginLeft: 270 }}>
+          <Icon size={20} name="caret-down-outline" color='#67330f'  ></Icon>
+        </View>
 
       </TouchableOpacity>
       {showOption && (<View>{data.map((val, i) => {
